@@ -1,4 +1,9 @@
 package com.example.springboot.Service;
 
-public class UserServiceImpl {
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@RequiredArgsConstructor
+@Service
+public class UserServiceImpl implements UserService{
 }
