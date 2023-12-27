@@ -1,17 +1,16 @@
 package com.example.springboot.Entity;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.example.springboot.Controller.Request.UserSignupRequest;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "tbl_user")
 @Getter
-@Setter
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -27,4 +26,12 @@ public class User {
 
     @Column(nullable = false)
     private String userPwd;
+
+    public static User create(UserSignupRequest userSignupRequest){
+        return User.builder()
+                .loginId(userSignupRequest.getLoginId())
+                .userName(userSignupRequest.getName())
+                .userPwd(userSignupRequest.getPassword())
+                .build();
+    }
 }

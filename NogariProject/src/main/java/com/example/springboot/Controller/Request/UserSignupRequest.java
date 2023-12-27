@@ -1,13 +1,11 @@
 package com.example.springboot.Controller.Request;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 
 @Getter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
