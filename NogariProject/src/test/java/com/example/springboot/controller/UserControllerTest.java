@@ -1,7 +1,6 @@
 package com.example.springboot.controller;
 
-import com.example.springboot.service.MemberService;
-import com.example.springboot.service.impl.MemberServiceImpl;
+import com.example.springboot.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -10,25 +9,22 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(MemberRestController.class)
+@WebMvcTest(UserRestController.class)
 @EntityScan()
-class MemberControllerTest {
+class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private MemberServiceImpl msi;
+    private UserServiceImpl msi;
     @Test
     @DisplayName("[API][GET] 회원 목록 전체 조회")
     public void getAllMembers_Test() throws Exception {
