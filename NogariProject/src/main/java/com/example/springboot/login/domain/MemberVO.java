@@ -8,9 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.ToString;
 
 @Entity
-@Data
+@Getter
+@ToString
 @Table(name = "members") 
 public class MemberVO {
 

@@ -16,4 +16,6 @@ public interface LoginMapper {
 	int insertMember(Map<String, String> param);
 
 	List<MemberVO> selectAllMembers();
+
+	int deleteMember(Map<String, String> param);
 }

@@ -1,6 +1,5 @@
 package com.example.springboot.login;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +22,8 @@ public class LoginServiceImpl implements LoginService {
 	private final LoginMapper mapper;
 
 	@Override
-	public ResultVO<String> doLogin(Map<String, String> param) {
+	public ResultVO<String> doLogin(Map<String, String> param) throws Exception {
+		
 		ResultVO<String> resultVO = new ResultVO<>();
 
 		MemberVO member = mapper.selectMemberById(param);
@@ -38,17 +38,16 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public ResultVO<String> signup(Map<String, String> param) throws SQLException {
+	public ResultVO<String> signup(Map<String, String> param) throws Exception {
 		ResultVO<String> resultVO = new ResultVO<>();
 		MemberVO member = mapper.selectMemberById(param);
-		String welcomeMessage = "";
 		if (member == null) {
 			mapper.insertMember(param);
-			welcomeMessage = "Welcome " + param.get("NAME");
+			resultVO.setData("Welcome " + param.get("NAME"));
 		} else {
-			welcomeMessage = "You're already our member, " + member.getName();
+			resultVO.setError(true);
+			resultVO.setMessage("Dup Member!");
 		}
-		resultVO.setData(welcomeMessage);
 		return resultVO;
 	}
 
@@ -58,5 +57,6 @@ public class LoginServiceImpl implements LoginService {
 		resultVO.setData(mapper.selectAllMembers());
 		return resultVO;
 	}
+
 
 }
