@@ -3,10 +3,12 @@ package com.example.springboot.login;
 import java.sql.SQLException;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.springboot.login.domain.ResultVO;
@@ -30,6 +32,7 @@ public class LoginController {
 	}
 	
 	@PostMapping("/signup")
+	@ResponseStatus(HttpStatus.CREATED)
 	public ResultVO<?> signup(@RequestBody Map<String, String>param) throws SQLException {
 		return service.signup(param);
 	}
