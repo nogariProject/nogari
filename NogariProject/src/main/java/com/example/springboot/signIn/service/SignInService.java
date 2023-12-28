@@ -1,5 +1,5 @@
 package com.example.springboot.signIn.service;
 
-public class SignInService {
-
+public interface SignInService {
+	public String signIn(String id, String password);
 }
