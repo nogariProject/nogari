@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.login.LoginMapper">
+	<select id="selectMemberById" parameterType="map" resultType="MemberVO">
+		/* LoginMapper - selectMemberById */
+		SELECT USER_ID
+		     , PASSWORD
+		     , NAME
+		  FROM MEMBERS
+		 WHERE USER_ID 	= #{USER_ID} 
+		   AND PASSWORD = #{PASSWORD}  
+	</select>
+	
+	<select id="selectAllMembers" parameterType="map" resultType="MemberVO">
+		/* LoginMapper - selectAllMembers */
+		SELECT ID
+		     , USER_ID
+		     , PASSWORD
+		     , NAME
+		  FROM MEMBERS
+	</select>
+	
+	<insert id="insertMember" parameterType="map">
+		/* LoginMapper - insertMember */
+		INSERT INTO MEMBERS ( 
+			   USER_ID
+		     , PASSWORD
+	   	     , NAME
+		     ) VALUES (
+			   #{USER_ID}
+			 , #{PASSWORD} 
+			 , #{NAME}
+	    )		  
+	</insert>
+	
+</mapper>
