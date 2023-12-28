@@ -1,5 +1,6 @@
 package com.example.springboot.Controller;
 
+import com.example.springboot.Controller.Request.LoginRequest;
 import com.example.springboot.Controller.Request.UserSignupRequest;
 import com.example.springboot.Service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,15 @@ public class LoginController {
 
     //회원가입
     @PostMapping("/signup")
-    public void singUp(@RequestBody @Valid UserSignupRequest userSignupRequest){
-        userService.userSignup(userSignupRequest);
+    public String singUp(@RequestBody @Valid UserSignupRequest userSignupRequest){
+        return userService.userSignup(userSignupRequest);
+
+    }
+
+
+    @PostMapping("/login")
+    public String login(@RequestBody LoginRequest loginRequest){
+        return userService.login(loginRequest);
     }
 
 
