@@ -23,9 +23,7 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public ResultVO<String> doLogin(Map<String, String> param) throws Exception {
-		
 		ResultVO<String> resultVO = new ResultVO<>();
-
 		MemberVO member = mapper.selectMemberById(param);
 		if (member == null) {
 			resultVO.setError(true);
@@ -33,7 +31,6 @@ public class LoginServiceImpl implements LoginService {
 		} else {
 			resultVO.setData("Welcome back " + member.getName());
 		}
-
 		return resultVO;
 	}
 

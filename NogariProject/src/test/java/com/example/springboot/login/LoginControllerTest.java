@@ -35,7 +35,7 @@ class LoginControllerTest {
 
     @Autowired
     private LoginMapper mapper;
-    
+
     @BeforeEach
     public void init() {
         Map<String, String> requestParam = new HashMap<>();
@@ -46,7 +46,6 @@ class LoginControllerTest {
     @Test
     @DisplayName("올바른 정보로 로그인")
     public void DoLogin() throws Exception {
-
         Map<String, String> requestParam = new HashMap<>();
         requestParam.put("USER_ID", "spring");
         requestParam.put("PASSWORD", "1234");
@@ -74,7 +73,6 @@ class LoginControllerTest {
         ResultVO<String> resultVO = new ResultVO<>();
         resultVO.setError(true);
         resultVO.setMessage("Not Member!");
-        ;
         String responseJson = objectMapper.writeValueAsString(resultVO);
 
         mockMvc.perform(
