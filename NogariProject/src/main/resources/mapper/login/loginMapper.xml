@@ -23,7 +23,7 @@
 	<insert id="insertMember" parameterType="map">
 		/* LoginMapper - insertMember */
 		INSERT INTO MEMBERS ( 
-			   USER_ID
+		       USER_ID
 		     , PASSWORD
 	   	     , NAME
 		     ) VALUES (
@@ -32,5 +32,11 @@
 			 , #{NAME}
 	    )		  
 	</insert>
+	
+	<delete id="deleteMember" parameterType="map">
+		/* LoginMapper - deleteMember */
+		DELETE MEMBERS
+		 WHERE USER_ID 	= #{USER_ID} 
+	</delete>
 	
 </mapper>
