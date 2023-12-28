@@ -30,7 +30,8 @@ public class UserServiceImpl implements UserService {
     public void deleteUsers(){
         mr.deleteAll();
     }
-
-
+    public Integer putEditUser(long id, User user) {
+        return mr.updateUserById(id, user.getUsername(), user.getPassword());
+    }
 }
 
