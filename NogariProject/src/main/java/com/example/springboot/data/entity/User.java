@@ -1,16 +1,13 @@
 package com.example.springboot.data.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import com.example.springboot.data.enumerate.Authority;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Getter @Setter
-@ToString
-@NoArgsConstructor
+@Data
+@Table(name = "USERS")
 public class User {
 
 	@Id @GeneratedValue
@@ -22,5 +19,8 @@ public class User {
 
 	@Column(name= "PASSWORD", nullable = false)
 	private String password;
+
+	@Column(name = "AUTORITY", nullable = false)
+	private Authority authority;
 
 }

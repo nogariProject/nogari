@@ -13,8 +13,9 @@ import java.beans.Transient;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
+    User findByUsername(String username);
     @Modifying
     @Transactional
-    @Query("update User u set u.password=:password, u.username=:username where u.id=:id")
-    Integer updateUserById(@Param("id")long id, @Param("username")String username, @Param("password")String password);
+    @Query("update User u set u.password=:password, u.username=:username, u.authority=:authority where u.id=:id")
+    Integer updateUserById(@Param("id")long id, @Param("username")String username, @Param("password")String password, @Param("authority")String authority);
 }
