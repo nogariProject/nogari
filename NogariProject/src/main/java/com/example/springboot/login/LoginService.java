@@ -3,7 +3,8 @@ package com.example.springboot.login;
 import java.util.List;
 import java.util.Map;
 
-import com.example.springboot.login.domain.MemberVO;
+import com.example.springboot.login.domain.MemberDTO;
+import com.example.springboot.login.domain.Member;
 import com.example.springboot.login.domain.ResultVO;
 
 public interface LoginService {
@@ -11,7 +12,7 @@ public interface LoginService {
 	/*
 	 * 로그인
 	 */
-	ResultVO<String> doLogin(Map<String, String> param) throws Exception;
+	ResultVO<MemberDTO> doLogin(Map<String, String> param) throws Exception;
 
 	/*
 	 * 회원가입
@@ -21,6 +22,6 @@ public interface LoginService {
 	/*
 	 * 모든 멤버 보기
 	 */
-	ResultVO<List<MemberVO>> getAllMembers();
+	ResultVO<List<MemberDTO>> getAllMembers();
 
 }
