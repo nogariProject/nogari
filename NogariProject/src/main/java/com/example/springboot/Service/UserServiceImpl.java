@@ -42,7 +42,8 @@ public class UserServiceImpl implements UserService{
             }else {
                 return "ID 또는 PWD가 틀렸습니다.";
             }
+        }else {
+            return "ID 또는 PWD가 틀렸습니다.";
         }
-        return "ID 또는 PWD가 틀렸습니다.";
     }
 }

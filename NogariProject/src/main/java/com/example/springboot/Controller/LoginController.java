@@ -27,7 +27,7 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest loginRequest){
+    public String login(@RequestBody @Valid LoginRequest loginRequest){
         return userService.login(loginRequest);
     }
 
