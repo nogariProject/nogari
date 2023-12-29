@@ -24,32 +24,110 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
+		 <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+		
 		<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-data-jpa</artifactId>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>2.2.0</version>
 		</dependency>
+		
+		
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-data-jdbc</artifactId>
+		</dependency>
+		
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<!-- Spring Boot Starter -->
-
+		
+		<!-- H2 database설정 시작 -->
 		<dependency>
-    <groupId>com.h2database</groupId>
-    <artifactId>h2</artifactId>
+    		<groupId>com.h2database</groupId>
+    		<artifactId>h2</artifactId>
 		</dependency>
+		<!-- H2 database설정 끝 -->
+
+		<!-- Oracle DataBase 설정 시작 -->
 		<dependency>
 		    <groupId>com.oracle.database.jdbc</groupId>
 		    <artifactId>ojdbc10</artifactId>
 		    <version>19.21.0.0</version>
 		</dependency>
-
-
+		
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>osdt_cert</artifactId>
+		    <version>19.21.0.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>oraclepki</artifactId>
+		    <version>19.21.0.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>osdt_core</artifactId>
+		    <version>19.21.0.0</version>
+		</dependency>
+		
+		<!-- Oracle DataBase 설정 끝 -->
+		
+		<!-- lombok 설정 시작 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!-- lombok 설정 끝 -->
+		
+		<!-- 쿼리 로그를 정력하기 필요한 lib 시작 -->
+		<dependency>
+            <groupId>org.bgee.log4jdbc-log4j2</groupId>
+            <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+            <version>1.16</version>
+        </dependency>
+        <!-- 쿼리 로그를 정력하기 필요한 lib 끝-->
+        
+        <!-- 파라미터 로그를 사용하기 위해 필요한 lib 시작 -->
+        <dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1</version>
+		</dependency>
+			<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+		</dependency>
+        <!-- 파라미터 로그를 사용하기 위해 필요한 lib 끝 -->
+        
 	</dependencies>
 
 	<build>
