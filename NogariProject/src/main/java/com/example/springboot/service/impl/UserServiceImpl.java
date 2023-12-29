@@ -6,38 +6,42 @@ import com.example.springboot.exception.UserNotFoundException;
 import com.example.springboot.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository mr;
+    private final UserRepository userRepository;
 
     @Override
+    @Transactional(readOnly=true)
     public List<User> readAllUsers() {
-        return (List<User>) mr.findAll();
+        return (List<User>) userRepository.findAll();
     }
     @Override
+    @Transactional(readOnly=true)
     public User readUserById(Long id){
-        return mr.findById(id).orElseThrow(() -> new UserNotFoundException(String.format("No user with id %s is available", id)));
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(String.format("No user with id %s is available", id)));
     }
     @Override
     public User createUser(User user){
-        return mr.save(user);
+        return userRepository.save(user);
     }
     @Override
     public void deleteUserById(Long id){
-        mr.deleteById(id);
+        userRepository.deleteById(id);
     }
     @Override
     public void deleteUsers(){
-        mr.deleteAll();
+        userRepository.deleteAll();
     }
     @Override
     public Integer putEditUser(long id, User user) {
-        return mr.updateUserById(id, user.getUsername(), user.getPassword(), String.valueOf(user.getAuthority()));
+        return userRepository.updateUserById(id, user.getUsername(), user.getPassword(), String.valueOf(user.getAuthority()));
     }
 }
 
