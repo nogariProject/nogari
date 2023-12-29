@@ -15,7 +15,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @Table(name = "members") 
-public class MemberVO {
+public class Member {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)

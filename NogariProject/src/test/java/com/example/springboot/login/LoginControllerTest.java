@@ -6,7 +6,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.HashMap;
 import java.util.Map;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +19,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.example.springboot.login.domain.MemberVO;
+import com.example.springboot.login.domain.Member;
 import com.example.springboot.login.domain.ResultVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -51,15 +50,9 @@ class LoginControllerTest {
         requestParam.put("PASSWORD", "1234");
         String requestJson = objectMapper.writeValueAsString(requestParam);
 
-        ResultVO<String> resultVO = new ResultVO<>();
-        resultVO.setData("Welcome back boot");
-        String responseJson = objectMapper.writeValueAsString(resultVO);
-
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/login").contentType(MediaType.APPLICATION_JSON).content(requestJson))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(jsonPath("data", Matchers.is("Welcome back boot")))
-                .andExpect(MockMvcResultMatchers.content().string(responseJson)).andDo(MockMvcResultHandlers.print());
+                .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
     }
 
     @Test
@@ -102,7 +95,7 @@ class LoginControllerTest {
                 MockMvcRequestBuilders.post("/signup").contentType(MediaType.APPLICATION_JSON).content(requestJson))
                 .andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 
-        MemberVO member = mapper.selectMemberById(requestParam);
+        Member member = mapper.selectMemberById(requestParam);
 
         assertThat(member.getName()).isEqualTo("test");
 

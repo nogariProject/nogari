@@ -6,16 +6,16 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import com.example.springboot.login.domain.MemberVO;
+import com.example.springboot.login.domain.Member;
 
 @Mapper
 @Repository
 public interface LoginMapper {
-	MemberVO selectMemberById(Map<String, String> param);
+	Member selectMemberById(Map<String, String> param);
 
 	int insertMember(Map<String, String> param);
 
-	List<MemberVO> selectAllMembers();
+	List<Member> selectAllMembers();
 
 	int deleteMember(Map<String, String> param);
 }
