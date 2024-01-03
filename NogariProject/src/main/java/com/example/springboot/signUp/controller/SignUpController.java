@@ -15,7 +15,7 @@ public class SignUpController {
 	@Autowired(required=true)
 	private SignUpService service;
 	
-	@RequestMapping("/signUp")
+	@RequestMapping("/sign-up")
 	public String signUp(@RequestBody HashMap<String, String> map){
 		String id = map.get("id");
 		String name = map.get("name");

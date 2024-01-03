@@ -15,7 +15,7 @@ public class SignInController {
 	@Autowired(required=true)
 	private SignInService service;
 	
-	@RequestMapping("/signIn")
+	@RequestMapping("/sign-in")
 	public String signIn(@RequestBody HashMap<String, String> map){
 		String id = map.get("id");
 		String password = map.get("password");
