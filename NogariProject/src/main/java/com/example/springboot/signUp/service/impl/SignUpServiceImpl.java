@@ -24,7 +24,7 @@ public class SignUpServiceImpl implements SignUpService {
 			member.setPassword(password);
 			repository.save(member); 
 			
-			return "signUp";
+			return "signUp!!";
 		}
 	}
 	

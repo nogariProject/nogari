@@ -41,4 +41,8 @@ public class TestEntity {
 	public String toString() {
 		return "id = " + test_id + ", name = " + test_name + ", password = " + test_password;
 	}
+	
+	public String toJson() {
+		return "{\"id\" : \"" + test_id + "\", \"name\" : \"" + test_name + "\", \"password\" : \"" + test_password + "\"}";
+	}
 }
