@@ -41,4 +41,8 @@ public class MemberEntity {
 	public String toString() {
 		return "id = " + id + ", name = " + name + ", password = " + password;
 	}
+	
+	public String toJson() {
+		return "{\"id\" : \"" + id + "\", \"name\" : \"" + name + "\", \"password\" : \"" + password + "\"}";
+	}
 }

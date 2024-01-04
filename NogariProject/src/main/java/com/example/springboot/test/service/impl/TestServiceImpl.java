@@ -1,4 +1,4 @@
-package com.example.springboot.service.impl;
+package com.example.springboot.test.service.impl;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.springboot.entity.TestEntity;
-import com.example.springboot.repository.TestRepository;
-import com.example.springboot.service.TestService;
+import com.example.springboot.test.repository.TestRepository;
+import com.example.springboot.test.service.TestService;
 
 @Service("testService")
 public class TestServiceImpl implements TestService {

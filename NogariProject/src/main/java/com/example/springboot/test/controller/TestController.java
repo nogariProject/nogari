@@ -1,4 +1,4 @@
-package com.example.springboot.controller;
+package com.example.springboot.test.controller;
 
 import org.springframework.stereotype.Controller;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.springboot.entity.TestEntity;
-import com.example.springboot.repository.TestRepository;
-import com.example.springboot.service.TestService;
+import com.example.springboot.test.repository.TestRepository;
+import com.example.springboot.test.service.TestService;
 
 @RestController
 public class TestController {
@@ -32,6 +32,6 @@ public class TestController {
 		test.setPassword("qwer1234");
 		testRepository.save(test);
 		
-		return test.toString();
+		return test.toJson();
 	}
 }
