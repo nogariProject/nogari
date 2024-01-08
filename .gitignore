@@ -9,8 +9,8 @@ tmp/
 *.bak
 *.swp
 *~.nib
-local.properties
-.settings/
+NogariProject/ local.properties
+NogariProject/.settings/
 .loadpath
 .recommenders
 
@@ -94,22 +94,24 @@ hs_err_pid*
 replay_pid*
 
 ### Maven ###
-target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
-buildNumber.properties
+NogariProject/target/
+NogariProject/ pom.xml.tag
+NogariProject/ pom.xml.releaseBackup
+NogariProject/ pom.xml.versionsBackup
+NogariProject/ pom.xml.next
+NogariProject/ release.properties
+NogariProject/ dependency-reduced-pom.xml
+NogariProject/ buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
-.mvn/wrapper/maven-wrapper.jar
+NogariProject/.mvn/wrapper/maven-wrapper.jar
 
 # Eclipse m2e generated files
 # Eclipse Core
-.project
+NogariProject/.project
 # JDT-specific (Eclipse Java Development Tools)
-.classpath
+NogariProject/.DS_Store
+NogariProject/src/.DS_Store
+.DS_Store
 
 # End of https://www.toptal.com/developers/gitignore/api/java,maven,eclipse
