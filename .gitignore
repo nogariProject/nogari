@@ -114,4 +114,8 @@ NogariProject/.DS_Store
 NogariProject/src/.DS_Store
 .DS_Store
 
+# Oracle Cloud DB
+NogariProject/src/main/resources/Wallet_nogariDB/
+
+
 # End of https://www.toptal.com/developers/gitignore/api/java,maven,eclipse
