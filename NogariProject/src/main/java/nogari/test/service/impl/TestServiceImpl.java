@@ -1,5 +1,6 @@
 package nogari.test.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,4 +22,24 @@ public class TestServiceImpl implements TestService {
 		return mapper.selectTest();
 	}
 	
+	public String insertTest(HashMap<String, String> map) {
+		
+		mapper.insertTest(map);
+		
+		return "insert 완료";
+	}
+	
+	public String deleteTest(HashMap<String, String> map) {
+		
+		mapper.deleteTest(map);
+		
+		return "delete 완료";
+	}
+	
+	public String updateTest(HashMap<String, String> map) {
+		
+		mapper.updateTest(map);
+		
+		return "update 완료";
+	}
 }

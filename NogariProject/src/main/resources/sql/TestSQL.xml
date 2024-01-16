@@ -6,7 +6,25 @@
     <select id="selectTest" resultType="HashMap">
         SELECT * 
           FROM MEMBER_KTW
-         WHERE ID = 'test00'
     </select>
+    
+    <insert id="insertTest" parameterType="hashmap">
+        INSERT 
+          INTO MEMBER_KTW
+        VALUES (#{id}, #{name}, #{password})
+    </insert>
+    
+    <delete id="deleteTest" parameterType="hashmap">
+        DELETE 
+          FROM MEMBER_KTW 
+         WHERE ID = #{id} 
+    </delete>
+    
+    <update id="updateTest" parameterType="hashmap">
+        UPDATE MEMBER_KTW
+           SET NAME     = #{name}
+             , PASSWORD = #{password}
+         WHERE ID       = #{id}
+    </update>
     
 </mapper>
