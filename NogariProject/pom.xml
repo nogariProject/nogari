@@ -71,7 +71,29 @@
             <optional>true</optional>
         </dependency>
         <!-- lombok 설정 끝 -->
+        
+		<!-- h2 설정 시작 -->
+		<dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+		<!-- h2 설정 끝 -->
+		
+		<!-- mybatis 설정 시작 -->
+		<dependency>
+    		<groupId>org.mybatis.spring.boot</groupId>
+    		<artifactId>mybatis-spring-boot-starter</artifactId>
+    		<version>1.3.2</version>
+		</dependency>
 
+		<dependency>
+    		<groupId>mysql</groupId>
+    		<artifactId>mysql-connector-java</artifactId>
+    		<scope>runtime</scope>
+		</dependency>
+		<!-- mybatis 설정 끝 -->
+		
     </dependencies>
 
     <build>
