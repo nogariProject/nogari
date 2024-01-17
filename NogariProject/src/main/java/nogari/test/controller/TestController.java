@@ -18,28 +18,28 @@ public class TestController {
 	private TestService service;
 	
 	@RequestMapping("/select-test")
-	public List<Map<String, Object>> selectTest(){
+	public List<Map<String, Object>> selectTest() throws Exception {
 		List<Map<String, Object>> list = service.selectTest();
 		
 		return list;
 	}
 	
 	@RequestMapping("/insert-test")
-	public String insertTest(@RequestBody HashMap<String, String> map){
+	public String insertTest(@RequestBody HashMap<String, String> map) throws Exception {
 		String str = service.insertTest(map);
 		
 		return str;
 	}
 	
 	@RequestMapping("/delete-test")
-	public String deleteTest(@RequestBody HashMap<String, String> map){
+	public String deleteTest(@RequestBody HashMap<String, String> map) throws Exception {
 		String str = service.deleteTest(map);
 		
 		return str;
 	}
 	
 	@RequestMapping("/update-test")
-	public String updateTest(@RequestBody HashMap<String, String> map){
+	public String updateTest(@RequestBody HashMap<String, String> map) throws Exception {
 		String str = service.updateTest(map);
 		
 		return str;

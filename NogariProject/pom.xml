@@ -61,7 +61,6 @@
             <groupId>com.oracle.database.security</groupId>
             <artifactId>osdt_core</artifactId>
         </dependency>
-
         <!-- Oracle DataBase 설정 끝 -->
 
         <!-- lombok 설정 시작 -->
@@ -93,6 +92,13 @@
     		<scope>runtime</scope>
 		</dependency>
 		<!-- mybatis 설정 끝 -->
+		
+		<!-- AOP 설정 시작 -->
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<!-- AOP 설정 끝 -->
 		
     </dependencies>
 
