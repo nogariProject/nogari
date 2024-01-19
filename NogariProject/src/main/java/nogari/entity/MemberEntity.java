@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class MemberEntity {
 	
 	@Id
-	@Column(name="ID", nullable=false)
+	@Column(name="ID")
 	private String id;
 	@Column(name="NAME", nullable=false)
 	private String name;

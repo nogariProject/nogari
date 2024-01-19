@@ -23,7 +23,7 @@ public class TestController {
 		
 		return list;
 	}
-	
+
 	@RequestMapping("/insert-test")
 	public String insertTest(@RequestBody HashMap<String, String> map) throws Exception {
 		String str = service.insertTest(map);
