@@ -9,13 +9,12 @@ tmp/
 *.bak
 *.swp
 *~.nib
-NogariProject/local.properties
-NogariProject/.settings/
-NogariProject/.idea/
-NogariProject/application.properties
+local.properties
+.settings/
+.idea/
+application.properties
 .loadpath
 .recommenders
-.idea/
 
 
 # External tool builders
@@ -98,28 +97,28 @@ hs_err_pid*
 replay_pid*
 
 ### Maven ###
-NogariProject/target/
-NogariProject/pom.xml.tag
-NogariProject/pom.xml.releaseBackup
-NogariProject/pom.xml.versionsBackup
-NogariProject/pom.xml.next
-NogariProject/release.properties
-NogariProject/dependency-reduced-pom.xml
-NogariProject/buildNumber.properties
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
 .mvn/timing.properties
 
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
-NogariProject/.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.jar
 
 # Eclipse m2e generated files
 # Eclipse Core
-NogariProject/.project
+.project
 # JDT-specific (Eclipse Java Development Tools)
-NogariProject/.DS_Store
-NogariProject/src/.DS_Store
+.DS_Store
+src/.DS_Store
 .DS_Store
 
 
 # Oracle Cloud DB
-NogariProject/src/main/resources/Wallet_nogariDB/
+src/main/resources/Wallet_nogariDB/
 
