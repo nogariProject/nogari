@@ -17,7 +17,7 @@ public class TestAOP {
 	
 	@After("@within(org.springframework.web.bind.annotation.RestController)")
 	public void afterController() {
-		System.out.println("@@after Controller");
+		System.out.println("@@after  Controller");
 	}
 	
 	@Around("@within(org.springframework.web.bind.annotation.RestController)")

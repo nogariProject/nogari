@@ -11,9 +11,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class GlobalExceptionHandler {
 
+	@ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<?> handleNullPointerException(Exception e) {
+    	log.error("@@@\n" + e.getMessage() + "\n@@@");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+	
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleException(Exception e) {
-    	log.error("@@Exeption Handle");
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Exeption Handle");
+    	log.error("@@@\n" + e.getMessage() + "\n@@@");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
+    
 }
