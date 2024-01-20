@@ -1,7 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,maven,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,maven,eclipse
 
-### Eclipse ###
+### IDE ###
 .metadata
 bin/
 tmp/
@@ -9,10 +9,14 @@ tmp/
 *.bak
 *.swp
 *~.nib
-NogariProject/ local.properties
+NogariProject/local.properties
 NogariProject/.settings/
+NogariProject/.idea/
+NogariProject/application.properties
 .loadpath
 .recommenders
+.idea/
+
 
 # External tool builders
 .externalToolBuilders/
@@ -95,14 +99,15 @@ replay_pid*
 
 ### Maven ###
 NogariProject/target/
-NogariProject/ pom.xml.tag
-NogariProject/ pom.xml.releaseBackup
-NogariProject/ pom.xml.versionsBackup
-NogariProject/ pom.xml.next
-NogariProject/ release.properties
-NogariProject/ dependency-reduced-pom.xml
-NogariProject/ buildNumber.properties
+NogariProject/pom.xml.tag
+NogariProject/pom.xml.releaseBackup
+NogariProject/pom.xml.versionsBackup
+NogariProject/pom.xml.next
+NogariProject/release.properties
+NogariProject/dependency-reduced-pom.xml
+NogariProject/buildNumber.properties
 .mvn/timing.properties
+
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 NogariProject/.mvn/wrapper/maven-wrapper.jar
 
