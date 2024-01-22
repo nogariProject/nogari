@@ -5,6 +5,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.HashMap;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import nogari.entity.MemberEntity;
+import nogari.sample.domain.entity.MemberEntity;
+import nogari.sample.signUp.controller.SignUpController;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -38,5 +42,14 @@ public class SignUpControllerTest {
         )
         .andExpect(status().isOk())
         .andDo(print());
+    }
+	
+	@Test
+    @DisplayName("예외 테스트")
+    void exception_test() throws Exception {
+		HashMap<String, String> map;
+		Assertions.assertThrows(Exception.class, () -> {
+			//SignUpController.signUp();
+	    });
     }
 }
