@@ -19,8 +19,6 @@ public class GlobalExceptionHandler {
      * @param ex MethodArgumentNotValidException
      * @return ResponseEntity<ErrorResponse>
      */
-
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
 
@@ -31,6 +29,13 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    /**
+     * [Exception] 위에서 처리하지 못한 모든 예외에서 발생
+     *
+     * @param ex Exception
+     * @return ResponseEntity<ErrorResponse>
+     */
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(Exception ex) {
         log.info("dasdfasdf{}", ex.getClass());

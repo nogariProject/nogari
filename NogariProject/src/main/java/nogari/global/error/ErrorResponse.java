@@ -13,8 +13,7 @@ import java.util.stream.Collectors;
  */
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Builder
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ErrorResponse {
 
     private int status;                 // 에러 상태 코드
