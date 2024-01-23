@@ -11,7 +11,8 @@ public class SampleController {
 
     @GetMapping("/exceptions/manve")
     public void testController() throws Exception {
-
+        log.info("SampleController.testController {}");
+        throw new Exception("테스트");//
     }
     @PostMapping("/test/ntdb")
     public String postTest(@Valid @RequestBody SampleDTO ntbdDto){

@@ -37,9 +37,9 @@ public class GlobalExceptionHandler {
      * @return ResponseEntity<ErrorResponse>
      */
     @ExceptionHandler(Exception.class)
-    protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(Exception ex) {
-        log.info("dasdfasdf{}", ex.getClass());
-        log.info("ddddddddddddd{}", ex.getMessage());
+    protected ResponseEntity<ErrorResponse> normalExceptionHandler(Exception ex) {
+        log.info("GlobalExceptionHandler.normalExceptionHandler{}", ex.getClass());
+        log.info("GlobalExceptionHandler.normalExceptionHandler error Message{}", ex.getMessage());
         //BindingResult bindingResult = ex.getBindingResult();
 
         final ErrorResponse response = ErrorResponse.of(HttpStatus.NOT_FOUND);
