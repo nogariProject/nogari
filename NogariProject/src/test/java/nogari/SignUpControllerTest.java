@@ -47,9 +47,10 @@ public class SignUpControllerTest {
 	@Test
     @DisplayName("예외 테스트")
     void exception_test() throws Exception {
-		HashMap<String, String> map;
-		Assertions.assertThrows(Exception.class, () -> {
-			//SignUpController.signUp();
+        SignUpController signUpController = new SignUpController();
+		HashMap<String, String> map = new HashMap();
+		Assertions.assertThrows(RuntimeException.class, () -> {
+			signUpController.signUp(map);
 	    });
     }
 }

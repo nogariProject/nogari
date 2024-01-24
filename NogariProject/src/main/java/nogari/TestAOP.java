@@ -5,17 +5,23 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
 public class TestAOP {
-	@Before("@within(org.springframework.web.bind.annotation.RestController)")
+	// @within : 클래스의 어노테이션
+	// @annotation : 메소드의 어노테이션
+	@Pointcut("@within(org.springframework.web.bind.annotation.RestController)")
+	public void contollerPointCut() {}
+	
+	@Before("contollerPointCut()")
 	public void beforeController() {
 		System.out.println("@@before Controller");
 	}
 	
-	@After("@within(org.springframework.web.bind.annotation.RestController)")
+	@After("bean(*Controller)")
 	public void afterController() {
 		System.out.println("@@after  Controller");
 	}
