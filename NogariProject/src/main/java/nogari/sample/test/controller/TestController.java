@@ -14,6 +14,7 @@ import nogari.sample.test.service.TestService;
 @RestController
 public class TestController {
 	
+	
 	@Autowired(required=true)
 	private TestService service;
 	
