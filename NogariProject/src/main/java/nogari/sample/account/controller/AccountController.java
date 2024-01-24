@@ -15,6 +15,7 @@ import nogari.sample.domain.entity.MemberEntity;
 @RestController
 public class AccountController {
 	
+	
 	@Autowired(required=true)
 	private AccountService service;
 	
