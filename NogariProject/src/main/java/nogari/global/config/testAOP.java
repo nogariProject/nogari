@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Slf4j
-@Component
 public class testAOP {
 
     @Pointcut("execution(* nogari.sample.service.*.get*(..))")
