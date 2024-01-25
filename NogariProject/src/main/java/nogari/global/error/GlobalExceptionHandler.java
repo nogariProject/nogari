@@ -1,4 +1,4 @@
-package nogari.gloval.error;
+package nogari.global.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +23,7 @@ public class GlobalExceptionHandler {
 		final ErrorResponse response = ErrorResponse.of(HttpStatus.NOT_FOUND, "test error message", ex.getBindingResult());
 		
 		return new ResponseEntity<>(response, HttpStatus.OK);
+		
 	}
 	
 }

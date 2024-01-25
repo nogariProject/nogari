@@ -1,5 +1,5 @@
 
-package nogari.gloval.error;
+package nogari.global.error;
 
 import java.util.List;
 
@@ -53,6 +53,7 @@ public class ErrorResponse {
 					.message(message)
 					.bindingResult(bindingResult).build();
 	}
+	
 	
 /*
 	// 커스터마이징 FieldError
