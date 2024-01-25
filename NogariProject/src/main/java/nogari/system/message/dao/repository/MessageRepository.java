@@ -7,4 +7,4 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MessageRepository extends CrudRepository<Message,String>{}
+public interface MessageRepository extends CrudRepository<Message,Long>{}

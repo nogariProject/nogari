@@ -1,56 +1,53 @@
 package nogari.system.message.controller;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import nogari.system.message.domain.dto.MessageDto;
 import nogari.system.message.domain.entity.Message;
-import nogari.system.message.service.MessageService;
+import nogari.system.message.service.MessageServiceImp;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.charset.Charset;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/message")
 @AllArgsConstructor
 public class MessageController {
 
-    private final MessageService messageService;
+    private final MessageServiceImp messageService;
     private final ModelMapper modelMapper;
 
     @GetMapping("")
-    @ResponseStatus(HttpStatus.OK)
-    public List<MessageDto> getMessage(){
+    public ResponseEntity<List<MessageDto>> getMessage(){
+        List<MessageDto> messageDtoList = new ArrayList<>();
 
         Iterable<Message> allMessage = messageService.getAllMessage();
+        allMessage.forEach(message -> messageDtoList.add(new MessageDto(message)));
 
-        List<MessageDto> messageDtoList = new ArrayList<>();
-        for(Message msg: allMessage) messageDtoList.add(convertToDto(msg));
-
-        return messageDtoList;
+        return new ResponseEntity<>(messageDtoList, HttpStatus.OK);
     }
-    @PostMapping("/{msgCd}")
-    @ResponseStatus(HttpStatus.OK)
-    public void createMessage(@RequestBody MessageDto messageDto, @PathVariable String msgCd){
-        messageDto.setMsgCd(msgCd);
+    @PostMapping("/create")
+    public ResponseEntity createMessage(@RequestBody @Valid MessageDto messageDto){
         Message message = convertToEntity(messageDto);
         messageService.createMessage(message);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
-
-
-
     private MessageDto convertToDto(Message message) {
         return modelMapper.map(message, MessageDto.class);
     }
     private Message convertToEntity(MessageDto messageDto) {
-        return modelMapper.map(messageDto, Message.class);
+        return Message.builder()
+                .msgCd(messageDto.getMsgCd())
+                .type(messageDto.getType())
+                .description(messageDto.getDescription())
+                .regId(messageDto.getRegId())
+                .updId(messageDto.getUpdId())
+                .build();
     }
 }

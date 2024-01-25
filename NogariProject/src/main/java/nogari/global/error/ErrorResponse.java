@@ -20,29 +20,41 @@ public class ErrorResponse {
     private String resultMsg;           // 에러 메시지
     private List<FieldError> errors;    // 상세 에러 메시지
 
-
     /**
-     * ErrorResponse 생성자-1
+     * ErrorResponse 생성자
      *
      * @param status HttpStatus
      */
-
-    protected ErrorResponse(final HttpStatus status) {
-        this.status = status.value();
-    }
-
-    protected ErrorResponse(final HttpStatus status, String resultMsg) {
+    @Builder
+    protected ErrorResponse(final HttpStatus status, String resultMsg, BindingResult bindingResult) {
         this.status = status.value();
         this.resultMsg = resultMsg;
-    }
-
-    protected ErrorResponse(final HttpStatus status, BindingResult bindingResult) {
-        this.status = status.value();
         this.errors = FieldError.of(bindingResult);
     }
 
     /**
-     * Global Exception 전송 타입-1
+     * ErrorResponse 정적 팩토리 메서드
+     *
+     * @param status    HttpStatus
+     * @return ErrorResponse
+     */
+    public static ErrorResponse of(final HttpStatus status) {
+        return ErrorResponse.builder().status(status).build();
+    }
+
+    /**
+     * ErrorResponse 정적 팩토리 메서드
+     *
+     * @param status    HttpStatus
+     * @param resultMsg String
+     * @return ErrorResponse
+     */
+    public static ErrorResponse of(final HttpStatus status, String resultMsg) {
+        return ErrorResponse.builder().status(status).resultMsg(resultMsg).build();
+    }
+
+    /**
+     * ErrorResponse 정적 팩토리 메서드
      *
      * @param status HttpStatus
      * @param bindingResult BindingResult
@@ -50,17 +62,7 @@ public class ErrorResponse {
      */
 
     public static ErrorResponse of(final HttpStatus status, final BindingResult bindingResult) {
-        return new ErrorResponse(status, bindingResult);
-    }
-
-    /**
-     * Global Exception 전송 타입-2
-     *
-     * @param status HttpStatus
-     * @return ErrorResponse
-     */
-    public static ErrorResponse of(final HttpStatus status) {
-        return new ErrorResponse(status);
+        return ErrorResponse.builder().status(status).bindingResult(bindingResult).build();
     }
 
 
