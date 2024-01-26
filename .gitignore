@@ -12,7 +12,7 @@ tmp/
 NogariProject/local.properties
 NogariProject/.settings/
 NogariProject/.idea/
-NogariProject/application.properties
+NogariProject/src/main/resources/application.properties
 .loadpath
 .recommenders
 .idea/
