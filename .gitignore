@@ -121,5 +121,9 @@ NogariProject/src/.DS_Store
 
 
 # Oracle Cloud DB
+<<<<<<< HEAD
 NogariProject/src/main/resources/Wallet_nogariDB/
 
+=======
+NogariProject/src/main/resources/Wallet_nogariDB/
+>>>>>>> 11554d2f4c355f0f823788b20b139705a991540c

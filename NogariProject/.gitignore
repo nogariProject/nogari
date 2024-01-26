@@ -121,4 +121,8 @@ src/.DS_Store
 
 # Oracle Cloud DB
 src/main/resources/Wallet_nogariDB/
+<<<<<<< HEAD
 
+=======
+/spring-boot-complete.iml
+>>>>>>> 11554d2f4c355f0f823788b20b139705a991540c
