@@ -1,5 +1,6 @@
 package nogari.global.error;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
@@ -13,16 +14,16 @@ import java.util.stream.Collectors;
  */
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ErrorResponse {
 
     private int status;                 // 에러 상태 코드
     private String resultMsg;           // 에러 메시지
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<FieldError> errors;    // 상세 에러 메시지
 
 
     /**
-     * ErrorResponse 생성자-1
+     * ErrorResponse 생성자
      *
      * @param status HttpStatus
      */
@@ -42,7 +43,7 @@ public class ErrorResponse {
     }
 
     /**
-     * Global Exception 전송 타입-1
+     * Global Exception 전송 타입
      *
      * @param status HttpStatus
      * @param bindingResult BindingResult
@@ -72,12 +73,6 @@ public class ErrorResponse {
         private final String field;
         private final String value;
         private final String message;
-
-//        public static List<FieldError> of(final String field, final String value, final String reason) {
-//            List<FieldError> fieldErrors = new ArrayList<>();
-//            fieldErrors.add(new FieldError(field, value, reason));
-//            return fieldErrors;
-//        }
 
         private static List<FieldError> of(final @NotNull BindingResult bindingResult) {
             final List<org.springframework.validation.FieldError> fieldErrors;

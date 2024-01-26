@@ -1,0 +1,36 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nogari.system.dept.dao.mapper.DeptMapper">
+    <insert id="insertDept" parameterType="nogari.system.dept.domain.dto.DeptReqDTO">
+    /* DeptMapper.insertDept */
+    INSERT INTO DEPT (
+           DEPT_CD
+         , DEPT_NM
+         , MGR_ID
+         , UPPER_DEPT_CD
+         , SORT
+         , REG_ID
+         , UPD_ID
+         ) VALUES (
+           #{deptCd}
+         , #{deptNm}
+         , #{mgrId}
+         , #{upperDeptCd}
+         , #{sort}
+         , #{regId}
+         , #{updId}
+         )
+    </insert>
+
+    <delete id="deleteDept" parameterType="string">
+        /* DeptMapper.deleteDept */
+        DELETE FROM DEPT WHERE DEPT_CD LIKE '%' || #{deptCd} || '%'
+    </delete>
+
+    <select id="selectByDeptCd" parameterType="string" resultType="nogari.system.dept.domain.dto.DeptResDTO">
+        /* DeptMapper.selectByDeptCd */
+        SELECT * FROM DEPT WHERE DEPT_CD = #{deptCd}
+    </select>
+</mapper>
