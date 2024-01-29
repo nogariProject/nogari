@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nogari.global.error.dao.mapper.ErrorLogMapper">
+
+    <select id="selectTest" resultType="hashmap">
+        SELECT * FROM TAB
+    </select>
+    
+    <insert id="saveError" parameterType="nogari.global.error.DTO.ErrorLogDTO">
+    <selectKey keyProperty="TRAN_SEQ" resultType="int" order="BEFORE">
+		SELECT NVL(MAX(TRAN_SEQ), 0)+1 FROM ERR_LOG	
+	</selectKey>
+    INSERT INTO ERR_LOG(
+    	   TRAN_DT		/*오류일시*/
+    	 , TRAN_SEQ     /*오류순번(일별순번)*/
+    	 , TRAN_TM      /*오류시간*/
+    	 , MENU_CD      /*메뉴ID*/
+    	 , REQ_PATH     /*요청경로*/
+    	 , SER_PATH     /*서비스명*/
+    	 , ERR_TYPE     /*오류유형*/
+    	 , ERR_CD       /*오류코드*/
+    	 , ERR_MSG      /*오류메세지*/
+    	 , MEMBER_ID    /*사용자ID*/
+    )
+     VALUES (
+     		 TO_CHAR(CURRENT_DATE,'YYYYMMDD')
+     	   , #{TRAN_SEQ}
+     	   , TO_CHAR(CURRENT_DATE, 'HH24MISS')
+     	   , #{MENU_CD}
+     	   , #{REQ_PATH}
+     	   , #{SER_PATH}
+     	   , #{ERR_TYPE}
+     	   , #{ERR_CD}
+     	   , #{ERR_MSG}
+     	   , #{MEMBER_ID}
+     	   )
+    </insert>
+
+</mapper>

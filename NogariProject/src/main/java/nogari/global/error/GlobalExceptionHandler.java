@@ -18,7 +18,6 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	protected ResponseEntity<ErrorResponse> normalExceptionHandler(MethodArgumentNotValidException ex) {
 		
-		log.info("AOP CHK :: @@@@@@@@@@@@@@@@@");
 		// of객체에서 인스턴스를 생성해서 반환해 주므로 final선언이 가능(변조방지)
 		final ErrorResponse response = ErrorResponse.of(HttpStatus.NOT_FOUND, "test error message", ex.getBindingResult());
 		

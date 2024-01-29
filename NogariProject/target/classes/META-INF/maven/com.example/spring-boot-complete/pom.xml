@@ -47,8 +47,6 @@
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter</artifactId>
 		</dependency>
-
-		
         <!-- Spring Boot Starter -->
 
         <!-- Oracle DataBase 설정 시작 -->
@@ -75,6 +73,14 @@
 
         <!-- Oracle DataBase 설정 끝 -->
 
+		<!--MyBatis 설정 시작-->
+		<dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+		<!--MyBatis 설정 끝-->
+		
         <!-- lombok 설정 시작 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
