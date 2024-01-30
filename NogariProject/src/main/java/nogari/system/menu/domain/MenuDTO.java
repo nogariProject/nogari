@@ -11,7 +11,7 @@ import java.util.List;
 public class MenuDTO {
     private String menuCd;
     private String menuNm;
-    private Integer sort;
+    private int    sort;
     private String upperMenuCd;
     private String url;
     private String useYn;
@@ -26,9 +26,9 @@ public class MenuDTO {
     private String etc3Yn;
     private String param;
     private String regId;
-    private Date regDt;
+    private String regDt;
     private String updId;
-    private Date updDt;
+    private String updDt;
 
     private List<MenuDTO> menuList;
 
