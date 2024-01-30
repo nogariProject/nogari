@@ -1,7 +1,10 @@
-package nogari.global.error;
+package nogari.global.error.DTO;
 
 import javax.validation.constraints.NotNull;
 
+import lombok.Getter;
+
+@Getter
 public class TestDTO {
 	
 	@NotNull(message = "NullPointException")

@@ -21,8 +21,8 @@ public class ErrorResponse {
 	
 	private int    status;
 	private String message;
-	private List<FieldError> errors;
-	// private List<CustomFieldError> errors;					// 커스터마이징 사용 시
+//	private List<FieldError> errors;			// 커스터마이징 사용X
+	private List<CustomFieldError> errors;		// 커스터마이징 사용 시
 	
 	
 	// ErrorResponse 생성자
@@ -30,8 +30,8 @@ public class ErrorResponse {
 	protected ErrorResponse(HttpStatus httpStatus, String message, BindingResult bindingResult) {
 		this.status  = httpStatus.value();
 		this.message = message;
-		this.errors  = bindingResult == null ? null : bindingResult.getFieldErrors();
-		// this.errors  = CustomFieldError.of(bindingResult);	// 커스터마이징 사용 시
+//		this.errors  = bindingResult == null ? null : bindingResult.getFieldErrors();	// 커스터마이징 사용X
+		this.errors  = CustomFieldError.of(bindingResult);	// 커스터마이징 사용 시
 	}
 	
 	// ErrorResponse 전송타입1
@@ -55,7 +55,7 @@ public class ErrorResponse {
 	}
 	
 	
-/*
+
 	// 커스터마이징 FieldError
 	@Getter
 	@NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -85,6 +85,6 @@ public class ErrorResponse {
 		}
 		
 	}
-*/
+
 	
 }

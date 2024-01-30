@@ -31,8 +31,8 @@ import nogari.global.error.service.ErrorLogService;
 @Slf4j
 public class AopConfig {
 	
-	@Autowired
-	ErrorLogService errorLogService;
+//	@Autowired
+//	ErrorLogService errorLogService;
 	
 	@Pointcut("@within(org.springframework.web.bind.annotation.RestControllerAdvice)")
 	private void exceptionLogPoint() {}	// @RestControllerAdvice 어노테이션이 붙은 클래스
@@ -46,14 +46,8 @@ public class AopConfig {
 		log.info("@@@@@@ 발생Controller :: "  + request.getRequestURI());
 		log.info("@@@@@@ 발생getQueryString :: "  + request.getQueryString());
 		
-		ErrorLogDTO edto = new ErrorLogDTO("", request.getRequestURL().toString(), "", signature.getName(), "001", "testErrorMessage", "홍길동");
-		
-		errorLogService.saveError(edto);
-		
-		log.info("로그저장 완료");
-		
-//		log.info("beforException :: "+ joinpoint.toString());
-//		List<Map<String, Object>> list = errorLogService.selectTest();
-//		log.info("tableList :: "+ list.toString());
+//		ErrorLogDTO edto = new ErrorLogDTO("", request.getRequestURL().toString(), "", signature.getName(), "001", "testErrorMessage", "홍길동");
+//		errorLogService.saveError(edto);
+//		log.info("로그저장 완료");
 	}
 }
