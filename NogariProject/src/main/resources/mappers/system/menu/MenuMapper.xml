@@ -44,7 +44,7 @@
 	<insert id="insertMenu" parameterType="MenuDTO">
 	<selectKey resultType="String" keyProperty="menuCd" order="BEFORE">
         SELECT <choose>
-        		<when test='URL == null and URL == ""'>
+        		<when test='url == null and url == ""'>
         		'MNU' || LPAD(TO_CHAR(SUBSTR(MAX(MENU_CD), 4, 7)+1), 6, '0')
         		</when>
         		<otherwise>
@@ -86,7 +86,7 @@
 		, #{menuNm}
 		, #{sort}
 		, #{upperMenuCd}
-		, #{URL}
+		, #{url}
 		, NVL(#{useYn}  , 'N')
 		, NVL(#{crtYn}  , 'N')
 		, NVL(#{redYn}  , 'N')

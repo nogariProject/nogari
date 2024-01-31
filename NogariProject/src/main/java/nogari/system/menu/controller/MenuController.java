@@ -29,6 +29,7 @@ public class MenuController {
 
     @PostMapping("/save")
     public String menuSave(@RequestBody List<MenuDTO> list) {
+
         menuService.createMenu(list);
         return "Menu created successfully!";
     }
