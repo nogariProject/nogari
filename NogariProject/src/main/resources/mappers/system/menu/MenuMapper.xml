@@ -3,4 +3,105 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="nogari.system.menu.dao.mapper.MenuMapper">
+
+	<select id="selectMenuList" resultType="MenuDTO">
+	SELECT LEVEL
+		 , MENU_CD
+		 , UPPER_MENU_CD
+		 , MENU_NM
+		 , SORT
+	  FROM (
+	  		SELECT '0000'   AS MENU_CD
+			     , NULL     AS UPPER_MENU_CD
+			     , '전체'		AS MENU_NM
+			     , 0		AS SORT
+			  FROM DUAL
+			
+			 UNION ALL
+			
+			SELECT MENU_CD
+				 , UPPER_MENU_CD
+				 , MENU_NM
+				 , SORT
+			  FROM MENU
+			 WHERE 1=1
+			   AND URL IS NULL 
+		   )
+	 START WITH UPPER_MENU_CD IS NULL
+   CONNECT BY PRIOR MENU_CD = UPPER_MENU_CD
+     ORDER SIBLINGS BY SORT
+	</select>
+	
+	<select id="selectScreen" parameterType="MenuDTO" resultType="MenuDTO">
+	SELECT *
+	  FROM MENU
+	 WHERE 1=1
+	   AND URL IS NOT NULL
+	   AND UPPER_MENU_CD = #{UPPER_MENU_CD}
+	 ORDER BY SORT
+	</select>
+	
+	<insert id="insertMenu">
+	<selectKey resultType="String" keyProperty="MENU_CD" order="BEFORE">
+        SELECT <choose>
+        		<when test='URL == null and URL == ""'>
+        		'MNU' || LPAD(TO_CHAR(SUBSTR(MAX(MENU_CD), 4, 7)+1), 6, '0')
+        		</when>
+        		<otherwise>
+        		'SCR' || LPAD(TO_CHAR(SUBSTR(MAX(MENU_CD), 4, 7)+1), 6, '0')
+        		</otherwise>
+        	   </choose>
+        FROM MENU
+         WHERE 1=1
+           <choose>
+            <when test='URL == null and URL == ""'>
+            AND SUBSTR(MENU_CD, 0, 3) = 'MNU'
+            </when>
+            <otherwise>
+            AND SUBSTR(MENU_CD, 0, 3) = 'SCR'
+            </otherwise>
+           </choose>
+    </selectKey> 
+	INSERT INTO MENU (
+		  MENU_CD
+		, MENU_NM
+		, SORT
+		, UPPER_MENU_CD
+		, URL
+		, USE_YN
+		, CRT_YN
+		, RED_YN
+		, SAV_YN
+		, DEL_YN
+		, PRT_YN
+		, EXL_YN
+		, ETC_1_YN
+		, ETC_2_YN
+		, ETC_3_YN
+		, PARAM
+		, REG_ID
+		, UPD_ID
+	) VALUES (
+		  #{MENU_CD}
+		, #{MENU_NM}
+		, #{SORT}
+		, #{UPPER_MENU_CD}
+		, #{URL}
+		, NVL(#{USE_YN}  , 'N')
+		, NVL(#{CRT_YN}  , 'N')
+		, NVL(#{RED_YN}  , 'N')
+		, NVL(#{SAV_YN}  , 'N')
+		, NVL(#{DEL_YN}  , 'N')
+		, NVL(#{PRT_YN}  , 'N')
+		, NVL(#{EXL_YN}  , 'N')
+		, NVL(#{ETC_1_YN}, 'N')
+		, NVL(#{ETC_2_YN}, 'N')
+		, NVL(#{ETC_3_YN}, 'N')
+		, #{PARAM}
+		, #{REG_ID}
+		, #{UPD_ID}
+	)
+	</insert>
+
+
 </mapper>
