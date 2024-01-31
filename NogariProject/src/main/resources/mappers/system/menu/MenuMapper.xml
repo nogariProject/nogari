@@ -103,6 +103,27 @@
 	)
 	</insert>
 
+	<update id="updateMenu" parameterType="MenuDTO">
+	UPDATE MENU SET
+		   MENU_NM       = #{menuNm}
+		 , SORT          = #{sort}
+		 , UPPER_MENU_CD = #{upperMenuCd}
+		 , URL           = #{url}
+		 , USE_YN        = #{useYn}
+		 , CRT_YN        = #{crtYn}
+		 , RED_YN        = #{redYn}
+		 , SAV_YN        = #{savYn}
+		 , DEL_YN        = #{delYn}
+		 , PRT_YN        = #{prtYn}
+		 , EXL_YN        = #{exlYn}
+		 , ETC_1_YN      = #{etc1Yn}
+		 , ETC_2_YN      = #{etc2Yn}
+		 , ETC_3_YN      = #{etc3Yn}
+		 , PARAM         = #{param}
+		 , UPD_ID        = #{updId}
+	 WHERE MENU_CD       = #{menuCd}
+	</update>
+
 	<delete id="deleteMenu" parameterType="String">
 	DELETE FROM MENU
 	 WHERE MENU_CD = #{menuCd}
