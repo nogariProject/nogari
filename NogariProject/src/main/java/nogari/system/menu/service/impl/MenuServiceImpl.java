@@ -40,8 +40,14 @@ public class MenuServiceImpl implements MenuService{
     }
 
     @Override
-    public void editMenu(MenuDTO menu) {
-        menuMapper.updateMenu(menu);
+    public void editMenu(List<MenuDTO> list) {
+        log.info("===================>  MenuServiceImpl createMenu :: {}",list.size());
+        int resultCnt = 0;
+        for(MenuDTO mDto:list){
+            menuMapper.updateMenu(mDto);
+            resultCnt ++;
+        }
+        log.info("===================>  MenuServiceImpl resultCnt :: {}",resultCnt);
     }
 
     @Override
