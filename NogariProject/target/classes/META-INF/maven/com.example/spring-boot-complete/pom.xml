@@ -89,6 +89,10 @@
         </dependency>
         <!-- lombok 설정 끝 -->
 
+        <!-- 쿼리 로그 설정 시작 -->
+
+        <!-- 쿼리 로그 설정 끝 -->
+
     </dependencies>
 
     <build>
