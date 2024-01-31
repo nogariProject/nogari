@@ -58,8 +58,8 @@
         <!-- Oracle DataBase 설정 시작 -->
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
-            <artifactId>ojdbc10</artifactId>
-            <version>19.21.0.0</version>
+            <artifactId>ojdbc11</artifactId>
+            <version>21.5.0.0</version>
         </dependency>
 
         <dependency>
