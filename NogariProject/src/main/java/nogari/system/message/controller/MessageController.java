@@ -2,7 +2,7 @@ package nogari.system.message.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import nogari.system.message.domain.dto.MessageDto;
+import nogari.system.message.domain.dto.MessageDTO;
 import nogari.system.message.domain.entity.Message;
 import nogari.system.message.service.MessageServiceImp;
 import org.modelmapper.ModelMapper;
@@ -24,30 +24,29 @@ public class MessageController {
     private final ModelMapper modelMapper;
 
     @GetMapping("")
-    public ResponseEntity<List<MessageDto>> getMessage(){
-        List<MessageDto> messageDtoList = new ArrayList<>();
-
-        Iterable<Message> allMessage = messageService.getAllMessage();
-        allMessage.forEach(message -> messageDtoList.add(new MessageDto(message)));
-
-        return new ResponseEntity<>(messageDtoList, HttpStatus.OK);
+    public ResponseEntity<List<MessageDTO>> messageList(){
+        return null;
     }
-    @PostMapping("/create")
-    public ResponseEntity createMessage(@RequestBody @Valid MessageDto messageDto){
-        Message message = convertToEntity(messageDto);
-        messageService.createMessage(message);
+    @GetMapping("/{msgCd}")
+    public MessageDTO messageDetails(){
+        return null;
+    }
+
+    @PostMapping("")
+    public ResponseEntity messageAdd(@RequestBody @Valid MessageDTO messageDto){
+
         return new ResponseEntity(HttpStatus.CREATED);
     }
-    private MessageDto convertToDto(Message message) {
-        return modelMapper.map(message, MessageDto.class);
+
+//    @PutMapping("/{msgCd}")
+//    public void ResponseEntity(@PathVariable String msgCd, @RequestBody @Valid MessageDTO messageDTO){
+//
+//        return new ResponseEntity(HttpStatus.CREATED);
+//    }
+    @DeleteMapping("")
+    public void deptRemove(@PathVariable String deptCd){
+
+
     }
-    private Message convertToEntity(MessageDto messageDto) {
-        return Message.builder()
-                .msgCd(messageDto.getMsgCd())
-                .type(messageDto.getType())
-                .description(messageDto.getDescription())
-                .regId(messageDto.getRegId())
-                .updId(messageDto.getUpdId())
-                .build();
-    }
+
 }

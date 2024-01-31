@@ -2,16 +2,17 @@ package nogari.system.message.domain.dto;
 
 import lombok.*;
 import nogari.system.message.domain.entity.Message;
+import org.apache.ibatis.type.Alias;
 
 import javax.validation.constraints.NotNull;
-import java.sql.Date;
 
+@Alias("MessageDTO")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MessageDto {
+public class MessageDTO {
 
     private Long msgCd;
     @NotNull(message = "type 값이 없습니다")
@@ -21,7 +22,7 @@ public class MessageDto {
     private String regId;
     private String updId;
 
-    public MessageDto(Message entity){
+    public MessageDTO(Message entity){
         this.msgCd = entity.getMsgCd();
         this.type = entity.getType();
         this.description = entity.getDescription();
