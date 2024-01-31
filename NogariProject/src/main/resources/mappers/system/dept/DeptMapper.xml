@@ -11,7 +11,7 @@
         ,MGR_ID         /*관리자ID*/
         ,UPPER_DEPT_CD  /*상위부서코드*/
         ,SORT           /*정렬순서*/
-        ,EXP_DT         /*유효일시*/
+        ,USE_YN         /*유효일시*/
         ,UPD_DT         /*등록일시*/
         ,UPD_ID         /*등록자ID*/
         ,REG_DT         /*수정일시*/
@@ -31,7 +31,7 @@
         ,MGR_ID         /*관리자ID*/
         ,UPPER_DEPT_CD  /*상위부서코드*/
         ,SORT           /*정렬순서*/
-        ,EXP_DT         /*유효일시*/
+        ,USE_YN         /*유효일시*/
         ,UPD_DT         /*등록일시*/
         ,UPD_ID         /*등록자ID*/
         ,REG_DT         /*수정일시*/
@@ -47,7 +47,6 @@
         ,MGR_ID         /*관리자ID*/
         ,UPPER_DEPT_CD  /*상위부서코드*/
         ,SORT           /*정렬순서*/
-        ,EXP_DT         /*유효일시*/
         ,UPD_DT         /*등록일시*/
         ,UPD_ID         /*등록자ID*/
         ,REG_DT         /*수정일시*/
@@ -58,7 +57,6 @@
         ,#{mgrId}
         ,#{upperDeptCd}
         ,#{sort}
-        ,#{expDt}
         ,#{updDt}
         ,#{updId}
         ,#{regDt}
@@ -73,7 +71,7 @@
             ,MGR_ID = #{mgrId}              /*관리자ID*/
             ,UPPER_DEPT_CD = #{upperDeptCd} /*상위부서코드*/
             ,SORT = #{sort}                 /*정렬순서*/
-            ,EXP_DT = #{expDt}              /*유효일시*/
+            ,USE_YN = #{useYn}              /*유효일시*/
             ,UPD_DT = #{updDt}              /*등록일시*/
             ,UPD_ID = #{updId}              /*등록자ID*/
         WHERE
@@ -81,7 +79,7 @@
     </update>
 
     <delete id="deleteDept" parameterType="String">
-        DELETE FROM employees
+        DELETE FROM DEPT
         WHERE DEPT_CD = #{deptCd}          /*부서코드*/
     </delete>
 </mapper>
