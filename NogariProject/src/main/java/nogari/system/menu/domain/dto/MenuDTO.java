@@ -1,4 +1,4 @@
-package nogari.system.menu.domain;
+package nogari.system.menu.domain.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -6,6 +6,9 @@ import lombok.Getter;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("MenuDTO")
 @Getter
 @Builder
 public class MenuDTO {
