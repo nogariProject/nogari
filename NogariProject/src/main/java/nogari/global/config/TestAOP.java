@@ -38,6 +38,9 @@ public class TestAOP {
             System.out.println("@@@@@@@@@@@@@@@@@@@\n" + getMethodBuffer() + "@@@@@@@@@@@@@@@@@@@");
             
 			System.out.println("@@around Controller finish");
+			
+			classBuffer = new StringBuilder();
+			methodBuffer = new StringBuilder();
 		}
 		
 	}
@@ -45,9 +48,9 @@ public class TestAOP {
 	private StringBuilder classBuffer = new StringBuilder();
     private StringBuilder methodBuffer = new StringBuilder();
 
-    @Around("execution(* nogari.sample.test.controller..*(..)) || " +
-            "execution(* nogari.sample.test.service..*(..)) || " +
-            "execution(* nogari.sample.test.mapper..*(..))")
+    @Around("execution(* nogari..controller..*(..)) || " +
+            "execution(* nogari..service..*(..)) || " +
+            "execution(* nogari..mapper..*(..))")
     public Object aroundMethodExecution(ProceedingJoinPoint joinPoint) throws Throwable {
     	
         Signature signature = joinPoint.getSignature();
