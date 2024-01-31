@@ -19,7 +19,7 @@ public class MenuDTO {
     private String menuNm;
     private int    sort;
     private String upperMenuCd;
-    private String URL;
+    private String url;
     private String useYn;
     private String crtYn;
     private String redYn;
