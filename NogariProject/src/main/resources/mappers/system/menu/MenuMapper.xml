@@ -32,33 +32,33 @@
      ORDER SIBLINGS BY SORT
 	</select>
 	
-	<select id="selectScreen" parameterType="MenuDTO" resultType="MenuDTO">
+	<select id="selectScreen" parameterType="String" resultType="MenuDTO">
 	SELECT *
 	  FROM MENU
 	 WHERE 1=1
 	   AND URL IS NOT NULL
-	   AND UPPER_MENU_CD = #{UPPER_MENU_CD}
+	   AND UPPER_MENU_CD = #{upperMenuCd}
 	 ORDER BY SORT
 	</select>
 	
-	<insert id="insertMenu">
+	<insert id="insertMenu" parameterType="MenuDTO">
 	<selectKey resultType="String" keyProperty="MENU_CD" order="BEFORE">
         SELECT <choose>
         		<when test='URL == null and URL == ""'>
-        		'MNU' || LPAD(TO_CHAR(SUBSTR(MAX(MENU_CD), 4, 7)+1), 6, '0')
+        		'MNU' || LPAD(TO_CHAR(SUBSTR(MAX(menuCd), 4, 7)+1), 6, '0')
         		</when>
         		<otherwise>
-        		'SCR' || LPAD(TO_CHAR(SUBSTR(MAX(MENU_CD), 4, 7)+1), 6, '0')
+        		'SCR' || LPAD(TO_CHAR(SUBSTR(MAX(menuCd), 4, 7)+1), 6, '0')
         		</otherwise>
         	   </choose>
         FROM MENU
          WHERE 1=1
            <choose>
             <when test='URL == null and URL == ""'>
-            AND SUBSTR(MENU_CD, 0, 3) = 'MNU'
+            AND SUBSTR(menuCd, 0, 3) = 'MNU'
             </when>
             <otherwise>
-            AND SUBSTR(MENU_CD, 0, 3) = 'SCR'
+            AND SUBSTR(menuCd, 0, 3) = 'SCR'
             </otherwise>
            </choose>
     </selectKey> 
@@ -83,25 +83,29 @@
 		, UPD_ID
 	) VALUES (
 		  #{MENU_CD}
-		, #{MENU_NM}
-		, #{SORT}
-		, #{UPPER_MENU_CD}
-		, #{URL}
-		, NVL(#{USE_YN}  , 'N')
-		, NVL(#{CRT_YN}  , 'N')
-		, NVL(#{RED_YN}  , 'N')
-		, NVL(#{SAV_YN}  , 'N')
-		, NVL(#{DEL_YN}  , 'N')
-		, NVL(#{PRT_YN}  , 'N')
-		, NVL(#{EXL_YN}  , 'N')
-		, NVL(#{ETC_1_YN}, 'N')
-		, NVL(#{ETC_2_YN}, 'N')
-		, NVL(#{ETC_3_YN}, 'N')
-		, #{PARAM}
-		, #{REG_ID}
-		, #{UPD_ID}
+		, #{menuNm}
+		, #{sort}
+		, #{upperMenuCd}
+		, #{url}
+		, NVL(#{useYn}  , 'N')
+		, NVL(#{crtYn}  , 'N')
+		, NVL(#{redYn}  , 'N')
+		, NVL(#{savYn}  , 'N')
+		, NVL(#{delYn}  , 'N')
+		, NVL(#{prtYn}  , 'N')
+		, NVL(#{exlYn}  , 'N')
+		, NVL(#{etc1Yn}, 'N')
+		, NVL(#{etc2Yn}, 'N')
+		, NVL(#{etc3Yn}, 'N')
+		, #{param}
+		, #{regId}
+		, #{updId}
 	)
 	</insert>
 
+	<delete id="deleteMenu" parameterType="String">
+	DELETE FROM MENU
+	 WHERE MENU_CD = #{menuCd}
+	</delete>
 
 </mapper>
