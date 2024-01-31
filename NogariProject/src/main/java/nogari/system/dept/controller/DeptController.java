@@ -28,7 +28,7 @@ public class DeptController {
      * @param deptCd
      * @return
      */
-    @GetMapping("{deptCd}")
+    @GetMapping("/{deptCd}")
     public DeptDTO deptDetail(@PathVariable String deptCd){
         return deptService.findDeptByDeptCd(deptCd);
     }
@@ -56,7 +56,7 @@ public class DeptController {
      * 부서 정보 삭제
      * @param deptCd
      */
-    @DeleteMapping
+    @DeleteMapping("")
     public void deptRemove(@PathVariable String deptCd){
         deptService.deleteDept(deptCd);
     }

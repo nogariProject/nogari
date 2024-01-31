@@ -18,7 +18,6 @@ public class DeptDTO {
     String mgrId;
     String upperDeptCd;
     Long sort;
-    String expDt;
     Date regDt;
     String regId;
     Date updDt;
