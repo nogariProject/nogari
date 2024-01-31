@@ -1,11 +1,11 @@
-package nogari.system.groupauth.domain;
+package nogari.system.auth.domain;
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
-public class groupAuthDTO {
+public class AuthDtlDTO {
 
     String name;
     String id;
