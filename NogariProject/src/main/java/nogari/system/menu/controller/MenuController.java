@@ -10,7 +10,7 @@ import nogari.system.menu.domain.dto.MenuDTO;
 import nogari.system.menu.service.MenuService;
 
 @RestController
-@RequestMapping("/menu")
+@RequestMapping("/menus")
 @Slf4j
 public class MenuController {
     @Autowired

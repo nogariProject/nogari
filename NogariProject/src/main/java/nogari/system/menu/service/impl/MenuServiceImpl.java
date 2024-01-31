@@ -40,7 +40,7 @@ public class MenuServiceImpl implements MenuService{
     }
 
     @Override
-    public void editMenu(List<MenuDTO> list) {
+    public int editMenu(List<MenuDTO> list) {
         log.info("===================>  MenuServiceImpl createMenu :: {}",list.size());
         int resultCnt = 0;
         for(MenuDTO mDto:list){
@@ -48,6 +48,7 @@ public class MenuServiceImpl implements MenuService{
             resultCnt ++;
         }
         log.info("===================>  MenuServiceImpl resultCnt :: {}",resultCnt);
+        return resultCnt;
     }
 
     @Override

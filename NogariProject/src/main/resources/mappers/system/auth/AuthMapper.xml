@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nogari.system.menu.dao.mapper.GroupAuthMapper">
+    
+    <select id="selectAuthMst" resultType="groupAuthMstDTO">
+
+    </select>
+
+    <select id="selectAuthDtl" parameterType="String" resultType="groupAuthDtlDTO">
+    </select>
+
+    <insert id="insertAuthMst" parameterType="groupAuthMstDTO">
+    </insert>
+
+    <insert id="insertAuthDtl" parameterType="groupAuthDtlDTO">
+    </insert>
+
+</mapper>
