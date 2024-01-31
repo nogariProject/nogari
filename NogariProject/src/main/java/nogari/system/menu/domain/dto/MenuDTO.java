@@ -37,4 +37,6 @@ public class MenuDTO {
     private String updId;
     private String updDt;
 
+    private List<MenuDTO> menuList;
+
 }
