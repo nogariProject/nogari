@@ -1,7 +1,7 @@
 package nogari.system.menu.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import nogari.system.menu.domain.MenuDTO;
+import nogari.system.menu.domain.dto.MenuDTO;
 import nogari.system.menu.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -23,7 +23,7 @@ public class MenuController {
     }
 
     @GetMapping("/detail")
-    public MenuDTO menuDetail(@RequestParam String menuCd) {
+    public List<MenuDTO> menuDetail(@RequestParam String menuCd) {
         return menuService.findMenuByCd(menuCd);
     }
 
