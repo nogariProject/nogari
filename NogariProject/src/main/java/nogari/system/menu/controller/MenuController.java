@@ -28,8 +28,8 @@ public class MenuController {
     }
 
     @PostMapping("/save")
-    public String menuSave(@RequestBody MenuDTO menuDTO) {
-        menuService.createMenu(menuDTO);
+    public String menuSave(@RequestBody List<MenuDTO> list) {
+        menuService.createMenu(list);
         return "Menu created successfully!";
     }
 

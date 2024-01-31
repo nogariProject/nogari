@@ -42,23 +42,23 @@
 	</select>
 	
 	<insert id="insertMenu" parameterType="MenuDTO">
-	<selectKey resultType="String" keyProperty="MENU_CD" order="BEFORE">
+	<selectKey resultType="String" keyProperty="menuCd" order="BEFORE">
         SELECT <choose>
         		<when test='URL == null and URL == ""'>
-        		'MNU' || LPAD(TO_CHAR(SUBSTR(MAX(menuCd), 4, 7)+1), 6, '0')
+        		'MNU' || LPAD(TO_CHAR(SUBSTR(MAX(MENU_CD), 4, 7)+1), 6, '0')
         		</when>
         		<otherwise>
-        		'SCR' || LPAD(TO_CHAR(SUBSTR(MAX(menuCd), 4, 7)+1), 6, '0')
+        		'SCR' || LPAD(TO_CHAR(SUBSTR(MAX(MENU_CD), 4, 7)+1), 6, '0')
         		</otherwise>
         	   </choose>
         FROM MENU
          WHERE 1=1
            <choose>
             <when test='URL == null and URL == ""'>
-            AND SUBSTR(menuCd, 0, 3) = 'MNU'
+            AND SUBSTR(MENU_CD, 0, 3) = 'MNU'
             </when>
             <otherwise>
-            AND SUBSTR(menuCd, 0, 3) = 'SCR'
+            AND SUBSTR(MENU_CD, 0, 3) = 'SCR'
             </otherwise>
            </choose>
     </selectKey> 
@@ -82,11 +82,11 @@
 		, REG_ID
 		, UPD_ID
 	) VALUES (
-		  #{MENU_CD}
+		  #{menuCd}
 		, #{menuNm}
 		, #{sort}
 		, #{upperMenuCd}
-		, #{url}
+		, #{URL}
 		, NVL(#{useYn}  , 'N')
 		, NVL(#{crtYn}  , 'N')
 		, NVL(#{redYn}  , 'N')

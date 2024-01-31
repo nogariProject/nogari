@@ -1,17 +1,15 @@
 package nogari.system.menu.domain.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
 
-import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
 
 @Alias("MenuDTO")
 @Getter
+@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +18,7 @@ public class MenuDTO {
     private String menuNm;
     private int    sort;
     private String upperMenuCd;
-    private String url;
+    private String URL;
     private String useYn;
     private String crtYn;
     private String redYn;
@@ -36,7 +34,4 @@ public class MenuDTO {
     private String regDt;
     private String updId;
     private String updDt;
-
-    private List<MenuDTO> menuList;
-
 }
