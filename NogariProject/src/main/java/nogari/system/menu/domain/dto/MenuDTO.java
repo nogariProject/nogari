@@ -1,11 +1,12 @@
 package nogari.system.menu.domain.dto;
 
-import lombok.*;
-
-import java.util.Date;
-import java.util.List;
-
 import org.apache.ibatis.type.Alias;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Alias("MenuDTO")
 @Getter

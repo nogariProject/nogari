@@ -45,16 +45,16 @@
 	<selectKey resultType="String" keyProperty="menuCd" order="BEFORE">
         SELECT <choose>
         		<when test='url == null and url == ""'>
-        		'MNU' || LPAD(TO_CHAR(SUBSTR(MAX(MENU_CD), 4, 7)+1), 6, '0')
+        		'MNU' || LPAD(TO_CHAR(NVL(SUBSTR(MAX(MENU_CD), 4, 7), 0)+1), 6, '0')
         		</when>
         		<otherwise>
-        		'SCR' || LPAD(TO_CHAR(SUBSTR(MAX(MENU_CD), 4, 7)+1), 6, '0')
+        		'SCR' || LPAD(TO_CHAR(NVL(SUBSTR(MAX(MENU_CD), 4, 7), 0)+1), 6, '0')
         		</otherwise>
         	   </choose>
         FROM MENU
          WHERE 1=1
            <choose>
-            <when test='URL == null and URL == ""'>
+            <when test='url == null and url == ""'>
             AND SUBSTR(MENU_CD, 0, 3) = 'MNU'
             </when>
             <otherwise>
