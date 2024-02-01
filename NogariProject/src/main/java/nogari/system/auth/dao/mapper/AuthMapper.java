@@ -24,6 +24,6 @@ public interface AuthMapper {
 	void updateAuthMenu(AuthDtlDTO authDtlDTO);
 	
 	// 삭제
-	void deleteAuth(@Param("authCd") String authCd);
+	void deleteAuth(AuthMstDTO authMstDTO);
 	void deleteAuthMenu(AuthDtlDTO authDtlDTO);
 }

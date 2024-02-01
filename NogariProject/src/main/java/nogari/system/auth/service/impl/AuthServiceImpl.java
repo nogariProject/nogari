@@ -51,7 +51,7 @@ public class AuthServiceImpl implements AuthService {
 	// 권한수정
 	@Override
 	public void editAuth(List<AuthMstDTO> authList) {
-		
+
 		for(AuthMstDTO arr : authList) {
 			authMapper.updateAuth(arr);
 		}
@@ -70,9 +70,10 @@ public class AuthServiceImpl implements AuthService {
 
 	// 권한삭제
 	@Override
-	public void deleteAuth(List<String> authCdList) {
+	public void deleteAuth(List<AuthMstDTO> authList) {
 		
-		for(String authCd : authCdList) {
+		for(AuthMstDTO authCd : authList) {
+			authMapper.deleteAuthMenu(authCd);
 			authMapper.deleteAuth(authCd);
 		}
 		

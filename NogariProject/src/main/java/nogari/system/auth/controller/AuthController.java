@@ -57,21 +57,19 @@ public class AuthController {
 	
 	@PutMapping("/{authCd}")
 	public String authMenuModify(@PathVariable String authCd, @RequestBody List<AuthDtlDTO> authMenuList) {
-		authService.createAuthMenu(authMenuList);
+		authService.editAuthMenu(authMenuList);
 		return "AuthMenu Modify!";
 	}
 	
 	@DeleteMapping
-	public String authDelete(List<String> menuCdList) {
+	public String authDelete(@RequestBody List<AuthMstDTO> menuCdList) {
 		authService.deleteAuth(menuCdList);
 		return "Auth Deleted!";
 	}
 
 	@DeleteMapping("/{authCd}")
 	public String authMenuDelete(@PathVariable String authCd, @RequestBody List<AuthDtlDTO> authMenuList) {
-		authService.createAuthMenu(authMenuList);
+		authService.deleteAuthMenu(authMenuList);
 		return "AuthMenu Deleted!";
 	}
-	
-	
 }

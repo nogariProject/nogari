@@ -19,6 +19,6 @@ public interface AuthService {
 	void editAuthMenu(List<AuthDtlDTO> authMenuList);
 	
 	// 삭제
-	void deleteAuth(List<String> authCdList);
+	void deleteAuth(List<AuthMstDTO> authList);
 	void deleteAuthMenu(List<AuthDtlDTO> authMenuList);
 }
