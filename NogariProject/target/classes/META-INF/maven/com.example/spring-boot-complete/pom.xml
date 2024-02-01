@@ -52,8 +52,8 @@
         <!-- Oracle DataBase 설정 시작 -->
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
-            <artifactId>ojdbc10</artifactId>
-            <version>19.21.0.0</version>
+            <artifactId>ojdbc11</artifactId>
+            <version>21.5.0.0</version>
         </dependency>
 
         <dependency>
@@ -90,7 +90,11 @@
         <!-- lombok 설정 끝 -->
 
         <!-- 쿼리 로그 설정 시작 -->
-
+        <dependency>
+            <groupId>org.bgee.log4jdbc-log4j2</groupId>
+            <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+            <version>1.16</version>
+        </dependency>
         <!-- 쿼리 로그 설정 끝 -->
 
     </dependencies>
