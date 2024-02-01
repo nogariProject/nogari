@@ -72,8 +72,10 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public void deleteAuth(List<AuthMstDTO> authList) {
 		
-		for(AuthMstDTO authCd : authList) {
-			authMapper.deleteAuthMenu(authCd);
+		for(AuthMstDTO authCd : authList) {			
+			AuthDtlDTO dtl = AuthDtlDTO.builder().authCd(authCd.getAuthCd()).build();
+			
+			authMapper.deleteAuthMenu(dtl);
 			authMapper.deleteAuth(authCd);
 		}
 		
