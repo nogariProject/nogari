@@ -1,4 +1,4 @@
-package nogari.system.auth.domain;
+package nogari.system.auth.domain.dto;
 
 import org.apache.ibatis.type.Alias;
 
@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Alias("GroupAuthDtlDTO")
+@Alias("AuthDtlDTO")
 @Getter
 @ToString
 @Builder

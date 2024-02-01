@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import nogari.system.auth.domain.AuthDtlDTO;
-import nogari.system.auth.domain.AuthMstDTO;
+import nogari.system.auth.domain.dto.AuthDtlDTO;
+import nogari.system.auth.domain.dto.AuthMstDTO;
 
 @Mapper
 public interface AuthMapper {

@@ -2,19 +2,19 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="nogari.system.menu.dao.mapper.GroupAuthMapper">
+<mapper namespace="nogari.system.auth.dao.mapper.AuthMapper">
     
-    <select id="selectAuthMst" resultType="groupAuthMstDTO">
+    <select id="selectAuthMst" resultType="AuthMstDTO">
 
     </select>
 
-    <select id="selectAuthDtl" parameterType="String" resultType="groupAuthDtlDTO">
+    <select id="selectAuthDtl" parameterType="String" resultType="AuthDtlDTO">
     </select>
 
-    <insert id="insertAuthMst" parameterType="groupAuthMstDTO">
+    <insert id="insertAuthMst" parameterType="AuthMstDTO">
     </insert>
 
-    <insert id="insertAuthDtl" parameterType="groupAuthDtlDTO">
+    <insert id="insertAuthDtl" parameterType="AuthDtlDTO">
     </insert>
 
 </mapper>

@@ -2,8 +2,8 @@ package nogari.system.auth.service;
 
 import java.util.List;
 
-import nogari.system.auth.domain.AuthDtlDTO;
-import nogari.system.auth.domain.AuthMstDTO;
+import nogari.system.auth.domain.dto.AuthDtlDTO;
+import nogari.system.auth.domain.dto.AuthMstDTO;
 
 public interface AuthService {
 	// 조회
