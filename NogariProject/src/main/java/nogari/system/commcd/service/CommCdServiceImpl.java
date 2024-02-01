@@ -1,7 +1,6 @@
 package nogari.system.commcd.service;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -18,12 +17,12 @@ public class CommCdServiceImpl implements CommCdService {
 	@Resource
 	private CommCdMapper mapper;
 	
-	public List<Map<String, Object>> selectClsCd(ClsCdDTO dto) throws Exception {
+	public List<ClsCdDTO> selectClsCd(ClsCdDTO dto) throws Exception {
 		
 		return mapper.selectClsCd(dto);
 	}
 	
-	public List<Map<String, Object>> selectCodeCd(CodeCdDTO dto) throws Exception {
+	public List<CodeCdDTO> selectCodeCd(CodeCdDTO dto) throws Exception {
 		
 		return mapper.selectCodeCd(dto);
 	}

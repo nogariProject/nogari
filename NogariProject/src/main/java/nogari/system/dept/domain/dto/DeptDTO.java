@@ -1,4 +1,4 @@
-package nogari.system.commcd.domain.dto;
+package nogari.system.dept.domain.dto;
 
 import javax.validation.constraints.NotNull;
 
@@ -7,12 +7,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ClsCdDTO {
+public class DeptDTO {
 
 	@NotNull(message = "필수값")
-	String clsCd;
-	String clsNm;
-	String remark;
+	String deptCd;
+	String deptNm;
+	String mgrId;
+	String upperDeptCd;
+	int sort;
+	String useYN;
 	String id;
 	
 }

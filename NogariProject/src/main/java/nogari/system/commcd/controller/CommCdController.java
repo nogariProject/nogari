@@ -1,7 +1,6 @@
 package nogari.system.commcd.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,15 +20,15 @@ public class CommCdController {
 	private CommCdService service;
 	
 	@GetMapping("/clscd")
-	public List<Map<String, Object>> selectClsCd(@RequestBody ClsCdDTO dto) throws Exception {
-		List<Map<String, Object>> list = service.selectClsCd(dto);
+	public List<ClsCdDTO> selectClsCd(@RequestBody ClsCdDTO dto) throws Exception {
+		List<ClsCdDTO> list = service.selectClsCd(dto);
 		
 		return list;
 	}
 	
 	@GetMapping("/codecd")
-	public List<Map<String, Object>> selectCodeCd(@RequestBody CodeCdDTO dto) throws Exception {
-		List<Map<String, Object>> list = service.selectCodeCd(dto);
+	public List<CodeCdDTO> selectCodeCd(@RequestBody CodeCdDTO dto) throws Exception {
+		List<CodeCdDTO> list = service.selectCodeCd(dto);
 		
 		return list;
 	}
