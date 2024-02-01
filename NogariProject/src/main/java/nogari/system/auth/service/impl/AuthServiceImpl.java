@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import nogari.system.auth.dao.mapper.AuthMapper;
-import nogari.system.auth.domain.AuthDtlDTO;
-import nogari.system.auth.domain.AuthMstDTO;
+import nogari.system.auth.domain.dto.AuthDtlDTO;
+import nogari.system.auth.domain.dto.AuthMstDTO;
 import nogari.system.auth.service.AuthService;
 
 @Service

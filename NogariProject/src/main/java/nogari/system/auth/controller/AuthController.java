@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import nogari.system.auth.domain.AuthDtlDTO;
-import nogari.system.auth.domain.AuthMstDTO;
+import nogari.system.auth.domain.dto.AuthDtlDTO;
+import nogari.system.auth.domain.dto.AuthMstDTO;
 import nogari.system.auth.service.AuthService;
 
 @RestController

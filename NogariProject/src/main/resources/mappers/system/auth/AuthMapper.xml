@@ -2,7 +2,7 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="nogari.system.menu.dao.mapper.GroupAuthMapper">
+<mapper namespace="nogari.system.auth.dao.mapper.AuthMapper">
     
     <select id="selectAuthMst" parameterType="String" resultType="authMstDTO">
         SELECT  AUTH_CD                    -- 그룹코드
@@ -21,7 +21,7 @@
         </if>
     </select>
 
-    <select id="selectAuthDtl" parameterType="String" resultType="authDtlDTO">
+    <select id="selectAuthMenuList" parameterType="String" resultType="authDtlDTO">
         SELECT AUTH_CD        -- 그룹코드
              , MENU_CD        -- 메뉴ID
              , USE_YN         -- 표시여부
@@ -42,7 +42,7 @@
       WHERE AUTH_CD = #{authCd}
     </select>
 
-    <insert id="insertAuthMst" parameterType="authMstDTO">
+    <insert id="insertAuth" parameterType="authMstDTO">
         <selectKey resultType="String" keyProperty="authCd" order="BEFORE">
             SELECT LPAD(TO_CHAR(NVL(MAX(AUTH_CD), 0)+1), 6, '0')
               FROM MENU
@@ -64,7 +64,7 @@
         )
     </insert>
 
-    <insert id="insertAuthDtl" parameterType="authDtlDTO">
+    <insert id="insertAuthMenu" parameterType="authDtlDTO">
         INSERT INTO AUTH_DTL (
               AUTH_CD               -- 그룹코드
             , MENU_CD               -- 메뉴ID
@@ -102,7 +102,7 @@
         )
     </insert>
 
-    <update id="updateAuthMst" parameterType="authMstDTO">
+    <update id="updateAuth" parameterType="authMstDTO">
         UPDATE AUTH_MST
            SET AUTH_NM = #{authNm}      -- 그룹명
              , UPD_DT  = #{updDt}       -- 수정일시
@@ -110,7 +110,7 @@
         WHERE AUTH_CD  = #{authCd}      -- 그룹코드
     </update>
 
-    <update id="updateAuthDtl" parameterType="authDtlDTO">
+    <update id="updateAuthMenu" parameterType="authDtlDTO">
         UPDATE AUTH_DTL
            SET MENU_CD  = #{menuCd}         -- 메뉴ID
              , USE_YN   = #{useYn}          -- 표시여부
@@ -128,11 +128,11 @@
         WHERE AUTH_CD   = #{authCd}         -- 그룹코드
     </update>
 
-    <delete id="deleteAuthMst" parameterType="String">
+    <delete id="deleteAuth" parameterType="String">
         DELETE FROM AUTH_MST WHERE AUTH_CD = #{authCd}
     </delete>
 
-    <delete id="deleteAuthDtl" parameterType="String">
+    <delete id="deleteAuthMenu" parameterType="authDtlDTO">
         DELETE FROM AUTH_DTL
                WHERE AUTH_CD = #{authCd}
         <if test='menuCd != null and menuCd !=""'>
