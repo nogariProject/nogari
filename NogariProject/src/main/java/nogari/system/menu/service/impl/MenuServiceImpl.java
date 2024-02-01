@@ -16,11 +16,11 @@ public class MenuServiceImpl implements MenuService{
     private MenuMapper menuMapper;
 
     @Override
-    public List<MenuDTO> findMenu(String menuCd, String menuNm) {
+    public List<MenuDTO> findMenu() {
         log.info("===================>  MenuServiceImpl 진입");
-        List<MenuDTO> list = menuMapper.selectMenuList(menuCd, menuNm);
+        List<MenuDTO> list = menuMapper.selectMenuList();
         log.info("===================>  MenuServiceImpl 쿼리 돌고 난 후 :: {}",list.toString());
-        return menuMapper.selectMenuList(menuCd, menuNm);
+        return menuMapper.selectMenuList();
     }
 
     @Override
@@ -29,30 +29,32 @@ public class MenuServiceImpl implements MenuService{
     }
 
     @Override
-    public void createMenu(List<MenuDTO> list) {
-        log.info("===================>  MenuServiceImpl createMenu :: {}",list.size());
+    public int createMenu(List<MenuDTO> list) {
         int resultCnt = 0;
         for(MenuDTO mDto:list){
             menuMapper.insertMenu(mDto);
             resultCnt ++;
         }
-        log.info("===================>  MenuServiceImpl resultCnt :: {}",resultCnt);
+        return resultCnt;
     }
 
     @Override
     public int editMenu(List<MenuDTO> list) {
-        log.info("===================>  MenuServiceImpl createMenu :: {}",list.size());
         int resultCnt = 0;
         for(MenuDTO mDto:list){
             menuMapper.updateMenu(mDto);
             resultCnt ++;
         }
-        log.info("===================>  MenuServiceImpl resultCnt :: {}",resultCnt);
         return resultCnt;
     }
 
     @Override
-    public void deleteMenu(String menuCd) {
-        menuMapper.deleteMenu(menuCd);
+    public int deleteMenu(List<MenuDTO> list) {
+        int resultCnt = 0;
+        for(MenuDTO mDto:list){
+            menuMapper.deleteMenu(mDto);
+            resultCnt ++;
+        }
+        return resultCnt;
     }
 }

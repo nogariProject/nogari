@@ -4,17 +4,140 @@
 
 <mapper namespace="nogari.system.menu.dao.mapper.GroupAuthMapper">
     
-    <select id="selectAuthMst" resultType="groupAuthMstDTO">
-
+    <select id="selectAuthMst" parameterType="String" resultType="authMstDTO">
+        SELECT  AUTH_CD                    -- 그룹코드
+              , AUTH_NM                    -- 그룹명
+              , REG_DT                     -- 등록일시
+              , REG_ID                     -- 등록자
+              , UPD_DT                     -- 수정일시
+              , UPD_ID                     -- 수정자
+         FROM AUTH_MST
+        WHERE 1=1
+        <if test='authCd != null and authCd !=""'>
+         AND AUTH_CD = #{authCd}
+        </if>
+        <if test='authNm != null and authNm !=""'>
+         AND AUTH_NM = #{authNm}
+        </if>
     </select>
 
-    <select id="selectAuthDtl" parameterType="String" resultType="groupAuthDtlDTO">
+    <select id="selectAuthDtl" parameterType="String" resultType="authDtlDTO">
+        SELECT AUTH_CD        -- 그룹코드
+             , MENU_CD        -- 메뉴ID
+             , USE_YN         -- 표시여부
+             , CRT_YN         -- 생성권한
+             , RED_YN         -- 읽기권한
+             , SAV_YN         -- 저장권한
+             , DEL_YN         -- 삭제권한
+             , PRT_YN         -- 인쇄권한
+             , EXL_YN         -- 엑셀권한
+             , ETC_1_YN       -- 기타1권한
+             , ETC_2_YN       -- 기타2권한
+             , ETC_3_YN       -- 기타3권한
+             , REG_DT         -- 등록일시
+             , REG_ID         -- 등록자
+             , UPD_DT         -- 수정일시
+             , UPD_ID         -- 수정자
+        FROM AUTH_DTL
+      WHERE AUTH_CD = #{authCd}
     </select>
 
-    <insert id="insertAuthMst" parameterType="groupAuthMstDTO">
+    <insert id="insertAuthMst" parameterType="authMstDTO">
+        <selectKey resultType="String" keyProperty="authCd" order="BEFORE">
+            SELECT LPAD(TO_CHAR(NVL(MAX(AUTH_CD), 0)+1), 6, '0')
+              FROM MENU
+        </selectKey>
+        INSERT INTO AUTH_MST (
+             AUTH_CD                    -- 그룹코드
+            ,AUTH_NM                    -- 그룹명
+            ,REG_DT                     -- 등록일시
+            ,REG_ID                     -- 등록자
+            ,UPD_DT                     -- 수정일시
+            ,UPD_ID                     -- 수정자
+        ) VALUES (
+            #{authCd}                   -- 그룹코드 값
+           ,#{authNm}                   -- 그룹명 값
+           ,#{regDt}                    -- 등록일시 값
+           ,#{regId}                    -- 등록자 값
+           ,#{updDt}                    -- 수정일시 값
+           ,#{updId}                    -- 수정자 값
+        )
     </insert>
 
-    <insert id="insertAuthDtl" parameterType="groupAuthDtlDTO">
+    <insert id="insertAuthDtl" parameterType="authDtlDTO">
+        INSERT INTO AUTH_DTL (
+              AUTH_CD               -- 그룹코드
+            , MENU_CD               -- 메뉴ID
+            , USE_YN                -- 표시여부
+            , CRT_YN                -- 생성권한
+            , RED_YN                -- 읽기권한
+            , SAV_YN                -- 저장권한
+            , DEL_YN                -- 삭제권한
+            , PRT_YN                -- 인쇄권한
+            , EXL_YN                -- 엑셀권한
+            , ETC_1_YN              -- 기타1권한
+            , ETC_2_YN              -- 기타2권한
+            , ETC_3_YN              -- 기타3권한
+            , REG_DT                -- 등록일시
+            , REG_ID                -- 등록자
+            , UPD_DT                -- 수정일시
+            , UPD_ID                -- 수정자
+        ) VALUES (
+              #{authCd}
+            , #{menuCd}
+            , #{useYn}
+            , #{crtYn}
+            , #{redYn}
+            , #{savYn}
+            , #{delYn}
+            , #{prtYn}
+            , #{exlYn}
+            , #{etc1Yn}
+            , #{etc2Yn}
+            , #{etc3Yn}
+            , #{regDt}
+            , #{regId}
+            , #{updDt}
+            , #{updId}
+        )
     </insert>
+
+    <update id="updateAuthMst" parameterType="authMstDTO">
+        UPDATE AUTH_MST
+           SET AUTH_NM = #{authNm}      -- 그룹명
+             , UPD_DT  = #{updDt}       -- 수정일시
+             , UPD_ID  = #{updId}       -- 수정자
+        WHERE AUTH_CD  = #{authCd}      -- 그룹코드
+    </update>
+
+    <update id="updateAuthDtl" parameterType="authDtlDTO">
+        UPDATE AUTH_DTL
+           SET MENU_CD  = #{menuCd}         -- 메뉴ID
+             , USE_YN   = #{useYn}          -- 표시여부
+             , CRT_YN   = #{crtYn}          -- 생성권한
+             , RED_YN   = #{redYn}          -- 읽기권한
+             , SAV_YN   = #{savYn}          -- 저장권한
+             , DEL_YN   = #{delYn}          -- 삭제권한
+             , PRT_YN   = #{prtYn}          -- 인쇄권한
+             , EXL_YN   = #{exlYn}          -- 엑셀권한
+             , ETC_1_YN = #{etc1Yn}         -- 기타1권한
+             , ETC_2_YN = #{etc2Yn}         -- 기타2권한
+             , ETC_3_YN = #{etc3Yn}         -- 기타3권한
+             , UPD_DT   = #{updDt}          -- 수정일시
+             , UPD_ID   = #{updId}          -- 수정자
+        WHERE AUTH_CD   = #{authCd}         -- 그룹코드
+    </update>
+
+    <delete id="deleteAuthMst" parameterType="String">
+        DELETE FROM AUTH_MST WHERE AUTH_CD = #{authCd}
+    </delete>
+
+    <delete id="deleteAuthDtl" parameterType="String">
+        DELETE FROM AUTH_DTL
+               WHERE AUTH_CD = #{authCd}
+        <if test='menuCd != null and menuCd !=""'>
+                 AND MENU_CD = #{menuCd}
+        </if>
+    </delete>
 
 </mapper>

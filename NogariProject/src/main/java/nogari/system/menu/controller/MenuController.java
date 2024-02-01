@@ -15,35 +15,32 @@ import nogari.system.menu.service.MenuService;
 public class MenuController {
     @Autowired
     private MenuService menuService;
-    @GetMapping("/list")
-    public List<MenuDTO> menuList(@RequestParam(required = false) String menuCd,
-                                  @RequestParam(required = false) String menuNm) {
-        log.info("===================>  MenuController 진입");
-        return menuService.findMenu(menuCd,menuNm);
+    @GetMapping
+    public List<MenuDTO> menuList() {
+        return menuService.findMenu();
     }
 
-    @GetMapping("/detail")
-    public List<MenuDTO> menuDetail(@RequestParam String menuCd) {
+    @GetMapping("/{menuCd}")
+    public List<MenuDTO> menuDetail(@PathVariable String menuCd) {
         return menuService.findMenuByCd(menuCd);
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public String menuSave(@RequestBody List<MenuDTO> list) {
-
-        menuService.createMenu(list);
-        return "Menu created successfully!";
+        int cnt = menuService.createMenu(list);
+        return cnt+"건 저장 성공!";
     }
 
-    @PutMapping ("/save")
+    @PutMapping
     public String menuModify(@RequestBody List<MenuDTO> list) {
-        menuService.editMenu(list);
-        return "Menu updated successfully!";
+        int cnt = menuService.editMenu(list);
+        return cnt+"건 변경 성공!";
     }
 
-    @DeleteMapping("/delete/{menuCd}")
-    public String menuRemove(@PathVariable String menuCd) {
-        menuService.deleteMenu(menuCd);
-        return "Menu deleted successfully!";
+    @DeleteMapping
+    public String menuRemove(@RequestBody List<MenuDTO> list) {
+        int cnt =menuService.deleteMenu(list);
+        return cnt+"건 삭제 성공!";
     }
 }
 

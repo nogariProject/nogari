@@ -8,10 +8,10 @@ import java.util.List;
 
 @Mapper
 public interface MenuMapper {
-    List<MenuDTO> selectMenuList(@Param("menuCd") String menuCd, @Param("menuNm") String menuNm);
+    List<MenuDTO> selectMenuList();
     List<MenuDTO> selectScreen(String menuCd);
     int insertMenu(MenuDTO menuDTO);
     int updateMenu(MenuDTO menu);
-    int deleteMenu(String menuCd);
+    int deleteMenu(MenuDTO menuDTO);
 
 }
