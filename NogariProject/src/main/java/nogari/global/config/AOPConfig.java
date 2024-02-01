@@ -6,6 +6,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,12 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 
 @Aspect
@@ -72,13 +79,18 @@ public class AOPConfig {
      * 어드바이스 : 로그를 남기고, 에러 db에 저장
      *
      * @param joinPoint
-     */
+
     @AfterReturning("@within(org.springframework.web.bind.annotation.RestControllerAdvice)")
     public void beforeErrorHandleAOP(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         Throwable exception = (Throwable) args[0];
         String message = exception.getMessage();
-        log.error("err={}-{}", exception.getClass().getName(), message);
+        log.info("err={}-{}", exception.getClass().getName(), message);
+
+        String methodName = joinPoint.getSignature().getName();
+        String className = joinPoint.getTarget().getClass().getSimpleName();
+        String method = ((MethodSignature) joinPoint.getSignature()).getMethod().toString();
+        System.out.println("Entering method " + method);
 
         String callClass = Util.extractInfoFromException(message, Util.MatcherResult.CLASS_NAME);
         String callMethod = Util.extractInfoFromException(message, Util.MatcherResult.METHOD_NAME);
@@ -88,6 +100,6 @@ public class AOPConfig {
         String requestURI = request.getRequestURI();
         log.info("uri={}", requestURI);
     }
-
+     */
 
 }

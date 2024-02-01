@@ -22,6 +22,8 @@ public class DeptServiceImpl implements DeptService {
     @Override
     @Transactional(readOnly = true)
     public DeptResDTO findOne(String deptCd) {
+
+        DeptResDTO vo = mapper.selectByDeptCd(deptCd);
         return mapper.selectByDeptCd(deptCd);
     }
 

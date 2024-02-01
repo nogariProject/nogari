@@ -1,0 +1,38 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nogari.system.menu.dao.mapper.MenuMapper">
+
+    <select id="getMenuList" parameterType="nogari.system.menu.domain.dto.MenuDTO" resultType="nogari.system.menu.domain.dto.MenuDTO">
+        /* MenuMapper.getMenuList */
+         SELECT
+               MENU_CD
+             , MENU_NM
+             , SORT
+             , UPPER_MENU_CD
+             , URL
+             , USE_YN
+             , CRT_YN
+             , RED_YN
+             , SAV_YN
+             , DEL_YN
+             , PRT_YN
+             , EXL_YN
+             , ETC_1_YN
+             , ETC_2_YN
+             , ETC_3_YN
+             , PARAM
+             , REG_ID
+             , REG_DT
+             , UPD_ID
+             , UPD_DT
+        FROM MENU
+    </select>
+
+    <delete id="deleteMenu" parameterType="string">
+        /* DeptMapper.deleteDept */
+        DELETE FROM MENU WHERE MENU_CD = #{menuCd}
+    </delete>
+
+</mapper>
