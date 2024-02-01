@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Alias("authDtlDTO")
+@Alias("AuthDtlDTO")
 @Getter
 @ToString
 @Builder
