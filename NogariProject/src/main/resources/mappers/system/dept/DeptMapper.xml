@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nogari.system.dept.dao.mapper.DeptMapper">
+
+	<!-- 부서 조회 -->
+    <select id="selectDept" parameterType="nogari.system.dept.domain.dto.DeptDTO" resultType="HashMap">
+        SELECT DEPT_CD
+             , DEPT_NM
+             , MGR_ID
+             , UPPER_DEPT_CD
+             , SORT
+             , USE_YN
+          FROM DEPT
+         WHERE 1=1
+        <if test="deptCd != '' and deptCd != null">
+           AND DEPT_CD = #{deptCd}
+        </if>
+           AND USE_YN = 'Y'
+         START WITH UPPER_DEPT_CD IS NULL
+         CONNECT BY PRIOR DEPT_CD = UPPER_DEPT_CD
+         ORDER SIBLINGS BY SORT
+    </select>
+    
+    <!-- 부서 저장 -->
+    <insert id="insertDept" parameterType="nogari.system.dept.domain.dto.DeptDTO">
+        INSERT 
+          INTO DEPT
+        VALUES (
+               #{deptCd}
+             , #{deptNm}
+             , #{mgrId}
+             , #{upperDeptCd}
+             , 1
+             , 'Y'
+             , CURRENT_DATE
+             , #{id}
+             , CURRENT_DATE
+             , #{id}
+        )
+    </insert>
+    
+    <!-- 부서 수정 -->
+    <update id="updateDept" parameterType="nogari.system.dept.domain.dto.DeptDTO">
+        UPDATE DEPT
+           SET DEPT_NM = #{deptNm}
+             , MGR_ID = #{mgrId}
+             , UPPER_DEPT_CD = #{upperDeptCd}
+             , SORT = #{sort}
+             , USE_YN = #{useYN}
+             , UPD_DT = CURRENT_DATE
+             , UPD_ID = #{id}
+         WHERE 1=1
+           AND DEPT_CD = #{deptCd}
+    </update>
+    
+    <!-- 부서 중복 체크 -->
+    <select id="selectDeptChk" parameterType="nogari.system.dept.domain.dto.DeptDTO" resultType="int">
+        SELECT COUNT(*)
+          FROM DEPT
+         WHERE 1=1
+           AND DEPT_CD = #{deptCd}
+    </select>
+    
+    <!-- 상위 부서 존재 체크 -->
+    <select id="selectUpperDeptChk" parameterType="nogari.system.dept.domain.dto.DeptDTO" resultType="int">
+        SELECT COUNT(*)
+          FROM DEPT
+         WHERE 1=1
+           AND DEPT_CD = #{upperDeptCd}
+    </select>
+    
+    <!-- 하위 부서 존재 체크 -->
+    <select id="selectLowerDeptChk" parameterType="nogari.system.dept.domain.dto.DeptDTO" resultType="int">
+        SELECT COUNT(*)
+          FROM DEPT
+         WHERE 1=1
+           AND UPPER_DEPT_CD = #{deptCd}
+           AND USE_YN = 'Y'
+    </select>
+    
+    <update id="updateUseDept" parameterType="nogari.system.dept.domain.dto.DeptDTO">
+        UPDATE DEPT
+           SET USE_YN = 'N'
+             , UPD_DT = CURRENT_DATE
+             , UPD_ID = #{id}
+         WHERE 1=1
+           AND DEPT_CD = #{deptCd}
+    </update>
+    
+</mapper>
