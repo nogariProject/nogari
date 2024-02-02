@@ -52,7 +52,7 @@ public class MessageController {
      * @return
      */
     @PutMapping("/{msgCd}")
-    public ResponseEntity<Integer> ResponseEntity(@PathVariable String msgCd, @RequestBody @Valid MessageDTO messageDTO){
+    public ResponseEntity<Integer> messageModify(@PathVariable String msgCd, @RequestBody @Valid MessageDTO messageDTO){
         int editeddRows = messageService.editMessage(messageDTO);
         return new ResponseEntity<>(editeddRows, HttpStatus.OK);
     }
@@ -62,7 +62,7 @@ public class MessageController {
      * @return
      */
     @DeleteMapping("/{msgCd}")
-    public ResponseEntity<Integer> deptRemove(@PathVariable String msgCd){
+    public ResponseEntity<Integer> messageRemove(@PathVariable String msgCd){
         int deletedRows = messageService.deleteMessage(msgCd);
         return new ResponseEntity<>(deletedRows, HttpStatus.OK);
     }
@@ -72,7 +72,7 @@ public class MessageController {
      * @return
      */
     @DeleteMapping("")
-    public ResponseEntity<Integer> deptRemove(@RequestBody @Valid List<MessageDTO> messageDTOs){
+    public ResponseEntity<Integer> messagesRemove(@RequestBody @Valid List<MessageDTO> messageDTOs){
         int deletedRow = messageService.deleteMessage(messageDTOs);
         return new ResponseEntity<>(deletedRow,HttpStatus.OK);
     }
