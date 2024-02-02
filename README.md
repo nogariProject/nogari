@@ -9,3 +9,6 @@
 - AWS 배포
 - Git
 - eclipse 4.24(2022-06)
+
+## Git 전략
+https://techblog.woowahan.com/2553/
