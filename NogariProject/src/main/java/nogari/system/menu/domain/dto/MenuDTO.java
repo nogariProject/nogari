@@ -5,20 +5,24 @@ import org.apache.ibatis.type.Alias;
 
 import java.util.List;
 
-@Alias("MenuDTO")
 @Getter
 @ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class MenuDTO {
+    
+	
     private Menu master;
     private List<Menu> detail;
+    
     @NoArgsConstructor
     @AllArgsConstructor
     @ToString
     @Getter
+    @Alias("MenuDTO")
     public static class Menu{
+    	
         private String menuCd;
         private String menuNm;
         private int    sort;
@@ -39,5 +43,7 @@ public class MenuDTO {
         private String regDt;
         private String updId;
         private String updDt;
+        
     }
+    
 }

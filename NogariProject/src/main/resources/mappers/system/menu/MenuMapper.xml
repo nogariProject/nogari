@@ -43,25 +43,11 @@
 	
 	<insert id="insertMenu" parameterType="MenuDTO">
 	<selectKey resultType="String" keyProperty="menuCd" order="BEFORE">
-        SELECT <choose>
-        		<when test='url == null and url == ""'>
-        		'MNU' || LPAD(TO_CHAR(NVL(SUBSTR(MAX(MENU_CD), 4, 7), 0)+1), 6, '0')
-        		</when>
-        		<otherwise>
-        		'SCR' || LPAD(TO_CHAR(NVL(SUBSTR(MAX(MENU_CD), 4, 7), 0)+1), 6, '0')
-        		</otherwise>
-        	   </choose>
-        FROM MENU
+        SELECT 'SCR' || LPAD(TO_CHAR(NVL(SUBSTR(MAX(MENU_CD), 4, 7), 0)+1), 6, '0')
+          FROM MENU
          WHERE 1=1
-           <choose>
-            <when test='url == null and url == ""'>
-            AND SUBSTR(MENU_CD, 0, 3) = 'MNU'
-            </when>
-            <otherwise>
-            AND SUBSTR(MENU_CD, 0, 3) = 'SCR'
-            </otherwise>
-           </choose>
-    </selectKey> 
+           AND SUBSTR(MENU_CD, 0, 3) = 'SCR'
+    </selectKey>
 	INSERT INTO MENU (
 		  MENU_CD
 		, MENU_NM
@@ -94,9 +80,9 @@
 		, NVL(#{delYn}  , 'N')
 		, NVL(#{prtYn}  , 'N')
 		, NVL(#{exlYn}  , 'N')
-		, NVL(#{etc1Yn}, 'N')
-		, NVL(#{etc2Yn}, 'N')
-		, NVL(#{etc3Yn}, 'N')
+		, NVL(#{etc1Yn} , 'N')
+		, NVL(#{etc2Yn} , 'N')
+		, NVL(#{etc3Yn} , 'N')
 		, #{param}
 		, #{regId}
 		, #{updId}
