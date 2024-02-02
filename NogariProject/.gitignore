@@ -12,7 +12,6 @@ tmp/
 local.properties
 .settings/
 .idea/
-application.properties
 .loadpath
 .recommenders
 
@@ -121,8 +120,7 @@ src/.DS_Store
 
 # Oracle Cloud DB
 src/main/resources/Wallet_nogariDB/
-<<<<<<< HEAD
-
-=======
+src/main/resources/application.properties
+src/main/resources/rebel.xml
 /spring-boot-complete.iml
->>>>>>> 11554d2f4c355f0f823788b20b139705a991540c
+
