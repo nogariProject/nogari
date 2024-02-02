@@ -6,7 +6,7 @@ import java.util.List;
 public interface MenuService {
     List<MenuDTO> findMenu();
     List<MenuDTO> findMenuByCd(String menuCd);
-    int createMenu(List<MenuDTO> list);
-    int editMenu(List<MenuDTO> list);
-    int deleteMenu(List<MenuDTO> list);
+    int createMenu(MenuDTO menuDTO);
+    int editMenu(MenuDTO menuDTO);
+    int deleteMenu(MenuDTO menuDTO);
 }

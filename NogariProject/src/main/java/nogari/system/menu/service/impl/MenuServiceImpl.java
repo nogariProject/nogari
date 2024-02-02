@@ -29,32 +29,34 @@ public class MenuServiceImpl implements MenuService{
     }
 
     @Override
-    public int createMenu(List<MenuDTO> list) {
-        int resultCnt = 0;
-        for(MenuDTO mDto:list){
-            menuMapper.insertMenu(mDto);
-            resultCnt ++;
+    public int createMenu(MenuDTO menuDTO) {
+
+        if(menuDTO.getMaster() != null ||menuDTO.getMaster().getMenuNm() == null) {
+            menuMapper.insertMenu(menuDTO.getMaster());
         }
-        return resultCnt;
+        for(MenuDTO.Menu kk : menuDTO.getDetail()) {
+            menuMapper.insertMenu(kk);
+        }
+
+
+
+
+        return 1;
     }
 
     @Override
-    public int editMenu(List<MenuDTO> list) {
-        int resultCnt = 0;
-        for(MenuDTO mDto:list){
-            menuMapper.updateMenu(mDto);
-            resultCnt ++;
-        }
-        return resultCnt;
+    public int editMenu(MenuDTO menuDTO) {
+//        for(MenuDTO mDto:list){
+//            menuMapper.updateMenu(mDto);
+//        }
+        return 1;
     }
 
     @Override
-    public int deleteMenu(List<MenuDTO> list) {
-        int resultCnt = 0;
-        for(MenuDTO mDto:list){
-            menuMapper.deleteMenu(mDto);
-            resultCnt ++;
-        }
-        return resultCnt;
+    public int deleteMenu(MenuDTO menuDTO) {
+//        for(MenuDTO mDto:list){
+//            menuMapper.deleteMenu(mDto);
+//        }
+        return 1;
     }
 }

@@ -5,7 +5,6 @@ import org.apache.ibatis.type.Alias;
 
 import java.util.List;
 
-@Alias("MenuDTO")
 @Getter
 @ToString
 @Builder
@@ -14,10 +13,12 @@ import java.util.List;
 public class MenuDTO {
     private Menu master;
     private List<Menu> detail;
+    @Getter
+    @ToString
+    @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    @ToString
-    @Getter
+    @Alias("MenuDTO")
     public static class Menu{
         private String menuCd;
         private String menuNm;
