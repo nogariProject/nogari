@@ -42,5 +42,12 @@ public class MenuController {
         int cnt =menuService.deleteMenu(list);
         return cnt+"건 삭제 성공!";
     }
+
+    @PostMapping("/test")
+    public String sample(@RequestBody MenuDTO menuDTO) {
+        log.info("getMaster:: {}",menuDTO.getMaster());
+        log.info("getDetail:: {}",menuDTO.getDetail());
+        return null;
+    }
 }
 
