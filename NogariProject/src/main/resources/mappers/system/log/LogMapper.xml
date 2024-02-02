@@ -29,7 +29,7 @@
              )
     </insert>
 
-     <select id="selectLogList" parameterType="nogari.system.log.domain.dto.ErrorLogDTO" resultType="nogari.system.log.domain.dto.ErrorLogDTO">
+     <select id="selectErrorLogList" parameterType="nogari.system.log.domain.dto.ErrorLogDTO" resultType="nogari.system.log.domain.dto.ErrorLogDTO">
       SELECT TRAN_DT
            , TRAN_SEQ
            , TRAN_TM

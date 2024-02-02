@@ -11,5 +11,5 @@ public interface ErrorLogMapper {
     int insertErrorLog(ErrorLogDTO paramDto);
 
     //에러 리스트조회
-    List<ErrorLogDTO> selectLogList(ErrorLogDTO paramDto);
+    List<ErrorLogDTO> selectErrorLogList(ErrorLogDTO paramDto);
 }

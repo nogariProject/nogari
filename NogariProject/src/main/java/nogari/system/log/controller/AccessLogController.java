@@ -29,7 +29,7 @@ public class AccessLogController {
     public List<AccessLogDTO> accessLogList( //조회
                                              @RequestParam( required = true) @Pattern(regexp = "(19|20)\\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])",message = "년도월일로 넣어주세요1")String accsDtFrom
             , @RequestParam( required = true) @Pattern(regexp = "(19|20)\\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])",message = "년도월일로 넣어주세요2")String accsDtTo
-                                             ,String memberId
+            , @RequestParam( required = false) String memberId
     ){
         AccessLogDTO paramDTO = AccessLogDTO.builder().accsDtFrom(accsDtFrom).accsDtTo(accsDtTo).memberId(memberId).build();
         return accessLogService.findAccessLog(paramDTO);

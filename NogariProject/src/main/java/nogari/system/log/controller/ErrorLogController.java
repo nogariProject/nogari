@@ -26,8 +26,9 @@ public class ErrorLogController {
     public List<ErrorLogDTO> errLogList( //조회
              @RequestParam( required = true) @Pattern(regexp = "(19|20)\\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])",message = "년도월일로 넣어주세요1")String tranDtFrom
             ,@RequestParam( required = true) @Pattern(regexp = "(19|20)\\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])",message = "년도월일로 넣어주세요2")String tranDtTo
+            ,@RequestParam( required = false) String memberId
     ){
-        ErrorLogDTO paramDTO = ErrorLogDTO.builder().tranDtFrom(tranDtFrom).tranDtTo(tranDtTo).build();
+        ErrorLogDTO paramDTO = ErrorLogDTO.builder().tranDtFrom(tranDtFrom).tranDtTo(tranDtTo).memberId(memberId).build();
         return errorLogService.findErrLog(paramDTO);
     }
 

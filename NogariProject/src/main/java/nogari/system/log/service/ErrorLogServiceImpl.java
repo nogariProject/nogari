@@ -20,7 +20,7 @@ public class ErrorLogServiceImpl implements ErrorLogService {
     @Override
     public List<ErrorLogDTO> findErrLog(ErrorLogDTO paramDto) {
 
-       return errlogMapper.selectLogList(paramDto);
+       return errlogMapper.selectErrorLogList(paramDto);
     }
 
 
