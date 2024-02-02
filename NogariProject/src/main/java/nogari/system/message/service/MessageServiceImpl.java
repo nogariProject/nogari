@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class MessageServiceImp implements MessageService{
+public class MessageServiceImpl implements MessageService{
 
     private final MessageMapper messageMapper;
 
