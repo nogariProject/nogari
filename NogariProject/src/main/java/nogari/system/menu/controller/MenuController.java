@@ -33,7 +33,7 @@ public class MenuController {
             log.info("되냐ㅑㅑㅑ");
         }
         log.info("getDetail:: {}",menuDTO.getDetail());
-       // int cnt = menuService.createMenu(menuDTO);
+        menuService.createMenu(menuDTO);
         return 1+"건 저장 성공!";
     }
 //

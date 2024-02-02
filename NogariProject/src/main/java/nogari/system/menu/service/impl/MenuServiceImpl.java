@@ -31,16 +31,12 @@ public class MenuServiceImpl implements MenuService{
     @Override
     public int createMenu(MenuDTO menuDTO) {
 
-        if(menuDTO.getMaster() != null ||menuDTO.getMaster().getMenuNm() == null) {
+        if(menuDTO.getMaster() != null || menuDTO.getMaster().getMenuNm().isEmpty()) {
             menuMapper.insertMenu(menuDTO.getMaster());
         }
         for(MenuDTO.Menu kk : menuDTO.getDetail()) {
             menuMapper.insertMenu(kk);
         }
-
-
-
-
         return 1;
     }
 
