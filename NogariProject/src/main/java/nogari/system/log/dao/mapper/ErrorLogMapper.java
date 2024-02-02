@@ -1,10 +1,13 @@
 package nogari.system.log.dao.mapper;
 
+import nogari.system.log.domain.dto.ErrorLogDTO;
+import nogari.system.log.domain.dto.ErrorLogReqDTO;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Mapper
-@Component
 public interface ErrorLogMapper {
-    void insertErrorLog();
+    int insertErrorLog(ErrorLogDTO errorLogDTO);
+    List<ErrorLogDTO> selectErrorLogList(ErrorLogReqDTO errorLogReqDTO);
 }

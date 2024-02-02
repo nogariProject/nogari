@@ -20,6 +20,7 @@
     </properties>
 
     <dependencies>
+
         <!-- Spring Boot Starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -33,28 +34,30 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <!-- Spring Boot Starter -->
+        
         <!--MyBatis 설정 시작-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.2.0</version>
         </dependency>
 
         <!-- Oracle DataBase 설정 시작 -->
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
-            <artifactId>ojdbc10</artifactId>
-            <version>19.21.0.0</version>
+            <artifactId>ojdbc11</artifactId>
+            <version>21.5.0.0</version>
         </dependency>
 
         <dependency>
@@ -73,6 +76,12 @@
         </dependency>
 
         <!-- Oracle DataBase 설정 끝 -->
+        <!-- Add the H2 dependency -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
 
         <!-- lombok 설정 시작 -->
         <dependency>
@@ -87,6 +96,13 @@
             <scope>compile</scope>
         </dependency>
         <!-- lombok 설정 끝 -->
+
+        <!-- log 정렬 툴 -->
+        <dependency>
+            <groupId>org.bgee.log4jdbc-log4j2</groupId>
+            <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+            <version>1.16</version>
+        </dependency>
 
     </dependencies>
 
