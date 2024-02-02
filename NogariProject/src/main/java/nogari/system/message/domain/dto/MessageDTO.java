@@ -1,33 +1,27 @@
 package nogari.system.message.domain.dto;
 
 import lombok.*;
-import nogari.system.message.domain.entity.Message;
 import org.apache.ibatis.type.Alias;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Alias("MessageDTO")
 @Getter
-@Setter
 @Builder
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 public class MessageDTO {
 
-    private Long msgCd;
-    @NotNull(message = "type 값이 없습니다")
+    private String msgCd;
+    @Pattern(regexp = "^(A|C)$", message = "TYPE 필드는 'A' 또는 'C' 만 입력할 수 있습니다.")
     private String type;
-    @NotNull(message = "description 값이 없습니다")
     private String description;
+    @NotNull(message = "등록자ID가 누락되었습니다.")
     private String regId;
+    @NotNull(message = "수정자ID가 누락되었습니다.")
     private String updId;
 
-    public MessageDTO(Message entity){
-        this.msgCd = entity.getMsgCd();
-        this.type = entity.getType();
-        this.description = entity.getDescription();
-        this.regId = entity.getRegId();
-        this.updId = entity.getUpdId();
-    }
 
 }

@@ -3,9 +3,6 @@ package nogari.global.error;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -21,11 +18,11 @@ public class GlobalExceptionHandler {
      * @param ex MethodArgumentNotValidException
      * @return ResponseEntity<ErrorResponse>
      */
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException ex) {
-        final ErrorResponse response = ErrorResponse.of(HttpStatus.NOT_FOUND, ex.getBindingResult());
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException ex) {
+//        final ErrorResponse response = ErrorResponse.of(HttpStatus.NOT_FOUND, ex.getBindingResult());
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
 
     /**
      * [Exception]

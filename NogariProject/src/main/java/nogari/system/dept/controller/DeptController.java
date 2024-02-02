@@ -15,7 +15,7 @@ public class DeptController {
     private final DeptService deptService;
 
     /**
-     * 부서 전체 리스트를 Connected By를 사용하여 조회
+     * 부서 전체 리스트 조회
      * @return List
      */
     @GetMapping("")

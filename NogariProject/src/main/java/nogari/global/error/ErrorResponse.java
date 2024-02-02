@@ -29,7 +29,7 @@ public class ErrorResponse {
     protected ErrorResponse(final HttpStatus status, String resultMsg, BindingResult bindingResult) {
         this.status = status.value();
         this.resultMsg = resultMsg;
-        this.errors = FieldError.of(bindingResult);
+        //this.errors = FieldError.of(bindingResult);
     }
 
     /**
