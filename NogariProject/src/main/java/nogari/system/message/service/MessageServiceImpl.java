@@ -46,6 +46,7 @@ public class MessageServiceImp implements MessageService{
             deletedRows += deletedRow;
         }
         if(originRows>deletedRows) throw new RuntimeException("요청건수: "+originRows+" 중 "+deletedRows+"가 성공 하였습니다");
+
         return deletedRows;
     }
     @Override
