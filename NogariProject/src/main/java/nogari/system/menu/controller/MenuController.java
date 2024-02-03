@@ -1,13 +1,13 @@
 package nogari.system.menu.controller;
 
-import java.util.List;
-
+import lombok.extern.slf4j.Slf4j;
+import nogari.system.menu.domain.dto.MenuDtlDTO;
+import nogari.system.menu.domain.dto.MenuMstDTO;
+import nogari.system.menu.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import lombok.extern.slf4j.Slf4j;
-import nogari.system.menu.domain.dto.MenuDTO;
-import nogari.system.menu.service.MenuService;
+import java.util.List;
 
 @RestController
 @RequestMapping("/menus")
@@ -16,24 +16,18 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
     @GetMapping
-    public List<MenuDTO> menuList() {
+    public List<MenuDtlDTO> menuList() {
         return menuService.findMenu();
     }
 
     @GetMapping("/{menuCd}")
-    public List<MenuDTO> menuDetail(@PathVariable String menuCd) {
+    public List<MenuDtlDTO> menuDetail(@PathVariable String menuCd) {
         return menuService.findMenuByCd(menuCd);
     }
 
     @PostMapping
-    public String menuSave(@RequestBody MenuDTO menuDTO) {
-        log.info("getMaster:: {}",menuDTO.getMaster());
-        log.info("getDetail:: {}",menuDTO.getDetail());
-        if(menuDTO.getMaster() == null) {
-            log.info("되냐ㅑㅑㅑ");
-        }
-        log.info("getDetail:: {}",menuDTO.getDetail());
-        menuService.createMenu(menuDTO);
+    public String menuSave(@RequestBody MenuMstDTO menuMstDTO) {
+        menuService.createMenu(menuMstDTO);
         return 1+"건 저장 성공!";
     }
 //
@@ -50,9 +44,9 @@ public class MenuController {
 //    }
 
     @PostMapping("/test")
-    public String sample(@RequestBody MenuDTO menuDTO) {
-        log.info("getMaster:: {}",menuDTO.getMaster());
-        log.info("getDetail:: {}",menuDTO.getDetail());
+    public String sample(@RequestBody MenuDtlDTO menuDTO) {
+//        log.info("getMaster:: {}",menuDTO.getMaster());
+//        log.info("getDetail:: {}",menuDTO.getDetail());
         return null;
     }
 }

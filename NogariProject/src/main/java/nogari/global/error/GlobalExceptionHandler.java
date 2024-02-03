@@ -33,9 +33,9 @@ public class GlobalExceptionHandler {
 		
 		String customErrorMessage = "아이디를 입력하세요";
 		
-		ErrorLogDTO edto = new ErrorLogDTO("", request.getRequestURL().toString(), "" , bindingResult.getFieldError().getDefaultMessage(), "0000", customErrorMessage, bindingResult.getRawFieldValue("user").toString());
+		//ErrorLogDTO edto = new ErrorLogDTO("", request.getRequestURL().toString(), "" , bindingResult.getFieldError().getDefaultMessage(), "0000", customErrorMessage, bindingResult.getRawFieldValue("user").toString());
 		
-		errorLogService.saveError(edto);
+		//errorLogService.saveError(edto);
 		
 		// of객체에서 인스턴스를 생성해서 반환해 주므로 final선언이 가능(변조방지)
 		final ErrorResponse response = ErrorResponse.of(HttpStatus.NOT_FOUND, customErrorMessage, bindingResult);
