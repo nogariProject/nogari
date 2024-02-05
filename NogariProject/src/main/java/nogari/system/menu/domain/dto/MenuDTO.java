@@ -11,18 +11,15 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MenuDTO {
-    
-	
     private Menu master;
     private List<Menu> detail;
-    
+    @Getter
+    @ToString
+    @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    @ToString
-    @Getter
     @Alias("MenuDTO")
     public static class Menu{
-    	
         private String menuCd;
         private String menuNm;
         private int    sort;
@@ -43,7 +40,5 @@ public class MenuDTO {
         private String regDt;
         private String updId;
         private String updDt;
-        
     }
-    
 }

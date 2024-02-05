@@ -89,7 +89,7 @@
 	)
 	</insert>
 
-	<update id="updateMenu" parameterType="MenuDTO">
+	<update id="updateMenu" parameterType="MDTO">
 	UPDATE MENU SET
 		   MENU_NM       = #{menuNm}
 		 , SORT          = #{sort}
