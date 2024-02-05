@@ -2,7 +2,9 @@ package nogari.system.menu.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import nogari.system.menu.dao.mapper.MenuMapper;
-import nogari.system.menu.domain.dto.MenuDTO;
+import nogari.system.menu.domain.dto.MenuDtlDTO;
+import nogari.system.menu.domain.dto.MenuMstDTO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import nogari.system.menu.service.MenuService;
@@ -16,43 +18,60 @@ public class MenuServiceImpl implements MenuService{
     private MenuMapper menuMapper;
 
     @Override
-    public List<MenuDTO> findMenu() {
-        log.info("===================>  MenuServiceImpl 진입");
-        List<MenuDTO> list = menuMapper.selectMenuList();
-        log.info("===================>  MenuServiceImpl 쿼리 돌고 난 후 :: {}",list.toString());
+    public List<MenuDtlDTO> findMenu() {
         return menuMapper.selectMenuList();
     }
 
     @Override
-    public List<MenuDTO> findMenuByCd(String menuCd) {
+    public List<MenuDtlDTO> findMenuByCd(String menuCd) {
         return menuMapper.selectScreen(menuCd);
     }
 
     @Override
-    public int createMenu(MenuDTO menuDTO) {
-
-        if(menuDTO.getMaster() == null || menuDTO.getMaster().equals(null)) {
-            menuMapper.insertMenu(menuDTO.getMaster());
+    public int createMenu(MenuMstDTO menuMstDTO) {
+        int cnt = 0;
+        if(menuMstDTO.getMaster().getMenuNm() != null) {
+            MenuDtlDTO menuDtlDTO = new MenuDtlDTO();
+            BeanUtils.copyProperties(menuMstDTO.getMaster(),menuDtlDTO);
+            cnt += menuMapper.insertMenu(menuDtlDTO);
         }
-        for(MenuDTO.Menu kk : menuDTO.getDetail()) {
-            menuMapper.insertMenu(kk);
+        if(menuMstDTO.getDetail() != null){
+            for(MenuDtlDTO dDto : menuMstDTO.getDetail()){
+                cnt += menuMapper.insertMenu(dDto);
+            }
         }
-        return 1;
+        return cnt;
     }
 
     @Override
-    public int editMenu(MenuDTO menuDTO) {
-//        for(MenuDTO mDto:list){
-//            menuMapper.updateMenu(mDto);
-//        }
-        return 1;
+    public int editMenu(MenuMstDTO menuMstDTO) {
+        int cnt = 0;
+        if(menuMstDTO.getMaster().getMenuNm() != null) {
+            MenuDtlDTO menuDtlDTO = new MenuDtlDTO();
+            BeanUtils.copyProperties(menuMstDTO.getMaster(),menuDtlDTO);
+            cnt += menuMapper.updateMenu(menuDtlDTO);
+        }
+        if(menuMstDTO.getDetail() != null){
+            for(MenuDtlDTO dDto : menuMstDTO.getDetail()){
+                cnt += menuMapper.updateMenu(dDto);
+            }
+        }
+        return cnt;
     }
 
     @Override
-    public int deleteMenu(MenuDTO menuDTO) {
-//        for(MenuDTO mDto:list){
-//            menuMapper.deleteMenu(mDto);
-//        }
-        return 1;
+    public int deleteMenu(MenuMstDTO menuMstDTO) {
+        int cnt = 0;
+        if(menuMstDTO.getMaster().getMenuNm() != null) {
+            MenuDtlDTO menuDtlDTO = new MenuDtlDTO();
+            BeanUtils.copyProperties(menuMstDTO.getMaster(),menuDtlDTO);
+            cnt += menuMapper.deleteMenu(menuDtlDTO);
+        }
+        if(menuMstDTO.getDetail() != null){
+            for(MenuDtlDTO dDto : menuMstDTO.getDetail()){
+                cnt += menuMapper.deleteMenu(dDto);
+            }
+        }
+        return cnt;
     }
 }

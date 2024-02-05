@@ -4,7 +4,7 @@
 
 <mapper namespace="nogari.system.menu.dao.mapper.MenuMapper">
 
-	<select id="selectMenuList" resultType="MenuDTO">
+	<select id="selectMenuList" resultType="MenuDtlDTO">
 	SELECT LEVEL
 		 , MENU_CD
 		 , UPPER_MENU_CD
@@ -32,7 +32,7 @@
      ORDER SIBLINGS BY SORT
 	</select>
 	
-	<select id="selectScreen" parameterType="String" resultType="MenuDTO">
+	<select id="selectScreen" parameterType="String" resultType="MenuDtlDTO">
 	SELECT *
 	  FROM MENU
 	 WHERE 1=1
@@ -41,12 +41,26 @@
 	 ORDER BY SORT
 	</select>
 	
-	<insert id="insertMenu" parameterType="MenuDTO">
+	<insert id="insertMenu" parameterType="MenuDtlDTO">
 	<selectKey resultType="String" keyProperty="menuCd" order="BEFORE">
-        SELECT 'SCR' || LPAD(TO_CHAR(NVL(SUBSTR(MAX(MENU_CD), 4, 7), 0)+1), 6, '0')
-          FROM MENU
+        SELECT <choose>
+        		<when test='url == null and url == ""'>
+        		'MNU' || LPAD(TO_CHAR(NVL(SUBSTR(MAX(MENU_CD), 4, 7), 0)+1), 6, '0')
+        		</when>
+        		<otherwise>
+        		'SCR' || LPAD(TO_CHAR(NVL(SUBSTR(MAX(MENU_CD), 4, 7), 0)+1), 6, '0')
+        		</otherwise>
+        	   </choose>
+        FROM MENU
          WHERE 1=1
-           AND SUBSTR(MENU_CD, 0, 3) = 'SCR'
+           <choose>
+            <when test='url == null and url == ""'>
+            AND SUBSTR(MENU_CD, 0, 3) = 'MNU'
+            </when>
+            <otherwise>
+            AND SUBSTR(MENU_CD, 0, 3) = 'SCR'
+            </otherwise>
+           </choose>
     </selectKey>
 	INSERT INTO MENU (
 		  MENU_CD
@@ -80,16 +94,16 @@
 		, NVL(#{delYn}  , 'N')
 		, NVL(#{prtYn}  , 'N')
 		, NVL(#{exlYn}  , 'N')
-		, NVL(#{etc1Yn} , 'N')
-		, NVL(#{etc2Yn} , 'N')
-		, NVL(#{etc3Yn} , 'N')
+		, NVL(#{etc1Yn}, 'N')
+		, NVL(#{etc2Yn}, 'N')
+		, NVL(#{etc3Yn}, 'N')
 		, #{param}
 		, #{regId}
 		, #{updId}
 	)
 	</insert>
 
-	<update id="updateMenu" parameterType="MDTO">
+	<update id="updateMenu" parameterType="MenuDtlDTO">
 	UPDATE MENU SET
 		   MENU_NM       = #{menuNm}
 		 , SORT          = #{sort}
@@ -110,7 +124,7 @@
 	 WHERE MENU_CD       = #{menuCd}
 	</update>
 
-	<delete id="deleteMenu" parameterType="String">
+	<delete id="deleteMenu" parameterType="MenuDtlDTO">
 	DELETE FROM MENU
 	 WHERE MENU_CD = #{menuCd}
 	</delete>

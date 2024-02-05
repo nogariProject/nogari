@@ -7,5 +7,5 @@ import nogari.global.error.DTO.ErrorLogDTO;
 
 public interface ErrorLogService {
 	public List<Map<String, Object>> selectTest();
-	public String saveError(ErrorLogDTO edto);
+	//public String saveError(ErrorLogDTO edto);
 }
