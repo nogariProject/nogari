@@ -11,7 +11,6 @@ public class CodeCdDTO {
 
 	@NotNull(message = "필수값")
 	String clsCd;
-	@NotNull(message = "필수값")
 	String codeCd;
 	String codeNm;
 	String opt1;
@@ -20,4 +19,15 @@ public class CodeCdDTO {
 	String remark;
 	String id;
 	
+	@Override
+	public String toString() {
+	    return "CodeCdDTO{" +
+	            "clsCd='" + clsCd + '\'' +
+	            ", codeNm='" + codeNm + '\'' +
+	            ", opt1=" + opt1 +
+	            ", opt2=" + opt2 +
+	            ", opt3=" + opt3 +
+	            ", remark='" + remark + '\'' +
+	            '}';
+	}
 }

@@ -3,11 +3,16 @@ package nogari.system.commcd.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import nogari.system.commcd.domain.dto.ClsCdDTO;
@@ -15,62 +20,79 @@ import nogari.system.commcd.domain.dto.CodeCdDTO;
 import nogari.system.commcd.service.CommCdService;
 
 @RestController
+@RequestMapping("/common-cds")
 public class CommCdController {
 	@Autowired(required=true)
 	private CommCdService service;
 	
-	@GetMapping("/clscd")
-	public List<ClsCdDTO> selectClsCd(@RequestBody ClsCdDTO dto) throws Exception {
-		List<ClsCdDTO> list = service.selectClsCd(dto);
+	//조회
+	@GetMapping
+	public ResponseEntity<List<ClsCdDTO>> selectClsCd(@RequestParam(required=false) String clsCd) throws Exception {
+		List<ClsCdDTO> list = service.selectClsCd(clsCd);
 		
-		return list;
+		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
-	@GetMapping("/codecd")
-	public List<CodeCdDTO> selectCodeCd(@RequestBody CodeCdDTO dto) throws Exception {
-		List<CodeCdDTO> list = service.selectCodeCd(dto);
+	@GetMapping("/{clsCd}")
+	public ResponseEntity<List<CodeCdDTO>> selectCodeCd(@PathVariable String clsCd) throws Exception {
+		List<CodeCdDTO> list = service.selectCodeCd(clsCd);
 		
-		return list;
+		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
-	@PostMapping("/clscd")
+	
+	//저장
+	@PostMapping
 	public String insertClsCd(@RequestBody ClsCdDTO dto) throws Exception {
 		String str = service.insertClsCd(dto);
 		
 		return str;
 	}
 
-	@PostMapping("/codecd")
-	public String insertCodeCd(@RequestBody CodeCdDTO dto) throws Exception {
-		String str = service.insertCodeCd(dto);
+	@PostMapping("/code")
+	public String insertCodeCd(@RequestBody List<CodeCdDTO> list) throws Exception {
+		String str = service.insertCodeCd(list);
 		
 		return str;
 	}
 	
-	@DeleteMapping("/clscd")
+//	@PostMapping
+//	public String insertClsCd(@RequestBody ClsCdDTO dto, @RequestBody List<CodeCdDTO> list) throws Exception {
+//		StringBuffer sb = new StringBuffer();
+//		sb.append(service.insertClsCd(dto)).append("\n");
+//		sb.append(service.insertCodeCd(list)).append("\n");
+//		
+//		return sb.toString();
+//	}
+	
+	
+	//삭제
+	@DeleteMapping
 	public String deleteClsCd(@RequestBody ClsCdDTO dto) throws Exception {
 		String str = service.deleteClsCd(dto);
 		
 		return str;
 	}
 	
-	@DeleteMapping("/codecd")
-	public String deleteCodeCd(@RequestBody CodeCdDTO dto) throws Exception {
-		String str = service.deleteCodeCd(dto);
+	@DeleteMapping("/{clsCd}")
+	public String deleteCodeCd(@PathVariable String clsCd, @RequestBody List<CodeCdDTO> list) throws Exception {
+		String str = service.deleteCodeCd(list);
 		
 		return str;
 	}
 	
-	@PutMapping("/clscd")
+	
+	//수정
+	@PutMapping
 	public String updateClsCd(@RequestBody ClsCdDTO dto) throws Exception {
 		String str = service.updateClsCd(dto);
 		
 		return str;
 	}
 	
-	@PutMapping("/codecd")
-	public String updateCodeCd(@RequestBody CodeCdDTO dto) throws Exception {
-		String str = service.updateCodeCd(dto);
+	@PutMapping("/{clsCd}")
+	public String updateCodeCd(@PathVariable String clsCd, @RequestBody List<CodeCdDTO> list) throws Exception {
+		String str = service.updateCodeCd(list);
 		
 		return str;
 	}
