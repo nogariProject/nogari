@@ -4,4 +4,20 @@
 
 <mapper namespace="nogari.system.ntbd.dao.mapper.NtbdMapper">
 
+    <select id="selectBoard" parameterType="String" resultType="nogari.system.ntbd.domain.dto.BoardRespDto">
+        SELECT NTBD_CD
+             , NTBD_DIV
+             , VIEW_CNT
+             , POST_NM
+             , POST_OUT_DATE
+             , REG_DT
+             , REG_ID
+             , UPD_DT
+             , UPD_ID
+             , TOP_YN
+             , FILE_CD
+          FROM NOTICE_BOARD
+         WHERE 1=1
+           AND NTBD_CD = #{ntbdCd}
+    </select>
 </mapper>
