@@ -1,36 +1,85 @@
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="nogari.system.dept.dao.mapper.DeptMapper">
-    <insert id="insertDept" parameterType="nogari.system.dept.domain.dto.DeptReqDTO">
-    /* DeptMapper.insertDept */
-    INSERT INTO DEPT (
-           DEPT_CD
-         , DEPT_NM
-         , MGR_ID
-         , UPPER_DEPT_CD
-         , SORT
-         , REG_ID
-         , UPD_ID
-         ) VALUES (
-           #{deptCd}
-         , #{deptNm}
-         , #{mgrId}
-         , #{upperDeptCd}
-         , #{sort}
-         , #{regId}
-         , #{updId}
-         )
+
+    <select id="selectDept" resultType="DeptDTO">
+        SELECT
+            DEPT_CD        --부서코드
+             ,DEPT_NM        --부서이름
+             ,MGR_ID         --관리자ID
+             ,UPPER_DEPT_CD  --상위부서코드
+             ,SORT           --정렬순서
+             ,USE_YN         --유효일시
+             ,UPD_DT         --등록일시
+             ,UPD_ID         --등록자ID
+             ,REG_DT         --수정일시
+             ,REG_ID         --수정자ID
+        FROM
+            DEPT
+                START WITH
+            UPPER_DEPT_CD IS NULL
+        CONNECT BY
+            PRIOR DEPT_CD = UPPER_DEPT_CD
+    </select>
+
+    <select id="selectDeptByDeptCd" parameterType="String" resultType="DeptDTO">
+        SELECT
+            DEPT_CD        --부서코드
+             ,DEPT_NM        --부서이름
+             ,MGR_ID         --관리자ID
+             ,UPPER_DEPT_CD  --상위부서코드
+             ,SORT           --정렬순서
+             ,USE_YN         --유효일시
+             ,UPD_DT         --등록일시
+             ,UPD_ID         --등록자ID
+             ,REG_DT         --수정일시
+             ,REG_ID         --수정자ID
+        FROM DEPT
+        WHERE DEPT_CD = #{deptCd}
+    </select>
+
+    <insert id="insertDept" parameterType="DeptDTO">
+        INSERT INTO DEPT (
+                          DEPT_CD        --부서코드
+                         ,DEPT_NM        --부서이름
+                         ,MGR_ID         --관리자ID
+                         ,UPPER_DEPT_CD  --상위부서코드
+                         ,SORT           --정렬순서
+                         ,UPD_DT         --등록일시
+                         ,UPD_ID         --등록자ID
+                         ,REG_DT         --수정일시
+                         ,REG_ID         --수정자ID
+        )VALUES(
+                   #{deptCd}
+               ,#{deptNm}
+               ,#{mgrId}
+               ,#{upperDeptCd}
+               ,#{sort}
+               ,#{updDt}
+               ,#{updId}
+               ,#{regDt}
+               ,#{regId}
+               )
     </insert>
 
-    <delete id="deleteDept" parameterType="string">
-        /* DeptMapper.deleteDept */
-        DELETE FROM DEPT WHERE DEPT_CD LIKE '%' || #{deptCd} || '%'
-    </delete>
+    <update id="updateDept" parameterType="DeptDTO">
+        UPDATE DEPT
+        SET
+            DEPT_NM = #{deptNm}            --부서이름
+          ,MGR_ID = #{mgrId}              --관리자ID
+          ,UPPER_DEPT_CD = #{upperDeptCd} --상위부서코드
+          ,SORT = #{sort}                 --정렬순서
+          ,USE_YN = #{useYn}              --유효일시
+          ,UPD_DT = #{updDt}              --등록일시
+          ,UPD_ID = #{updId}              --등록자ID
+        WHERE
+            DEPT_CD = #{deptCd}             --부서코드
+    </update>
 
-    <select id="selectByDeptCd" parameterType="string" resultType="nogari.system.dept.domain.dto.DeptResDTO">
-        /* DeptMapper.selectByDeptCd */
-        SELECT * FROM DEPT WHERE DEPT_CD = #{deptCd}
-    </select>
+    <delete id="deleteDept" parameterType="String">
+        DELETE FROM DEPT
+        WHERE DEPT_CD = #{deptCd}          /*부서코드*/
+    </delete>
 </mapper>

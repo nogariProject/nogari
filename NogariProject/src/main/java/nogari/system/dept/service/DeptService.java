@@ -1,14 +1,15 @@
 package nogari.system.dept.service;
 
-import nogari.system.dept.domain.dto.DeptReqDTO;
-import nogari.system.dept.domain.dto.DeptResDTO;
-import org.springframework.transaction.annotation.Transactional;
+import nogari.system.dept.domain.dto.DeptDTO;
 
-
+import java.util.List;
 
 public interface DeptService {
 
-    void saveDept(DeptReqDTO reqDTO);
+    public List<DeptDTO> findDepts();
+    public DeptDTO findDeptByDeptCd(String deptCd);
+    public void createDept(DeptDTO deptDTO);
+    public void editDept(DeptDTO deptDTO);
+    public void deleteDept(String deptCd);
 
-    DeptResDTO findOne(String deptCd);
 }

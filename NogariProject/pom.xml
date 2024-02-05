@@ -40,23 +40,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-<<<<<<< HEAD
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-=======
-        <dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter</artifactId>
-		</dependency>
->>>>>>> dc902f890dfa4e72724dfa34a94a98934a3b0757
         <!-- Spring Boot Starter -->
 
         <!--MyBatis 설정 시작-->
@@ -87,23 +75,21 @@
             <groupId>com.oracle.database.security</groupId>
             <artifactId>osdt_core</artifactId>
         </dependency>
-
         <!-- Oracle DataBase 설정 끝 -->
-        <!-- Add the H2 dependency -->
+
+        <!-- Add the DB tools 시작 -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
-
-		<!--MyBatis 설정 시작-->
-		<dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>2.2.0</version>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
         </dependency>
-		<!--MyBatis 설정 끝-->
-		
+        <!-- Add the DB tools 끝 -->
+
         <!-- lombok 설정 시작 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -118,20 +104,12 @@
         </dependency>
         <!-- lombok 설정 끝 -->
 
-<<<<<<< HEAD
         <!-- log 정렬 툴 -->
-=======
-        <!-- 쿼리 로그 설정 시작 -->
->>>>>>> dc902f890dfa4e72724dfa34a94a98934a3b0757
         <dependency>
             <groupId>org.bgee.log4jdbc-log4j2</groupId>
             <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
             <version>1.16</version>
         </dependency>
-<<<<<<< HEAD
-=======
-        <!-- 쿼리 로그 설정 끝 -->
->>>>>>> dc902f890dfa4e72724dfa34a94a98934a3b0757
 
     </dependencies>
 
