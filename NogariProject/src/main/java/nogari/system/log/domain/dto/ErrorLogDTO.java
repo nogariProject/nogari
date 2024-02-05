@@ -1,20 +1,18 @@
 package nogari.system.log.domain.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 import org.apache.ibatis.type.Alias;
-
-import java.io.Serializable;
 
 /**
  * ErrorLog DTO
  */
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @ToString
 @Alias("ErrorLogDTO")
-public class ErrorLogDTO implements Serializable {
+public class ErrorLogDTO {
     private String tranDt;
     private String tranSeq;
     private String tranTm;

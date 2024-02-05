@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -20,41 +21,77 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ErrorResponse {
 
-    private int httpStatus;                       // http 상태코드
-    private String message;                         // 메시지
+    private int status;                     // http 상태코드
+    private String message;                 // 에러 메시지
+    private String code;                    // 에러코드
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private List<CustomFieldError> errors;          // 필드 에러 메시지
+    private List<CustomFieldError> errors;  // 필드 에러 메시지
 
     /**
      * 빌더 패턴이 적용된 ErrorResponse 생성자
-     * @param httpStatus
+     *
+     * @param status
      * @param message
      * @param bindingResult
      */
     @Builder
-    protected ErrorResponse(final HttpStatus httpStatus, final String message, BindingResult bindingResult) {
-        this.httpStatus = httpStatus.value();
+    protected ErrorResponse(final HttpStatus status, final String code, final String message, BindingResult bindingResult, final List<ErrorResponse.CustomFieldError> fieldErrors) {
+        this.status = status.value();
         this.message = message;
-        this.errors = bindingResult == null? List.of() : CustomFieldError.of(bindingResult);
+        this.code = code;
+        this.errors = List.of();
+
+        if (bindingResult != null) {
+            this.errors = CustomFieldError.of(bindingResult);
+        } else if (fieldErrors != null) {
+            this.errors = fieldErrors;
+        }
     }
 
     /**
      * ErrorResponse 인스턴스 반환
+     *
      * @param errorCode
      * @return
      */
     public static ErrorResponse of(ErrorCode errorCode) {
-        return ErrorResponse.builder().httpStatus(errorCode.getHttpStatus()).message(errorCode.getMessage()).build();
+        return ErrorResponse.builder()
+                .status(errorCode.getHttpStatus())
+                .code(errorCode.getErrorCode())
+                .message(errorCode.getMessage())
+                .build();
     }
 
     /**
      * ErrorResponse 인스턴스 반환
+     *
      * @param errorCode
      * @param bindingResult
      * @return
      */
     public static ErrorResponse of(ErrorCode errorCode, BindingResult bindingResult) {
-        return ErrorResponse.builder().httpStatus(errorCode.getHttpStatus()).message(errorCode.getMessage()).bindingResult(bindingResult).build();
+        return ErrorResponse.builder()
+                .status(errorCode.getHttpStatus())
+                .code(errorCode.getErrorCode())
+                .message(errorCode.getMessage())
+                .bindingResult(bindingResult)
+                .build();
+    }
+
+    /**
+     * ErrorResponse 인스턴스 반환
+     *
+     * @param errorCode
+     * @param FieldErrorList
+     * @return
+     */
+    public static ErrorResponse of(ErrorCode errorCode, List<ErrorResponse.CustomFieldError> FieldErrorList) {
+        return ErrorResponse.builder()
+                .status(errorCode.getHttpStatus())
+                .code(errorCode.getErrorCode())
+                .message(errorCode.getMessage())
+                .fieldErrors(FieldErrorList)
+                .build();
     }
 
     /**
