@@ -1,9 +1,18 @@
 package nogari.system.ntbd.service;
 
-import java.util.List;
+import nogari.system.ntbd.dao.mapper.NtbdMapper;
 import nogari.system.ntbd.domain.dto.BoardRespDto;
+import org.springframework.stereotype.Service;
 
-public interface NtbdService {
+import javax.annotation.Resource;
+import java.util.List;
 
-    public List<BoardRespDto> selectBoard(String ntbdCd);
+@Service
+public class NtbdServiceImpl implements NtbdService {
+    @Resource
+    private NtbdMapper mapper;
+
+    public List<BoardRespDto> selectBoard(String ntbdCd){
+        return mapper.selectBoard(ntbdCd);
+    }
 }
