@@ -6,7 +6,6 @@
     </appender>
 
     <logger name="jdbc" level="OFF"/>
-
     <logger name="jdbc.sqlonly" level="OFF"/>
     <logger name="jdbc.sqltiming" level="DEBUG"/>
     <logger name="jdbc.audit" level="OFF"/>

@@ -12,12 +12,12 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class AOPConfig {
-    @AfterThrowing(pointcut = "execution(* nogari..controller.*Controller.*(..))", throwing = "exception")
-    public void logExceptionAtController(JoinPoint joinPoint, Exception exception) {
-        StringBuilder target = new StringBuilder()
-                .append(joinPoint.getTarget().getClass().getName())
-                .append(".")
-                .append(joinPoint.getSignature().getName());
-        ErrorContext.setErrorContext(target.toString());
-    }
+	@AfterThrowing(pointcut = "execution(* nogari..controller.*Controller.*(..))", throwing = "exception")
+	public void logExceptionAtController(JoinPoint joinPoint, Exception exception) {
+		StringBuilder target = new StringBuilder()
+				.append(joinPoint.getTarget().getClass().getName())
+				.append(".")
+				.append(joinPoint.getSignature().getName());
+		ErrorContext.setErrorContext(target.toString());
+	}
 }
