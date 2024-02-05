@@ -4,7 +4,7 @@
 
 <mapper namespace="nogari.system.menu.dao.mapper.MenuMapper">
 
-	<select id="selectMenuList" resultType="MenuDtlDTO">
+	<select id="selectMenuList" resultType="MenuFieldDTO">
 	SELECT LEVEL
 		 , MENU_CD
 		 , UPPER_MENU_CD
@@ -32,7 +32,7 @@
      ORDER SIBLINGS BY SORT
 	</select>
 	
-	<select id="selectScreen" parameterType="String" resultType="MenuDtlDTO">
+	<select id="selectScreen" parameterType="String" resultType="MenuFieldDTO">
 	SELECT *
 	  FROM MENU
 	 WHERE 1=1
@@ -41,26 +41,12 @@
 	 ORDER BY SORT
 	</select>
 	
-	<insert id="insertMenu" parameterType="MenuDtlDTO">
+	<insert id="insertScreen" parameterType="MenuFieldDTO">
 	<selectKey resultType="String" keyProperty="menuCd" order="BEFORE">
-        SELECT <choose>
-        		<when test='url == null and url == ""'>
-        		'MNU' || LPAD(TO_CHAR(NVL(SUBSTR(MAX(MENU_CD), 4, 7), 0)+1), 6, '0')
-        		</when>
-        		<otherwise>
-        		'SCR' || LPAD(TO_CHAR(NVL(SUBSTR(MAX(MENU_CD), 4, 7), 0)+1), 6, '0')
-        		</otherwise>
-        	   </choose>
-        FROM MENU
+        SELECT 'SCR' || LPAD(TO_CHAR(NVL(SUBSTR(MAX(MENU_CD), 4, 7), 0)+1), 6, '0')
+          FROM MENU
          WHERE 1=1
-           <choose>
-            <when test='url == null and url == ""'>
-            AND SUBSTR(MENU_CD, 0, 3) = 'MNU'
-            </when>
-            <otherwise>
-            AND SUBSTR(MENU_CD, 0, 3) = 'SCR'
-            </otherwise>
-           </choose>
+           AND SUBSTR(MENU_CD, 0, 3) = 'SCR'
     </selectKey>
 	INSERT INTO MENU (
 		  MENU_CD
@@ -103,7 +89,7 @@
 	)
 	</insert>
 
-	<update id="updateMenu" parameterType="MenuDtlDTO">
+	<update id="updateMenu" parameterType="MenuFieldDTO">
 	UPDATE MENU SET
 		   MENU_NM       = #{menuNm}
 		 , SORT          = #{sort}
@@ -124,7 +110,7 @@
 	 WHERE MENU_CD       = #{menuCd}
 	</update>
 
-	<delete id="deleteMenu" parameterType="MenuDtlDTO">
+	<delete id="deleteMenu" parameterType="MenuFieldDTO">
 	DELETE FROM MENU
 	 WHERE MENU_CD = #{menuCd}
 	</delete>

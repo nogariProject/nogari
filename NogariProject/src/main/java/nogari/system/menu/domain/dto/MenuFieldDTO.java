@@ -3,15 +3,16 @@ package nogari.system.menu.domain.dto;
 import lombok.*;
 import org.apache.ibatis.type.Alias;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @Getter
 @ToString
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Alias("MenuDtlDTO")
-public class MenuDtlDTO {
+@Alias("MenuFieldDTO")
+public class MenuFieldDTO {
+        @Valid
         private String menuCd;
         private String menuNm;
         private int    sort;
