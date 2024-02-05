@@ -42,9 +42,9 @@
              , MEM.MEMBER_NM
           FROM ERR_LOG ERR
              , MEMBER  MEM
-         WHERE ERR.MEMBER_ID = MEM.MEMBER_ID
+         WHERE ERR.MEMBER_ID = MEM.ID
          <if test="tranDtFrom != null and tranDtFrom != '' and tranDtTo != null and tranDtTo != ''">
-           AND ERR.TRAN_DT BETWEEN #{tranDtFrom} AND #{tranDtFrom}
+           AND ERR.TRAN_DT BETWEEN #{tranDtFrom} AND #{tranDtTo}
          </if>
          <if test="member != null and member != ''">
             AND (
