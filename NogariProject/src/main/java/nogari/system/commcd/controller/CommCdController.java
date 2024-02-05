@@ -49,8 +49,8 @@ public class CommCdController {
 		return str;
 	}
 
-	@PostMapping("/code")
-	public String insertCodeCd(@RequestBody List<CodeCdDTO> list) throws Exception {
+	@PostMapping("/{clsCd}")
+	public String insertCodeCd(@PathVariable String clsCd, @RequestBody List<CodeCdDTO> list) throws Exception {
 		String str = service.insertCodeCd(list);
 		
 		return str;
