@@ -10,8 +10,8 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Alias("MenuMstDTO")
-public class MenuMstDTO {
-    private MenuDtlDTO master;
-    private List<MenuDtlDTO> detail;
+@Alias("MenuDTO")
+public class MenuDTO {
+    private MenuFieldDTO master;
+    private List<MenuFieldDTO> detail;
 }
