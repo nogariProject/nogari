@@ -9,6 +9,8 @@
              , NTBD_DIV
              , VIEW_CNT
              , POST_NM
+             , POST_CONT
+             , POST_IN_DATE
              , POST_OUT_DATE
              , REG_DT
              , REG_ID
