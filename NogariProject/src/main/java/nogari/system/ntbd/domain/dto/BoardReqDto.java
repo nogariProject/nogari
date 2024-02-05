@@ -1,17 +1,17 @@
 package nogari.system.ntbd.domain.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.apache.ibatis.type.Alias;
 
 import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
 @Builder
-@RequiredArgsConstructor
-public class BoardDto {
+@NoArgsConstructor
+@AllArgsConstructor
+@Alias("BoardReqDto")
+public class BoardReqDto {
 
     @NotNull(message = "필수값")
     String ntbdCd;
