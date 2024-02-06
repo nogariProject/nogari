@@ -1,9 +1,12 @@
 package nogari.system.ntbd.controller;
 
 import lombok.RequiredArgsConstructor;
+import nogari.system.ntbd.domain.dto.BoardReqDto;
 import nogari.system.ntbd.domain.dto.BoardRespDto;
 import nogari.system.ntbd.service.NtbdService;
 import nogari.system.ntbd.service.NtbdServiceImpl;
+import oracle.jdbc.proxy.annotation.Post;
+import org.apache.ibatis.type.ByteObjectArrayTypeHandler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +20,25 @@ public class NtbdController {
 
     private final NtbdService ntbdService;
 
-    //게시글 내용 조회
     @GetMapping
-    public ResponseEntity<List<BoardRespDto>> selectBoard(@RequestParam("ntbdCd") String ntbdCd) throws Exception{
-        List<BoardRespDto> board = ntbdService.selectBoard(ntbdCd);
+    public ResponseEntity<List<BoardRespDto>> boardList() throws Exception{
+        List<BoardRespDto> boardList = ntbdService.findBoards();
+        return new ResponseEntity<>(boardList, HttpStatus.OK);
+    }
+
+    //게시글 내용 조회
+    @GetMapping("/{ntbdCd}")
+    public ResponseEntity<List<BoardRespDto>> boardDetails(@PathVariable String ntbdCd) throws Exception{
+        List<BoardRespDto> board = ntbdService.findBoard(ntbdCd);
         return new ResponseEntity<>(board, HttpStatus.OK);
     }
+
+//    @PostMapping("/write")
+//    public String boardAdd() throws Exception{
+//        String result = ntbdService.createBoard();
+//
+//        return
+//    }
+
 
 }

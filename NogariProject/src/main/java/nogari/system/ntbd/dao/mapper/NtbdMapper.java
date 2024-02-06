@@ -8,5 +8,6 @@ import java.util.List;
 @Mapper
 public interface NtbdMapper {
     List<BoardRespDto> selectBoard(String ntbdCd);
+    List<BoardRespDto> selectBoardList();
 
 }

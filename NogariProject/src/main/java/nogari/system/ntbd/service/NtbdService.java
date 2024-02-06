@@ -5,5 +5,6 @@ import nogari.system.ntbd.domain.dto.BoardRespDto;
 
 public interface NtbdService {
 
-    public List<BoardRespDto> selectBoard(String ntbdCd);
+    public List<BoardRespDto> findBoard(String ntbdCd);
+    public List<BoardRespDto> findBoards();
 }

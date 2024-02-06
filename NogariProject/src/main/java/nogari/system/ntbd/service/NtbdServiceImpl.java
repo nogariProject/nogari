@@ -15,8 +15,13 @@ import java.util.List;
 public class NtbdServiceImpl implements NtbdService {
 
     private final NtbdMapper mapper;
-
-    public List<BoardRespDto> selectBoard(String ntbdCd){
+    @Override
+    public List<BoardRespDto> findBoard(String ntbdCd){
         return mapper.selectBoard(ntbdCd);
+    }
+
+    @Override
+    public List<BoardRespDto> findBoards() {
+        return mapper.selectBoardList();
     }
 }
