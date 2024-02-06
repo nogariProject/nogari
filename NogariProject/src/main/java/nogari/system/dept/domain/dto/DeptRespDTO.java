@@ -8,7 +8,7 @@ import org.apache.ibatis.type.Alias;
 
 import java.sql.Date;
 
-@Alias("DeptReqDTO")
+@Alias("DeptRespDTO")
 @Getter
 @Builder
 @NoArgsConstructor
