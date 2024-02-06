@@ -33,12 +33,12 @@ public class NtbdController {
         return new ResponseEntity<>(board, HttpStatus.OK);
     }
 
-//    @PostMapping("/write")
-//    public String boardAdd() throws Exception{
-//        String result = ntbdService.createBoard();
-//
-//        return
-//    }
+    @PostMapping("/write")
+    public String boardAdd(@RequestBody BoardReqDto boardReqDto) throws Exception{
+        String result = ntbdService.createBoard(boardReqDto);
+
+        return result;
+    }
 
 
 }

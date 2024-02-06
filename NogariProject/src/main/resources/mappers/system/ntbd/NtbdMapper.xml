@@ -4,6 +4,7 @@
 
 <mapper namespace="nogari.system.ntbd.dao.mapper.NtbdMapper">
 
+    <!-- 게시글 조회 -->
     <select id="selectBoard" parameterType="String" resultType="nogari.system.ntbd.domain.dto.BoardRespDto">
         SELECT NTBD_CD
              , NTBD_DIV
@@ -22,6 +23,8 @@
          WHERE 1=1
            AND NTBD_CD = #{ntbdCd}
     </select>
+
+    <!-- 게시글 목록 조회 -->
     <select id="selectBoardList" parameterType="String" resultType="BoardRespDto">
         SELECT NTBD_CD
              , NTBD_DIV
@@ -36,4 +39,36 @@
              , FILE_CD
         FROM NOTICE_BOARD
     </select>
+
+    <!-- 게시글 저장 -->
+    <insert id="insertCodeCd" parameterType="nogari.system.commcd.domain.dto.CodeCdDTO">
+        INSERT
+        INTO NOTICE_BOARD (
+                        NTBD_CD
+                      , NTBD_DIV
+                      , POST_NM
+                      , POST_CONT
+                      , POST_IN_DATE
+                      , POST_OUT_DATE
+                      , REG_DT
+                      , REG_ID
+                      , UPD_DT
+                      , UPD_ID
+                      , TOP_YN
+                      , FILE_CD
+        )
+        VALUES (
+                 #{ntbdCd}
+               , #{ntbdDiv}
+               , #{postNm}
+               , #{postCont}
+               , #{postInDate}
+               , #{postOutDate}
+               , CURRENT_DATE
+               , #{id}
+               , CURRENT_DATE
+               , #{id}
+               , #{fileCd}
+               )
+    </insert>
 </mapper>
