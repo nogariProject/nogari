@@ -1,4 +1,4 @@
-package nogari.system.auth.service.impl;
+package nogari.system.auth.service;
 
 import java.util.List;
 
