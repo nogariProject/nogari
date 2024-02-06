@@ -42,7 +42,7 @@ public class NtbdServiceImpl implements NtbdService {
 
     // 게시글 수정
     @Override
-    public String boardModify(BoardReqDto boardReqDto) {
+    public String editBoard(BoardReqDto boardReqDto) {
         int result = mapper.updateBoard(boardReqDto);
         if(result==1){
             return "게시글 수정 성공";

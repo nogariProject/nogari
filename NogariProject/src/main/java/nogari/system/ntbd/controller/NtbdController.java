@@ -28,23 +28,23 @@ public class NtbdController {
 
     //게시글 내용 조회
     @GetMapping("/{ntbdCd}")
-    public ResponseEntity<List<BoardRespDto>> boardDetails(@PathVariable String ntbdCd) throws Exception{
+    public ResponseEntity<List<BoardRespDto>> boardDetails(@PathVariable String ntbdCd){
         List<BoardRespDto> board = ntbdService.findBoard(ntbdCd);
         return new ResponseEntity<>(board, HttpStatus.OK);
     }
 
     @PostMapping("/write")
-    public String boardAdd(@RequestBody BoardReqDto boardReqDto) throws Exception{
+    public ResponseEntity<String> boardAdd(@RequestBody BoardReqDto boardReqDto){
         String result = ntbdService.createBoard(boardReqDto);
 
-        return result;
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public String updateClsCd(@RequestBody BoardReqDto boardReqDto) throws Exception {
-        String result = ntbdService.boardModify(boardReqDto);
+    public ResponseEntity<String> boardModify(@RequestBody BoardReqDto boardReqDto) {
+        String result = ntbdService.editBoard(boardReqDto);
 
-        return result;
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }
