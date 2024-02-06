@@ -1,0 +1,39 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nogari.system.log.dao.mapper.AccessLogMapper">
+
+    <select id="selectAccessLogList" parameterType="nogari.system.log.domain.dto.AccessLogDTO" resultType="nogari.system.log.domain.dto.AccessLogDTO">
+        /* queryId = selectAccessLogList */
+        SELECT ACCS_DT
+             , MENU_CD
+             , MENU_PATH
+             , MEMBER_ID
+        FROM ACCESS_LOG
+        WHERE 1=1
+        <if test='(accsDtFrom != "" and accsDtFrom !=null) and (accsDtTo !="" and accsDtTo !=null)' >
+            /*오류발생일자*/
+            AND ACCS_DT BETWEEN #{accsDtFrom} AND #{accsDtTo}
+        </if>
+        <if test='memberId != "" and memberId !=null' >
+            /*사용자조회*/
+            AND MEMBER_ID = #{memberId}
+        </if>
+    </select>
+
+    <insert id="insertAccessLog" parameterType="nogari.system.log.domain.dto.ErrorLogDTO">
+        INSERT INTO ACCESS_LOG (
+                              ACCS_DT
+                            , MENU_CD
+                            , MENU_PATH
+                            , MEMBER_ID
+        ) VALUES (
+                   TO_CHAR(CURRENT_DATE, 'YYYYMMDDHH24MISS')
+                 , #{menuCd}
+                 , #{menuPath}
+                 , #{memberId}
+                 )
+    </insert>
+
+</mapper>
