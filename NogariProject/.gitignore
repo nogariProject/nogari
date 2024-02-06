@@ -123,3 +123,4 @@ src/.DS_Store
 src/main/resources/Wallet_nogariDB/
 
 /spring-boot-complete.iml
+!/src/main/resources/application-account.properties
