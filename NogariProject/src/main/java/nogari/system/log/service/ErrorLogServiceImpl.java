@@ -39,7 +39,7 @@ public class ErrorLogServiceImpl implements ErrorLogService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ErrorLogDTO> findErrorLogList(ErrorLogReqDTO reqDTO) {
-        return mapper.selectErrorLogList(reqDTO);
+    public List<ErrorLogDTO> findErrorLogList(ErrorLogReqDTO paramDTO) {
+        return mapper.selectErrorLogList(paramDTO);
     }
 }

@@ -36,16 +36,8 @@ public class GlobalExceptionHandler {
 
     private final ErrorLogService service;
 
-    private static String getCurrentLeafNodeName(Path propertyPath) {
-        return StreamSupport.stream(propertyPath.spliterator(), false)
-                .reduce((past, current) -> current)
-                .map(Path.Node::getName)
-                .orElse(null);
-    }
-
     /**
      * [Exception] 비즈니스 예외
-     *
      * @param exception
      * @param webRequest
      * @return
@@ -59,7 +51,6 @@ public class GlobalExceptionHandler {
 
     /**
      * [Exception] 접근이 허용되지 않을 떄
-     *
      * @param exception
      * @return
      */
@@ -72,7 +63,6 @@ public class GlobalExceptionHandler {
 
     /**
      * [Exception] controller에서 전달한 값이 유효성을 통과하지 못했을 때
-     *
      * @param exception
      * @return
      */
@@ -95,7 +85,6 @@ public class GlobalExceptionHandler {
 
     /**
      * [Exception] Controller에서 @RequstParam 에서 필수값 검증
-     *
      * @param exception
      * @return
      */
@@ -135,6 +124,13 @@ public class GlobalExceptionHandler {
 
         final ErrorResponse response = ErrorResponse.of(ErrorCode.NOT_VALID_ERROR, resultList);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    private static String getCurrentLeafNodeName(Path propertyPath) {
+        return StreamSupport.stream(propertyPath.spliterator(), false)
+                .reduce((past, current) -> current)
+                .map(Path.Node::getName)
+                .orElse(null);
     }
 
     /**
@@ -177,7 +173,6 @@ public class GlobalExceptionHandler {
         final ErrorResponse response = ErrorResponse.of(errorCode);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
     private ErrorCode determineErrorCode(DataAccessException exception) {
         if (exception instanceof BadSqlGrammarException) {
             return ErrorCode.DB_BAD_SQL_GRAMMAR;
@@ -218,4 +213,5 @@ public class GlobalExceptionHandler {
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
     }
+
 }

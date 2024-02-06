@@ -8,6 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface ErrorLogMapper {
-    int insertErrorLog(ErrorLogDTO errorLogDTO);
-    List<ErrorLogDTO> selectErrorLogList(ErrorLogReqDTO errorLogReqDTO);
+    int insertErrorLog(ErrorLogDTO paramDto);
+
+    List<ErrorLogDTO> selectErrorLogList(ErrorLogReqDTO paramDto);
 }

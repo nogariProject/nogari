@@ -2,10 +2,9 @@ package nogari.system.menu.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import nogari.system.menu.domain.dto.MenuFieldDTO;
 import nogari.system.menu.domain.dto.MenuDTO;
+import nogari.system.menu.domain.dto.MenuFieldDTO;
 import nogari.system.menu.service.MenuService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -52,4 +51,3 @@ public class MenuController {
         return null;
     }
 }
-

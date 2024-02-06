@@ -19,10 +19,7 @@ public class AccessLogServiceImpl implements AccessLogService {
 
     @Override
     public void createAccessLog(AccessLogDTO paramDTO) {
-        int cnt = mapper.insertAccessLog(paramDTO); // update 3 2건 1001 10011 0
-//        if(cnt < 1) {
-//            throw new DatabaseException(ErrorCode.INTERNAL_SERVER_ERROR, "요청 건수 1건 중  " + cnt + "건이 처리 되었습니다." );
-//        }
+        int cnt = mapper.insertAccessLog(paramDTO);
     }
 
     @Override

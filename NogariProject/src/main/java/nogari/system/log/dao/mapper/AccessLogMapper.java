@@ -9,5 +9,6 @@ import java.util.List;
 @Mapper
 public interface AccessLogMapper {
     int insertAccessLog(AccessLogDTO paramDTO);
+
     List<AccessLogDTO> selectAccessLogList(AccessLogReqDTO paramDTO);
 }

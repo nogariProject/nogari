@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class DeptServiceImp implements DeptService {
+public class DeptServiceImpl implements DeptService {
 
     private final DeptMapper deptMapper;
     @Override

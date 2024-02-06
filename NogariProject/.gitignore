@@ -12,7 +12,6 @@ tmp/
 local.properties
 .settings/
 .idea/
-application.properties
 .loadpath
 .recommenders
 
@@ -124,3 +123,5 @@ src/main/resources/Wallet_nogariDB/
 
 # spring boot file
 spring-boot-complete.iml
+src/main/resources/application.properties
+src/main/resources/rebel.xml
