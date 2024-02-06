@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
@@ -25,20 +26,9 @@ public class ErrorLogController {
     private final ErrorLogService service;
 
     @GetMapping("")
-    public ResponseEntity<List<ErrorLogDTO>> errLogList( //조회
-                                                         @RequestParam(required = true) @Pattern(regexp = "(19|20)\\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])", message = "년도월일로 넣어주세요1") String tranDtFrom
-            , @RequestParam(required = true) @Pattern(regexp = "(19|20)\\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])", message = "년도월일로 넣어주세요2") String tranDtTo
-            , @RequestParam(required = false) String memberId) {
-        ErrorLogReqDTO paramDTO = new ErrorLogReqDTO();
-        paramDTO.setTranDtFrom(tranDtFrom);
-        paramDTO.setTranDtFrom(tranDtTo);
-        List<ErrorLogDTO> errorLogList = service.findErrorLogList(paramDTO);
+    public ResponseEntity<List<ErrorLogDTO>> errlogFindA(@Valid ErrorLogReqDTO errorLogReqDTO) {
+        List<ErrorLogDTO> errorLogList = service.findErrorLogList(errorLogReqDTO);
         return new ResponseEntity<>(errorLogList, HttpStatus.OK);
     }
-//    @GetMapping("")
-//    public ResponseEntity<List<ErrorLogDTO>> errlogFind(@Valid ErrorLogReqDTO errorLogReqDTO) {
-//        List<ErrorLogDTO> errorLogList = service.findErrorLogList(errorLogReqDTO);
-//        return new ResponseEntity<>(errorLogList, HttpStatus.OK);
-//    }
 }
 
