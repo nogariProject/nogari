@@ -41,7 +41,7 @@
     </select>
 
     <!-- 게시글 저장 -->
-    <insert id="insertCodeCd" parameterType="nogari.system.commcd.domain.dto.CodeCdDTO">
+    <insert id="insertBoard" parameterType="BoardReqDto">
         INSERT
         INTO NOTICE_BOARD (
                         NTBD_CD
@@ -65,9 +65,10 @@
                , #{postInDate}
                , #{postOutDate}
                , CURRENT_DATE
-               , #{id}
+               , #{userId}
                , CURRENT_DATE
-               , #{id}
+               , #{userId}
+               , #{topYn}
                , #{fileCd}
                )
     </insert>
