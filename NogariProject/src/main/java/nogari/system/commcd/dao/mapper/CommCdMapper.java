@@ -15,11 +15,12 @@ public interface CommCdMapper {
 	void insertClsCd(ClsCdDTO dto);
 	void insertCodeCd(CodeCdDTO dto);
 	
-	void deleteClsCd(ClsCdDTO dto);
-	void deleteClsCodeCd(ClsCdDTO dto);
-	void deleteCodeCd(CodeCdDTO dto);
+//	void deleteClsCd(ClsCdDTO dto);
+//	void deleteClsCodeCd(ClsCdDTO dto);
+//	void deleteCodeCd(CodeCdDTO dto);
 	
 	void updateClsCd(ClsCdDTO dto);
+	void updateClsCodeCd(ClsCdDTO dto);
 	void updateCodeCd(CodeCdDTO dto);
 	
 	int selectClsCdChk(ClsCdDTO dto);

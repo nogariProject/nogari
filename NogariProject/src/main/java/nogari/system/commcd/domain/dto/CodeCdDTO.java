@@ -11,23 +11,14 @@ public class CodeCdDTO {
 
 	@NotNull(message = "필수값")
 	String clsCd;
+	@NotNull(message = "필수값")
 	String codeCd;
 	String codeNm;
 	String opt1;
 	String opt2;
 	String opt3;
 	String remark;
+	String useYN;
 	String id;
 	
-	@Override
-	public String toString() {
-	    return "CodeCdDTO{" +
-	            "clsCd='" + clsCd + '\'' +
-	            ", codeNm='" + codeNm + '\'' +
-	            ", opt1=" + opt1 +
-	            ", opt2=" + opt2 +
-	            ", opt3=" + opt3 +
-	            ", remark='" + remark + '\'' +
-	            '}';
-	}
 }

@@ -13,6 +13,7 @@ public class ClsCdDTO {
 	String clsCd;
 	String clsNm;
 	String remark;
+	String useYN;
 	String id;
 	
 }
