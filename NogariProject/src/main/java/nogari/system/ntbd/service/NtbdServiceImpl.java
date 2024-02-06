@@ -29,6 +29,7 @@ public class NtbdServiceImpl implements NtbdService {
         return mapper.selectBoardList();
     }
 
+    // 게시글 등록
     @Override
     public String createBoard(BoardReqDto boardReqDto) {
         int result = mapper.insertBoard(boardReqDto);
@@ -36,6 +37,17 @@ public class NtbdServiceImpl implements NtbdService {
             return "게시글 등록 성공";
         }else{
             return "게시글 등록 실패";
+        }
+    }
+
+    // 게시글 수정
+    @Override
+    public String boardModify(BoardReqDto boardReqDto) {
+        int result = mapper.updateBoard(boardReqDto);
+        if(result==1){
+            return "게시글 수정 성공";
+        }else{
+            return "게시글 수정 실패";
         }
     }
 }

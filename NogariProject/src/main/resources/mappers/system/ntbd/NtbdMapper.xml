@@ -72,4 +72,21 @@
                , #{fileCd}
                )
     </insert>
+
+    <!-- 게시글 수정 -->
+    <update id="updateBoard" parameterType="BoardReqDto">
+        UPDATE NOTICE_BOARD
+        SET NTBD_DIV = #{ntbdDiv}
+          , POST_NM = #{postNm}
+          , POST_CONT = #{postCont}
+          , POST_IN_DATE = #{postInDate}
+          , POST_OUT_DATE = #{postOutDate}
+          , TOP_YN = #{topYn}
+          , FILE_CD = #{fileCd}
+          , UPD_DT = CURRENT_DATE
+          , UPD_ID = #{userId}
+        WHERE 1=1
+          AND NTBD_CD = #{ntbdCd}
+    </update>
+
 </mapper>

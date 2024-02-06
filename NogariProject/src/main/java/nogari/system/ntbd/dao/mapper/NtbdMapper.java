@@ -11,4 +11,5 @@ public interface NtbdMapper {
     List<BoardRespDto> selectBoard(String ntbdCd);
     List<BoardRespDto> selectBoardList();
     int insertBoard(BoardReqDto boardReqDto);
+    int updateBoard(BoardReqDto boardReqDto);
 }

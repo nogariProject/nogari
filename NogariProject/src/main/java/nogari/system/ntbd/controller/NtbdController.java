@@ -40,5 +40,11 @@ public class NtbdController {
         return result;
     }
 
+    @PutMapping("/update")
+    public String updateClsCd(@RequestBody BoardReqDto boardReqDto) throws Exception {
+        String result = ntbdService.boardModify(boardReqDto);
+
+        return result;
+    }
 
 }
