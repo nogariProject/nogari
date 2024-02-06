@@ -1,7 +1,8 @@
 package nogari.system.dept.controller;
 
 import lombok.RequiredArgsConstructor;
-import nogari.system.dept.domain.dto.DeptDTO;
+import nogari.system.dept.domain.dto.DeptReqDTO;
+import nogari.system.dept.domain.dto.DeptRespDTO;
 import nogari.system.dept.service.DeptService;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,44 +20,38 @@ public class DeptController {
      * @return List
      */
     @GetMapping("")
-    public List<DeptDTO> deptList(){
+    public List<DeptReqDTO> deptList(){
         return deptService.findDepts();
     }
 
     /**
      * 부서코드를 기준으로 부서 단건 조회
-     * @param deptCd
-     * @return
      */
     @GetMapping("/{deptCd}")
-    public DeptDTO deptDetail(@PathVariable String deptCd){
+    public DeptRespDTO deptDetail(@PathVariable String deptCd){
         return deptService.findDeptByDeptCd(deptCd);
     }
 
     /**
      * 부서 추가
-     * @param deptDto
      */
     @PostMapping("")
-    public void deptAdd(DeptDTO deptDto){
-        deptService.createDept(deptDto);
+    public void deptAdd(DeptReqDTO deptReqDto){
+        deptService.createDept(deptReqDto);
     }
 
     /**
      * 부서 정보 수정
-     * @param deptCd
-     * @param deptDto
      */
     @PutMapping("/{deptCd}")
-    public void deptModify(@PathVariable String deptCd, @RequestBody DeptDTO deptDto){
-        deptService.editDept(deptDto);
+    public void deptModify(@PathVariable String deptCd, @RequestBody DeptReqDTO deptReqDto){
+        deptService.editDept(deptReqDto);
     }
 
     /**
      * 부서 정보 삭제
-     * @param deptCd
      */
-    @DeleteMapping("")
+    @DeleteMapping("/{deptCd}")
     public void deptRemove(@PathVariable String deptCd){
         deptService.deleteDept(deptCd);
     }
