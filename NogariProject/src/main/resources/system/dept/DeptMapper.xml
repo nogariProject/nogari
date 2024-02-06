@@ -76,6 +76,6 @@
 
     <delete id="deleteDept" parameterType="String">
         DELETE FROM DEPT
-        WHERE DEPT_CD = #{deptCd}          /*부서코드*/
+        WHERE DEPT_CD = #{deptCd}       --부서코드
     </delete>
 </mapper>
