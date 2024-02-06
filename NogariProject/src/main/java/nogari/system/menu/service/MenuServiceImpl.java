@@ -1,4 +1,4 @@
-package nogari.system.menu.service.impl;
+package nogari.system.menu.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
