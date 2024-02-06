@@ -37,21 +37,17 @@ public class MessageServiceImpl implements MessageService{
         return messageMapper.updateMessage(deptDTO);
     }
     @Override
-    public int deleteMessage(List<MessageReqDTO> messageReqDTOS) {
-        int originRows = messageReqDTOS.size();
-
+    public int deleteMessage(String msgCd) {
+        int deletedRow = messageMapper.deleteMessage(msgCd);
+        return deletedRow;
+    }
+    @Override
+    public int deleteMessages(List<MessageReqDTO> messageReqDTOS) {
         int deletedRows = 0;
         for (MessageReqDTO messageReqDTO : messageReqDTOS) {
             int deletedRow = messageMapper.deleteMessage(messageReqDTO.getMsgCd());
             deletedRows += deletedRow;
         }
-        if(originRows>deletedRows) throw new RuntimeException("요청건수: "+originRows+" 중 "+deletedRows+"가 성공 하였습니다");
-
         return deletedRows;
-    }
-    @Override
-    public int deleteMessage(String msgCd) {
-        int deletedRow = messageMapper.deleteMessage(msgCd);
-        return deletedRow;
     }
 }

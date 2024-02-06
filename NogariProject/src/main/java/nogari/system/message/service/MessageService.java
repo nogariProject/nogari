@@ -10,6 +10,6 @@ public interface MessageService {
     MessageReqDTO findMessageByMsgCd(String msgCd);
     int createMessage(MessageReqDTO deptDTO);
     int editMessage(MessageReqDTO deptDTO);
-    int deleteMessage(List<MessageReqDTO> messageReqDTO);
     int deleteMessage(String msgCd);
+    int deleteMessages(List<MessageReqDTO> messageReqDTO);
 }

@@ -53,8 +53,8 @@ public class MessageController {
      */
     @PutMapping("/{msgCd}")
     public ResponseEntity<Integer> messageModify(@PathVariable String msgCd, @RequestBody @Valid MessageReqDTO messageReqDTO){
-        int editeddRows = messageService.editMessage(messageReqDTO);
-        return new ResponseEntity<>(editeddRows, HttpStatus.OK);
+        int updatedRows = messageService.editMessage(messageReqDTO);
+        return new ResponseEntity<>(updatedRows, HttpStatus.OK);
     }
     /**
      * 메시지 단건 삭제
@@ -73,7 +73,7 @@ public class MessageController {
      */
     @DeleteMapping("")
     public ResponseEntity<Integer> messagesRemove(@RequestBody @Valid List<MessageReqDTO> messageReqDTOS){
-        int deletedRow = messageService.deleteMessage(messageReqDTOS);
+        int deletedRow = messageService.deleteMessages(messageReqDTOS);
         return new ResponseEntity<>(deletedRow,HttpStatus.OK);
     }
 }
