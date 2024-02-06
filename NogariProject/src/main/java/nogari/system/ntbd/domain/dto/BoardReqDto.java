@@ -17,8 +17,9 @@ public class BoardReqDto {
     String ntbdCd;
     String fileCd;
     String ntbdDiv;
-    Long viewCnt;
     String topYn;
+    String postInDate;
+    String postOutDate;
     String postNm;
     String postCont;
     String userId;
