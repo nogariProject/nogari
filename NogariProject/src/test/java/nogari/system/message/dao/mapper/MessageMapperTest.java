@@ -1,6 +1,6 @@
 package nogari.system.message.dao.mapper;
 
-import nogari.system.message.domain.dto.MessageDTO;
+import nogari.system.message.domain.dto.MessageReqDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,60 +22,60 @@ class MessageMapperTest {
     @BeforeEach
     public void setUp_3_Messages(){
         //Given
-        MessageDTO messageDTO1 = MessageDTO.builder()
+        MessageReqDTO messageReqDTO1 = MessageReqDTO.builder()
                 .msgCd("AAAAA")
                 .type("C")
                 .description("예시: 파일 다운로드에 실패하였습니다")
                 .regId("admin")
                 .updId("user")
                 .build();
-        MessageDTO messageDTO2 = MessageDTO.builder()
+        MessageReqDTO messageReqDTO2 = MessageReqDTO.builder()
                 .msgCd("AAAAB")
                 .type("C")
                 .description("예시: 파일 업로드에 실패하였습니다")
                 .regId("admin")
                 .updId("user")
                 .build();
-        MessageDTO messageDTO3 = MessageDTO.builder()
+        MessageReqDTO messageReqDTO3 = MessageReqDTO.builder()
                 .msgCd("AAAAC")
                 .type("C")
                 .description("예시: 성공")
                 .regId("admin")
                 .updId("user")
                 .build();
-        messageMapper.insertMessage(messageDTO1);
-        messageMapper.insertMessage(messageDTO2);
-        messageMapper.insertMessage(messageDTO3);
+        messageMapper.insertMessage(messageReqDTO1);
+        messageMapper.insertMessage(messageReqDTO2);
+        messageMapper.insertMessage(messageReqDTO3);
     }
     @Test
     void selectMessage_ThreeMessages_ReturnsThree() {
         //When
-        List<MessageDTO> messageDTOs = messageMapper.selectMessage();
+        List<MessageReqDTO> messageReqDTOS = messageMapper.selectMessage();
         //Then
-        assertThat(3, is(equalTo(messageDTOs.size())));
+        assertThat(3, is(equalTo(messageReqDTOS.size())));
     }
 
     @Test
     void selectMessageByMsgCd_OneMessage_ReturnThatMessage() {
         //Given
-        MessageDTO messageDTO = MessageDTO.builder()
+        MessageReqDTO messageReqDTO = MessageReqDTO.builder()
                 .msgCd("AAAAD")
                 .type("C")
                 .description("예시: 공지사항이 성공적으로 입력 되었습니다.")
                 .regId("admin")
                 .updId("user")
                 .build();
-        messageMapper.insertMessage(messageDTO);
+        messageMapper.insertMessage(messageReqDTO);
         //When
-        MessageDTO messageDTONew = messageMapper.selectMessageByMsgCd("AAAAD");
+        MessageReqDTO messageReqDTONew = messageMapper.selectMessageByMsgCd("AAAAD");
         //Then
-        assertThat(messageDTO, is(equalTo(messageDTONew)));
+        assertThat(messageReqDTO, is(equalTo(messageReqDTONew)));
     }
 
     @Test
     void updateMessage_editOneMessage_ReturnEditedValue() {
         //Given
-        MessageDTO messageDTO = MessageDTO.builder()
+        MessageReqDTO messageReqDTO = MessageReqDTO.builder()
                 .msgCd("AAAAC")
                 .type("C")
                 .description("예시: 변경된 메시지")
@@ -83,10 +83,10 @@ class MessageMapperTest {
                 .updId("user")
                 .build();
         //When
-        messageMapper.updateMessage(messageDTO);
+        messageMapper.updateMessage(messageReqDTO);
         //Then
-        MessageDTO messageDTONew = messageMapper.selectMessageByMsgCd("AAAAC");
-        assertThat(messageDTO.getDescription(), is(equalTo(messageDTONew.getDescription())));
+        MessageReqDTO messageReqDTONew = messageMapper.selectMessageByMsgCd("AAAAC");
+        assertThat(messageReqDTO.getDescription(), is(equalTo(messageReqDTONew.getDescription())));
     }
 
     @Test
@@ -95,7 +95,7 @@ class MessageMapperTest {
         //When
         messageMapper.deleteMessage("AAAAB");
         //Then
-        List<MessageDTO> messageDTOs = messageMapper.selectMessage();
-        assertThat(2, is(equalTo(messageDTOs.size())));
+        List<MessageReqDTO> messageReqDTOS = messageMapper.selectMessage();
+        assertThat(2, is(equalTo(messageReqDTOS.size())));
     }
 }

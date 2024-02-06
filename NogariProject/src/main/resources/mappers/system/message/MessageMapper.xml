@@ -4,7 +4,7 @@
 
 <mapper namespace="nogari.system.message.dao.mapper.MessageMapper">
 
-    <select id="selectMessage" resultType="MessageDTO">
+    <select id="selectMessage" resultType="MessageRespDTO">
         SELECT
               MSG_CD        --메시지코드
             , TYPE          --메세지타입
@@ -17,7 +17,7 @@
             MESSAGE
     </select>
 
-    <select id="selectMessageByMsgCd" parameterType="String" resultType="MessageDTO">
+    <select id="selectMessageByMsgCd" parameterType="String" resultType="MessageRespDTO">
         SELECT
               MSG_CD        --메시지코드
             , TYPE          --메세지타입
@@ -32,7 +32,7 @@
             MSG_CD = #{msgCd}
     </select>
 
-    <insert id="insertMessage" parameterType="MessageDTO" >
+    <insert id="insertMessage" parameterType="MessageReqDTO" >
         INSERT INTO MESSAGE (
               MSG_CD        --메시지코드
             , TYPE          --메세지타입
@@ -48,7 +48,7 @@
             )
     </insert>
 
-    <update id="updateMessage" parameterType="MessageDTO">
+    <update id="updateMessage" parameterType="MessageReqDTO">
         UPDATE MESSAGE
         SET
             TYPE = #{type}                  --메세지타입

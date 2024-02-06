@@ -1,6 +1,6 @@
 package nogari.system.message.controller;
 
-import nogari.system.message.domain.dto.MessageDTO;
+import nogari.system.message.domain.dto.MessageReqDTO;
 import nogari.system.message.service.MessageService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +28,9 @@ class MessageControllerTest {
     @Test
     void messageList() throws Exception {
         //Given
-        List<MessageDTO> messageDTOs = new ArrayList<MessageDTO>();
-        messageDTOs.add(
-                MessageDTO.builder()
+        List<MessageReqDTO> messageReqDTOS = new ArrayList<MessageReqDTO>();
+        messageReqDTOS.add(
+                MessageReqDTO.builder()
                         .msgCd("AAAAD")
                         .type("C")
                         .description("예시: 첫번째 MOCK")
@@ -38,8 +38,8 @@ class MessageControllerTest {
                         .updId("user")
                         .build()
         );
-        messageDTOs.add(
-                MessageDTO.builder()
+        messageReqDTOS.add(
+                MessageReqDTO.builder()
                         .msgCd("AAAAA")
                         .type("C")
                         .description("예시: 두번째 MOCK")
@@ -47,7 +47,7 @@ class MessageControllerTest {
                         .updId("user")
                         .build()
         );
-        when(messageService.findMessages()).thenReturn(messageDTOs);
+        when(messageService.findMessages()).thenReturn(messageReqDTOS);
         //When
         mockMvc.perform(get("/messages"))
         //Then
@@ -70,14 +70,14 @@ class MessageControllerTest {
     @Test
     void messageDetails_OneMessage_ReturnMessage() throws Exception {
         //Given
-        MessageDTO messageDTO = MessageDTO.builder()
+        MessageReqDTO messageReqDTO = MessageReqDTO.builder()
                 .msgCd("AAAAD")
                 .type("C")
                 .description("예시: 첫번째 MOCK")
                 .regId("admin")
                 .updId("user")
                 .build();
-        when(messageService.findMessageByMsgCd("AAAAD")).thenReturn(messageDTO);
+        when(messageService.findMessageByMsgCd("AAAAD")).thenReturn(messageReqDTO);
         //When
         mockMvc.perform(get("/messages/AAAAD"))
                 .andExpect(status().isOk())
@@ -98,14 +98,14 @@ class MessageControllerTest {
                 ",\"regId\": \"admin\"" +
                 ",\"updId\": \"user\"" +
                 "}";
-        MessageDTO messageDTO = MessageDTO.builder()
+        MessageReqDTO messageReqDTO = MessageReqDTO.builder()
                 .msgCd("AAAAD")
                 .type("C")
                 .description("예시: 첫번째 MOCK")
                 .regId("admin")
                 .updId("user")
                 .build();
-        when(messageService.createMessage(messageDTO)).thenReturn(1);
+        when(messageService.createMessage(messageReqDTO)).thenReturn(1);
         mockMvc.perform(post("/messages")
                 .contentType("application/json")
                 .content(jsonContent))

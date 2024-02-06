@@ -1,7 +1,7 @@
 package nogari.system.message.controller;
 
 import lombok.RequiredArgsConstructor;
-import nogari.system.message.domain.dto.MessageDTO;
+import nogari.system.message.domain.dto.MessageReqDTO;
 import nogari.system.message.service.MessageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +21,8 @@ public class MessageController {
      * @return
      */
     @GetMapping("")
-    public ResponseEntity<List<MessageDTO>> messageList(){
-        List<MessageDTO> messages = messageService.findMessages();
+    public ResponseEntity<List<MessageReqDTO>> messageList(){
+        List<MessageReqDTO> messages = messageService.findMessages();
         return new ResponseEntity<>(messages,HttpStatus.OK);
     }
     /**
@@ -31,29 +31,29 @@ public class MessageController {
      * @return
      */
     @GetMapping("/{msgCd}")
-    public ResponseEntity<MessageDTO> messageDetails(@PathVariable String msgCd){
-        MessageDTO message = messageService.findMessageByMsgCd(msgCd);
+    public ResponseEntity<MessageReqDTO> messageDetails(@PathVariable String msgCd){
+        MessageReqDTO message = messageService.findMessageByMsgCd(msgCd);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
     /**
      * 메시지 단건 생성
-     * @param messageDto
+     * @param messageReqDto
      * @return
      */
     @PostMapping("")
-    public ResponseEntity<Integer> messageAdd(@RequestBody MessageDTO messageDto){
-        Integer createdRow = messageService.createMessage(messageDto);
+    public ResponseEntity<Integer> messageAdd(@RequestBody MessageReqDTO messageReqDto){
+        Integer createdRow = messageService.createMessage(messageReqDto);
         return new ResponseEntity<>(createdRow, HttpStatus.CREATED);
     }
     /**
      * 메시지 단건 수정
      * @param msgCd
-     * @param messageDTO
+     * @param messageReqDTO
      * @return
      */
     @PutMapping("/{msgCd}")
-    public ResponseEntity<Integer> messageModify(@PathVariable String msgCd, @RequestBody @Valid MessageDTO messageDTO){
-        int editeddRows = messageService.editMessage(messageDTO);
+    public ResponseEntity<Integer> messageModify(@PathVariable String msgCd, @RequestBody @Valid MessageReqDTO messageReqDTO){
+        int editeddRows = messageService.editMessage(messageReqDTO);
         return new ResponseEntity<>(editeddRows, HttpStatus.OK);
     }
     /**
@@ -68,12 +68,12 @@ public class MessageController {
     }
     /**
      * 메시지 다건 삭제
-     * @param messageDTOs
+     * @param messageReqDTOS
      * @return
      */
     @DeleteMapping("")
-    public ResponseEntity<Integer> messagesRemove(@RequestBody @Valid List<MessageDTO> messageDTOs){
-        int deletedRow = messageService.deleteMessage(messageDTOs);
+    public ResponseEntity<Integer> messagesRemove(@RequestBody @Valid List<MessageReqDTO> messageReqDTOS){
+        int deletedRow = messageService.deleteMessage(messageReqDTOS);
         return new ResponseEntity<>(deletedRow,HttpStatus.OK);
     }
 }

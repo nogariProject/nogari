@@ -1,6 +1,6 @@
 package nogari.system.message.dao.mapper;
 
-import nogari.system.message.domain.dto.MessageDTO;
+import nogari.system.message.domain.dto.MessageReqDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -10,10 +10,10 @@ import java.util.List;
 @Component
 public interface MessageMapper {
 
-    List<MessageDTO> selectMessage();
-    MessageDTO selectMessageByMsgCd(String msgCd);
-    int insertMessage(MessageDTO messageDTO);
-    int updateMessage(MessageDTO messageDTO);
+    List<MessageReqDTO> selectMessage();
+    MessageReqDTO selectMessageByMsgCd(String msgCd);
+    int insertMessage(MessageReqDTO messageReqDTO);
+    int updateMessage(MessageReqDTO messageReqDTO);
     int deleteMessage(String msgCd);
 
 

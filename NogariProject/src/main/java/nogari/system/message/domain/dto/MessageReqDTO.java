@@ -6,13 +6,13 @@ import org.apache.ibatis.type.Alias;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-@Alias("MessageDTO")
+@Alias("MessageReqDTO")
 @Getter
 @Builder
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
-public class MessageDTO {
+public class MessageReqDTO {
 
     private String msgCd;
     @Pattern(regexp = "^(A|C)$", message = "TYPE 필드는 'A' 또는 'C' 만 입력할 수 있습니다.")

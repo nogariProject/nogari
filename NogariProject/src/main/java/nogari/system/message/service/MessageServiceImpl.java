@@ -2,7 +2,7 @@ package nogari.system.message.service;
 
 import lombok.RequiredArgsConstructor;
 import nogari.system.message.dao.mapper.MessageMapper;
-import nogari.system.message.domain.dto.MessageDTO;
+import nogari.system.message.domain.dto.MessageReqDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,32 +17,32 @@ public class MessageServiceImpl implements MessageService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<MessageDTO> findMessages() {
+    public List<MessageReqDTO> findMessages() {
         return messageMapper.selectMessage();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public MessageDTO findMessageByMsgCd(String msgCd) {
+    public MessageReqDTO findMessageByMsgCd(String msgCd) {
         return messageMapper.selectMessageByMsgCd(msgCd);
     }
 
     @Override
-    public int createMessage(MessageDTO deptDTO) {
+    public int createMessage(MessageReqDTO deptDTO) {
         return messageMapper.insertMessage(deptDTO);
     }
 
     @Override
-    public int editMessage(MessageDTO deptDTO) {
+    public int editMessage(MessageReqDTO deptDTO) {
         return messageMapper.updateMessage(deptDTO);
     }
     @Override
-    public int deleteMessage(List<MessageDTO> messageDTOs) {
-        int originRows = messageDTOs.size();
+    public int deleteMessage(List<MessageReqDTO> messageReqDTOS) {
+        int originRows = messageReqDTOS.size();
 
         int deletedRows = 0;
-        for (MessageDTO messageDTO : messageDTOs) {
-            int deletedRow = messageMapper.deleteMessage(messageDTO.getMsgCd());
+        for (MessageReqDTO messageReqDTO : messageReqDTOS) {
+            int deletedRow = messageMapper.deleteMessage(messageReqDTO.getMsgCd());
             deletedRows += deletedRow;
         }
         if(originRows>deletedRows) throw new RuntimeException("요청건수: "+originRows+" 중 "+deletedRows+"가 성공 하였습니다");
