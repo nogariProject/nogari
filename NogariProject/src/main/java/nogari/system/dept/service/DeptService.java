@@ -9,9 +9,9 @@ public interface DeptService {
 
     List<DeptReqDTO> findDepts();
     DeptRespDTO findDeptByDeptCd(String deptCd);
-    void createDept(DeptReqDTO deptReqDTO);
-    void editDept(DeptReqDTO deptReqDTO);
-    void deleteDept(String deptCd);
+    int createDept(DeptReqDTO deptReqDTO);
+    int editDept(DeptReqDTO deptReqDTO);
+    int deleteDept(String deptCd);
 
 
 

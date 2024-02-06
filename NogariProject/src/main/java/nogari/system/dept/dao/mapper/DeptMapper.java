@@ -12,9 +12,9 @@ import java.util.List;
 public interface DeptMapper {
     List<DeptReqDTO> selectDept();
     DeptRespDTO selectDeptByDeptCd(String deptCd);
-    void insertDept(DeptReqDTO deptReqDTO);
-    void updateDept(DeptReqDTO deptReqDTO);
-    void deleteDept(String deptCd);
+    int insertDept(DeptReqDTO deptReqDTO);
+    int updateDept(DeptReqDTO deptReqDTO);
+    int deleteDept(String deptCd);
 
 
 }

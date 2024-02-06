@@ -13,25 +13,30 @@ import java.util.List;
 public class DeptServiceImpl implements DeptService {
 
     private final DeptMapper deptMapper;
+
     @Override
     public List<DeptReqDTO> findDepts() {
         return deptMapper.selectDept();
     }
+
     @Override
     public DeptRespDTO findDeptByDeptCd(String deptCd) {
         return deptMapper.selectDeptByDeptCd(deptCd);
     }
+
     @Override
-    public void createDept(DeptReqDTO deptReqDTO) {
-        deptMapper.insertDept(deptReqDTO);
+    public int createDept(DeptReqDTO deptReqDTO) {
+        return deptMapper.insertDept(deptReqDTO);
     }
+
     @Override
-    public void editDept(DeptReqDTO deptReqDTO) {
-        deptMapper.updateDept(deptReqDTO);
+    public int editDept(DeptReqDTO deptReqDTO) {
+        return deptMapper.updateDept(deptReqDTO);
     }
+
     @Override
-    public void deleteDept(String deptCd) {
-        deptMapper.deleteDept(deptCd);
+    public int deleteDept(String deptCd) {
+        return deptMapper.deleteDept(deptCd);
     }
 
 

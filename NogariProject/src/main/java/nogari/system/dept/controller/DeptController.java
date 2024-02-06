@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import nogari.system.dept.domain.dto.DeptReqDTO;
 import nogari.system.dept.domain.dto.DeptRespDTO;
 import nogari.system.dept.service.DeptService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,40 +22,54 @@ public class DeptController {
      * @return List
      */
     @GetMapping("")
-    public List<DeptReqDTO> deptList(){
-        return deptService.findDepts();
+    public ResponseEntity<List<DeptReqDTO>> deptList(){
+        List<DeptReqDTO> depts = deptService.findDepts();
+        return new ResponseEntity<>(depts, HttpStatus.OK);
     }
 
     /**
      * 부서코드를 기준으로 부서 단건 조회
      */
     @GetMapping("/{deptCd}")
-    public DeptRespDTO deptDetail(@PathVariable String deptCd){
-        return deptService.findDeptByDeptCd(deptCd);
+    public ResponseEntity<DeptRespDTO> deptDetail(@PathVariable String deptCd){
+        DeptRespDTO deptByDeptCd = deptService.findDeptByDeptCd(deptCd);
+        return new ResponseEntity<>(deptByDeptCd, HttpStatus.OK) ;
     }
 
     /**
      * 부서 추가
+     *
+     * @return
      */
     @PostMapping("")
-    public void deptAdd(DeptReqDTO deptReqDto){
-        deptService.createDept(deptReqDto);
+    public ResponseEntity<Integer> deptAdd(DeptReqDTO deptReqDto){
+        int createdRows = deptService.createDept(deptReqDto);
+        return new ResponseEntity<>(createdRows, HttpStatus.OK) ;
     }
 
     /**
      * 부서 정보 수정
+     *
+     * @return
      */
     @PutMapping("/{deptCd}")
-    public void deptModify(@PathVariable String deptCd, @RequestBody DeptReqDTO deptReqDto){
-        deptService.editDept(deptReqDto);
+    public ResponseEntity<Integer> deptModify(@PathVariable String deptCd, @RequestBody DeptReqDTO deptReqDto){
+        int updatedRows = deptService.editDept(deptReqDto);
+        return new ResponseEntity<>(updatedRows, HttpStatus.OK) ;
+
     }
 
     /**
      * 부서 정보 삭제
+     *
+     * @return
      */
     @DeleteMapping("/{deptCd}")
-    public void deptRemove(@PathVariable String deptCd){
-        deptService.deleteDept(deptCd);
+    public ResponseEntity<Integer> deptRemove(@PathVariable String deptCd){
+        int deletedRows = deptService.deleteDept(deptCd);
+        return new ResponseEntity<>(deletedRows, HttpStatus.OK) ;
+
+
     }
 
 
