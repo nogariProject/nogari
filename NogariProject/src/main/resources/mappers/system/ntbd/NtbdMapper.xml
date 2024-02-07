@@ -89,4 +89,12 @@
           AND NTBD_CD = #{ntbdCd}
     </update>
 
+    <!-- 게시글 삭제 -->
+    <delete id="deleteBoard" parameterType="String">
+        DELETE
+            FROM NOTICE_BOARD
+        WHERE 1=1
+          AND NTBD_CD = #{ntbdCd}
+    </delete>
+
 </mapper>

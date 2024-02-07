@@ -33,18 +33,25 @@ public class NtbdController {
         return new ResponseEntity<>(board, HttpStatus.OK);
     }
 
-    @PostMapping("/write")
+    @PostMapping("")
     public ResponseEntity<String> boardAdd(@RequestBody BoardReqDto boardReqDto){
         String result = ntbdService.createBoard(boardReqDto);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/{ntbdCd}")
     public ResponseEntity<String> boardModify(@RequestBody BoardReqDto boardReqDto) {
         String result = ntbdService.editBoard(boardReqDto);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{ntbdCd}")
+    public String boardRemove(@PathVariable String ntbdCd){
+        String result = ntbdService.deleteBoard(ntbdCd);
+
+        return result;
     }
 
 }

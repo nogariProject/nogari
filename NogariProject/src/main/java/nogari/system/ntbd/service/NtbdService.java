@@ -11,4 +11,5 @@ public interface NtbdService {
     List<BoardRespDto> findBoards();
     String createBoard(BoardReqDto boardReqDto);
     String editBoard(BoardReqDto boardReqDto);
+    String deleteBoard(String ntbdCd);
 }

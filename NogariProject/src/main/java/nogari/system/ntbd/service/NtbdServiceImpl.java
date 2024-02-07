@@ -50,4 +50,10 @@ public class NtbdServiceImpl implements NtbdService {
             return "게시글 수정 실패";
         }
     }
+
+    @Override
+    public String deleteBoard(String ntbdCd) {
+        int result = mapper.deleteBoard(ntbdCd);
+        return result + "건의 게시글이 삭제되었습니다.";
+    }
 }
