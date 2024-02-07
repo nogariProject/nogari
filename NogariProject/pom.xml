@@ -146,6 +146,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- 파일 관련 설정 추가 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
