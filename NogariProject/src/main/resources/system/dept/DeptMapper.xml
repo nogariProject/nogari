@@ -5,77 +5,73 @@
 <mapper namespace="nogari.system.dept.dao.mapper.DeptMapper">
 
     <select id="selectDept" resultType="DeptRespDTO">
-        SELECT
-         DEPT_CD        --부서코드
-        ,DEPT_NM        --부서이름
-        ,MGR_ID         --관리자ID
-        ,UPPER_DEPT_CD  --상위부서코드
-        ,SORT           --정렬순서
-        ,USE_YN         --유효일시
-        ,UPD_DT         --등록일시
-        ,UPD_ID         --등록자ID
-        ,REG_DT         --수정일시
-        ,REG_ID         --수정자ID
-        FROM
-            DEPT
-        START WITH
-            UPPER_DEPT_CD IS NULL
-        CONNECT BY
-            PRIOR DEPT_CD = UPPER_DEPT_CD
+        /* DeptMapper.selectDept */
+        SELECT DEPT_CD             /* 부서코드 */
+             , DEPT_NM             /* 부서이름 */
+             , MGR_ID              /* 관리자ID */
+             , UPPER_DEPT_CD       /* 상위부서코드 */
+             , SORT                /* 정렬순서 */
+             , USE_YN              /* 사용여부 */
+             , UPD_DT              /* 수정일시 */
+             , UPD_ID              /* 수정자ID */
+             , REG_DT              /* 등록일시 */
+             , REG_ID              /* 등록자ID */
+          FROM DEPT
+         START WITH UPPER_DEPT_CD IS NULL
+       CONNECT BY PRIOR DEPT_CD = UPPER_DEPT_CD
     </select>
 
     <select id="selectDeptByDeptCd" parameterType="String" resultType="DeptRespDTO">
-        SELECT
-         DEPT_CD        --부서코드
-        ,DEPT_NM        --부서이름
-        ,MGR_ID         --관리자ID
-        ,UPPER_DEPT_CD  --상위부서코드
-        ,SORT           --정렬순서
-        ,USE_YN         --유효일시
-        ,UPD_DT         --등록일시
-        ,UPD_ID         --등록자ID
-        ,REG_DT         --수정일시
-        ,REG_ID         --수정자ID
-        FROM DEPT
-        WHERE DEPT_CD = #{deptCd}
+        /* DeptMapper.selectDeptByDeptCd */
+        SELECT DEPT_CD             /* 부서코드 */
+             , DEPT_NM             /* 부서이름 */
+             , MGR_ID              /* 관리자ID */
+             , UPPER_DEPT_CD       /* 상위부서코드 */
+             , SORT                /* 정렬순서 */
+             , USE_YN              /* 사용여부 */
+             , UPD_DT              /* 수정일시 */
+             , UPD_ID              /* 수정자ID */
+             , REG_DT              /* 등록일시 */
+             , REG_ID              /* 등록자ID */
+          FROM DEPT
+         WHERE DEPT_CD = #{deptCd} /* 부서코드 */
     </select>
 
     <insert id="insertDept" parameterType="DeptReqDTO">
+        /* DeptMapper.insertDept */
         INSERT INTO DEPT (
-         DEPT_CD        --부서코드
-        ,DEPT_NM        --부서이름
-        ,MGR_ID         --관리자ID
-        ,UPPER_DEPT_CD  --상위부서코드
-        ,SORT           --정렬순서
-        ,UPD_ID         --등록자ID
-        ,REG_ID         --수정자ID
-        )VALUES(
-         #{deptCd}
-        ,#{deptNm}
-        ,#{mgrId}
-        ,#{upperDeptCd}
-        ,#{sort}
-        ,#{updId}
-        ,#{regId}
-        )
+               DEPT_CD             /* 부서코드 */
+             , DEPT_NM             /* 부서이름 */
+             , MGR_ID              /* 관리자ID */
+             , UPPER_DEPT_CD       /* 상위부서코드 */
+             , SORT                /* 정렬순서 */
+             , UPD_ID              /* 수정자ID */
+             , REG_ID              /* 등록자ID */
+             ) VALUES (
+               #{deptCd}
+             , #{deptNm}
+             , #{mgrId}
+             , #{upperDeptCd}
+             , #{sort}
+             , #{updId}
+             , #{regId}
+             )
     </insert>
 
     <update id="updateDept" parameterType="DeptReqDTO">
-        UPDATE DEPT
-        <set>
-            <if test="deptNm != null"> DEPT_NM = #{deptNm}, </if>                 --부서이름
-            <if test="mgrId != null"> MGR_ID = #{mgrId}, </if>                    --관리자ID
-            <if test="upperDeptCd != null"> UPPER_DEPT_CD = #{upperDeptCd}, </if> --상위부서코드
-            <if test="sort != null"> SORT = #{sort}, </if>                        --정렬순서
-            UPD_DT = CURRENT_DATE,                                                --수정일시
-            <if test="updId != null"> UPD_ID = #{updId}, </if>                    --수정자ID
-            <if test="regId != null"> REG_ID = #{regId}, </if>                    --등록자ID
-        </set>
-        WHERE DEPT_CD = #{deptCd}       --부서코드
+        /* DeptMapper.insertDept */
+        UPDATE DEPT SET
+               DEPT_NM          = #{deptNm}       /* 부서이름 */
+             , MGR_ID           = #{mgrId}        /* 관리자ID */
+             , UPPER_DEPT_CD    = #{upperDeptCd}  /* 상위부서코드 */
+             , SORT             = #{sort}         /* 정렬순서 */
+             , UPD_DT           = CURRENT_DATE    /* 수정일시 */
+             , UPD_ID           = #{updId}        /* 수정자ID */
+         WHERE DEPT_CD          = #{deptCd}       /* 부서코드 */
     </update>
 
     <delete id="deleteDept" parameterType="String">
         DELETE FROM DEPT
-        WHERE DEPT_CD = #{deptCd}       --부서코드
+         WHERE DEPT_CD          = #{deptCd}       /* 부서코드 */
     </delete>
 </mapper>
