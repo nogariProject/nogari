@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nogari.system.commcd.dao.mapper.CommCdMapper">
+
+    <!-- 대분류 코드 조회 -->
+    <select id="selectClsCd" parameterType="String" resultType="HashMap">
+        SELECT CLS_CD
+             , CLS_NM
+             , REMARK
+             , USE_YN
+          FROM CODE_MST
+         WHERE 1=1
+        <if test="_parameter != '' and _parameter != null">
+           AND CLS_CD LIKE '%'||#{clsCd}||'%'
+            OR CLS_NM LIKE '%'||#{clsCd}||'%'
+        </if>
+    </select>
+
+    <!-- 소분류 코드 조회 -->
+    <select id="selectCodeCd" parameterType="String" resultType="HashMap">
+        SELECT CLS_CD
+             , CODE_CD
+             , CODE_NM
+             , OPT_1
+             , OPT_2
+             , OPT_3
+             , REMARK
+             , USE_YN
+          FROM CODE_DTL
+         WHERE 1=1
+           AND CLS_CD = #{clsCd}
+    </select>
+
+    <!-- 대분류 코드 저장 -->
+    <insert id="insertClsCd" parameterType="nogari.system.commcd.domain.dto.ClsCdDTO">
+        INSERT
+          INTO CODE_MST
+        VALUES (
+               #{clsCd}
+             , #{clsNm}
+             , #{remark}
+             , CURRENT_DATE
+             , #{id}
+             , CURRENT_DATE
+             , #{id}
+             , 'Y'
+        )
+    </insert>
+
+    <!-- 소분류 코드 저장 -->
+    <insert id="insertCodeCd" parameterType="nogari.system.commcd.domain.dto.CodeCdDTO">
+        INSERT
+          INTO CODE_DTL
+        VALUES (
+               #{codeCd}
+             , #{clsCd}
+             , #{codeNm}
+             , #{opt1}
+             , #{opt2}
+             , #{opt3}
+             , #{remark}
+             , CURRENT_DATE
+             , #{id}
+             , CURRENT_DATE
+             , #{id}
+             , 'Y'
+        )
+    </insert>
+
+    <!-- 대분류 코드 수정 -->
+    <update id="updateClsCd" parameterType="nogari.system.commcd.domain.dto.ClsCdDTO">
+        UPDATE CODE_MST
+           SET CLS_NM = #{clsNm}
+             , REMARK = #{remark}
+             , USE_YN = #{useYN}
+             , UPD_DT = CURRENT_DATE
+             , UPD_ID = #{id}
+         WHERE 1=1
+           AND CLS_CD = #{clsCd}
+    </update>
+
+    <!-- 대분류 코드 하위 소분류 코드 사용여부 수정 -->
+    <update id="updateClsCodeCd" parameterType="nogari.system.commcd.domain.dto.ClsCdDTO">
+        UPDATE CODE_DTL
+           SET USE_YN = #{useYN}
+         WHERE 1=1
+           AND CLS_CD = #{clsCd}
+    </update>
+
+    <!-- 소분류 코드 수정 -->
+    <update id="updateCodeCd" parameterType="nogari.system.commcd.domain.dto.CodeCdDTO">
+        UPDATE CODE_DTL
+           SET CODE_NM = #{codeNm}
+             , OPT_1   = #{opt1}
+             , OPT_2   = #{opt2}
+             , OPT_3   = #{opt3}
+             , REMARK  = #{remark}
+             , USE_YN  = #{useYN}
+             , UPD_DT  = CURRENT_DATE
+             , UPD_ID  = #{id}
+         WHERE 1=1
+           AND CLS_CD  = #{clsCd}
+           AND CODE_CD = #{codeCd}
+    </update>
+
+</mapper>

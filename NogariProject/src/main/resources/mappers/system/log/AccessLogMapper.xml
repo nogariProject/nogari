@@ -1,0 +1,51 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nogari.system.log.dao.mapper.AccessLogMapper">
+    <insert id="insertAccessLog" parameterType="AccessLogDTO">
+        /* AccessLogMapper.insertAccessLog */
+        INSERT INTO ACCESS_LOG (
+               ACCS_DT
+             , MENU_CD
+             , MENU_PATH
+             , MEMBER_ID
+             ) VALUES (
+               TO_CHAR(CURRENT_DATE, 'YYYYMMDDHH24MISS')
+             , #{menuCd}
+             , #{menuPath}
+             , #{memberId}
+             )
+    </insert>
+    
+    <select id="selectAccessLogList" parameterType="AccessLogReqDTO" resultType="AccessLogDTO">
+        /* AccessLogMapper.selectAccessLogList */
+        SELECT TO_CHAR(TO_DATE(ACCESS_LOG.ACCS_DT, 'YYYYMMDDHH24MISS'), 'YYYY-MM-DD HH24:MI:SS') ACCS_DT
+             , ACC.MENU_CD
+             , ACC.MENU_NM
+             , ACC.MENU_PATH
+             , ACC.MEMBER_ID
+             , MENU.MENU_NM
+             , MEM.MEMBER_NM
+          FROM ACCESS_LOG  ACC
+             , MENU
+             , MEMBER      MEM
+         WHERE ACC.MENU_CD   = MENU.MENU_CD
+           AND ACC.MEMBER_ID = MEM.ID
+         <if test="accsDtFrom != null and accsDtFrom != '' and accsDtTo != null and accsDtTo != ''">
+           AND ACC.ACCS_DT BETWEEN #{accsDtFrom} AND #{accsDtTo}
+         </if>
+         <if test="member != null and member != ''">
+           AND (
+                    ACC.MEMBER_ID = #{member}
+                 OR MEM.MEMBER_NM LIKE '%' || #{member} || '%'
+               )
+         </if>
+         <if test="menu != null and menu != ''">
+           AND (
+                    ACC.MENU_ID = #{menu}
+                 OR MENU.MENU_NM LIKE '%' || #{menu} || '%'
+             )
+         </if>
+    </select>
+</mapper>

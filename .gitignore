@@ -123,3 +123,5 @@ NogariProject/src/.DS_Store
 # Oracle Cloud DB
 NogariProject/src/main/resources/Wallet_nogariDB/
 
+# spring boot file
+NogariProject/spring-boot-complete.iml
