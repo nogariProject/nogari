@@ -12,4 +12,5 @@ public interface NtbdService {
     String createBoard(BoardReqDto boardReqDto);
     String editBoard(BoardReqDto boardReqDto);
     String deleteBoard(String ntbdCd);
+    String deleteBoards(List<String> ntbdCds);
 }

@@ -48,10 +48,17 @@ public class NtbdController {
     }
 
     @DeleteMapping("/{ntbdCd}")
-    public String boardRemove(@PathVariable String ntbdCd){
+    public ResponseEntity<String> boardRemove(@PathVariable String ntbdCd){
         String result = ntbdService.deleteBoard(ntbdCd);
 
-        return result;
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @PostMapping("/delete-multi")
+    public ResponseEntity<String> boardsRemove(@RequestBody List<String> ntbdCds){
+        String result = ntbdService.deleteBoards(ntbdCds);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

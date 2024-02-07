@@ -56,4 +56,11 @@ public class NtbdServiceImpl implements NtbdService {
         int result = mapper.deleteBoard(ntbdCd);
         return result + "건의 게시글이 삭제되었습니다.";
     }
+
+
+    @Override
+    public String deleteBoards(List<String> ntbdCds) {
+        int result = mapper.deleteBoards(ntbdCds);
+        return result + "건의 게시글이 삭제되었습니다.";
+    }
 }

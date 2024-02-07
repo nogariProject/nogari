@@ -37,13 +37,13 @@
              , UPD_ID
              , TOP_YN
              , FILE_CD
-        FROM NOTICE_BOARD
+          FROM NOTICE_BOARD
     </select>
 
     <!-- 게시글 저장 -->
     <insert id="insertBoard" parameterType="BoardReqDto">
         INSERT
-        INTO NOTICE_BOARD (
+          INTO NOTICE_BOARD (
                         NTBD_CD
                       , NTBD_DIV
                       , POST_NM
@@ -76,25 +76,37 @@
     <!-- 게시글 수정 -->
     <update id="updateBoard" parameterType="BoardReqDto">
         UPDATE NOTICE_BOARD
-        SET NTBD_DIV = #{ntbdDiv}
-          , POST_NM = #{postNm}
-          , POST_CONT = #{postCont}
-          , POST_IN_DATE = #{postInDate}
-          , POST_OUT_DATE = #{postOutDate}
-          , TOP_YN = #{topYn}
-          , FILE_CD = #{fileCd}
-          , UPD_DT = CURRENT_DATE
-          , UPD_ID = #{userId}
-        WHERE 1=1
-          AND NTBD_CD = #{ntbdCd}
+           SET NTBD_DIV = #{ntbdDiv}
+             , POST_NM = #{postNm}
+             , POST_CONT = #{postCont}
+             , POST_IN_DATE = #{postInDate}
+             , POST_OUT_DATE = #{postOutDate}
+             , TOP_YN = #{topYn}
+             , FILE_CD = #{fileCd}
+             , UPD_DT = CURRENT_DATE
+             , UPD_ID = #{userId}
+         WHERE 1=1
+           AND NTBD_CD = #{ntbdCd}
     </update>
 
-    <!-- 게시글 삭제 -->
+    <!-- 게시글 단건 삭제 -->
     <delete id="deleteBoard" parameterType="String">
+        DELETE
+          FROM NOTICE_BOARD
+        WHERE 1=1
+           AND NTBD_CD = #{ntbdCd}
+    </delete>
+
+    <!-- 게시글 다건 삭제 -->
+    <delete id="deleteBoards" parameterType="String">
         DELETE
             FROM NOTICE_BOARD
         WHERE 1=1
-          AND NTBD_CD = #{ntbdCd}
+          AND NTBD_CD
+           IN
+           <foreach collection="list" item="ntbdCd" open="(" separator="," close=")">
+            #{ntbdCd}
+           </foreach>
     </delete>
 
 </mapper>

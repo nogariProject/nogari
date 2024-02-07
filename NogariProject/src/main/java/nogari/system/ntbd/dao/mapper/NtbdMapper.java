@@ -13,4 +13,5 @@ public interface NtbdMapper {
     int insertBoard(BoardReqDto boardReqDto);
     int updateBoard(BoardReqDto boardReqDto);
     int deleteBoard(String ntbdCd);
+    int deleteBoards(List<String> ntbdCds);
 }
