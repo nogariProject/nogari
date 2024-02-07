@@ -43,11 +43,18 @@
 	
 	<insert id="insertScreen" parameterType="MenuFieldDTO">
 	<selectKey resultType="String" keyProperty="menuCd" order="BEFORE">
-        SELECT 'SCR' || LPAD(TO_CHAR(NVL(SUBSTR(MAX(MENU_CD), 4, 7), 0)+1), 6, '0')
-          FROM MENU
-         WHERE 1=1
-           AND SUBSTR(MENU_CD, 0, 3) = 'SCR'
-    </selectKey>
+		<choose>
+		<when test='menuCd != null and menuCd != ""'>
+			SELECT #{menuCd} FROM DUAL
+		</when>
+		<otherwise>
+			SELECT 'SCR' || LPAD(TO_CHAR(NVL(SUBSTR(MAX(MENU_CD), 4, 7), 0)+1), 6, '0')
+			  FROM MENU
+			 WHERE 1=1
+			   AND SUBSTR(MENU_CD, 0, 3) = 'SCR'
+		</otherwise>
+		</choose>
+	</selectKey>
 	INSERT INTO MENU (
 		  MENU_CD
 		, MENU_NM

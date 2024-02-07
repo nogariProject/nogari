@@ -1,9 +1,12 @@
 package nogari.system.menu.domain.dto;
 
-import lombok.*;
 import org.apache.ibatis.type.Alias;
 
-import javax.validation.Valid;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @ToString
@@ -12,7 +15,7 @@ import javax.validation.Valid;
 @AllArgsConstructor
 @Alias("MenuFieldDTO")
 public class MenuFieldDTO {
-        @Valid
+	
         private String menuCd;
         private String menuNm;
         private int    sort;
@@ -33,4 +36,5 @@ public class MenuFieldDTO {
         private String regDt;
         private String updId;
         private String updDt;
+        
 }
