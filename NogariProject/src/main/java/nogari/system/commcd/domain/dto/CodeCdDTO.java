@@ -18,7 +18,9 @@ public class CodeCdDTO {
     String opt2;                    // 옵션 2
     String opt3;                    // 옵션 3
     String remark;                  // 기타
-    String useYN;                   // 사용 여부
+    String useYn;                   // 사용 여부
     String id;                      // 사용자 아이디
+    
+    String status;                  // 로우 상태 (C, U)
 
 }

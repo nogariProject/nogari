@@ -53,7 +53,7 @@ public interface CommCdMapper {
      *  대분류 코드 수정
      * </pre>
      * 
-     * @param 수정한 대분류 코드 정보
+     * @param 수정할 대분류 코드 정보
      */
     void updateClsCd(ClsCdDTO dto);
 
@@ -71,8 +71,17 @@ public interface CommCdMapper {
      *  소분류 코드 수정
      * </pre>
      * 
-     * @param 수정한 소분류 코드 정보
+     * @param 수정할 소분류 코드 정보
      */
     void updateCodeCd(CodeCdDTO dto);
+    
+    /**
+     * <pre>
+     *  소분류 코드 사용 여부 수정
+     * </pre>
+     * 
+     * @param  수정할 소분류 코드 정보
+     */
+    void updateCodeCdUseYn(CodeCdDTO dto);
 
 }
