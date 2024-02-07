@@ -56,7 +56,6 @@ public class DeptController {
     public ResponseEntity<Integer> deptModify(@PathVariable String deptCd, @RequestBody DeptReqDTO deptReqDto){
         int updatedRows = deptService.editDept(deptReqDto);
         return new ResponseEntity<>(updatedRows, HttpStatus.OK) ;
-
     }
 
     /**
@@ -68,8 +67,6 @@ public class DeptController {
     public ResponseEntity<Integer> deptRemove(@PathVariable String deptCd){
         int deletedRows = deptService.deleteDept(deptCd);
         return new ResponseEntity<>(deletedRows, HttpStatus.OK) ;
-
-
     }
 
 
