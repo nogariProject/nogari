@@ -68,12 +68,12 @@ public class MessageController {
     }
     /**
      * 메시지 다건 삭제
-     * @param messageReqDTOS
+     * @param msgCds
      * @return
      */
-    @DeleteMapping("")
-    public ResponseEntity<Integer> messagesRemove(@RequestBody @Valid List<MessageReqDTO> messageReqDTOS){
-        int deletedRow = messageService.deleteMessages(messageReqDTOS);
+    @PostMapping("/delete-multi")
+    public ResponseEntity<Integer> messagesRemove(@RequestBody List<String> msgCds){
+        int deletedRow = messageService.deleteMessages(msgCds);
         return new ResponseEntity<>(deletedRow,HttpStatus.OK);
     }
 }

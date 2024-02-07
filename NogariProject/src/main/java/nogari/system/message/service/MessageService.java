@@ -11,5 +11,5 @@ public interface MessageService {
     int createMessage(MessageReqDTO deptDTO);
     int editMessage(MessageReqDTO deptDTO);
     int deleteMessage(String msgCd);
-    int deleteMessages(List<MessageReqDTO> messageReqDTO);
+    int deleteMessages(List<String> msgCds);
 }
