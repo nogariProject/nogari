@@ -44,8 +44,8 @@ public class MessageServiceImpl implements MessageService{
     @Override
     public int deleteMessages(List<String> msgCds) {
         int deletedRows = 0;
-        for (MessageReqDTO messageReqDTO : msgCds) {
-            int deletedRow = messageMapper.deleteMessage(messageReqDTO.getMsgCd());
+        for (String msgCd : msgCds) {
+            int deletedRow = messageMapper.deleteMessage(msgCd);
             deletedRows += deletedRow;
         }
         return deletedRows;
