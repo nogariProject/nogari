@@ -1,16 +1,22 @@
 package nogari.system.dept.domain.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
 
+import javax.validation.constraints.NotBlank;
 import java.sql.Date;
-@Alias("DeptDTO")
+@Alias("DeptReqDTO")
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeptDTO {
+public class DeptReqDTO {
+    @NotBlank
     String deptCd;
+    @NotBlank
     String deptNm;
     String mgrId;
     String upperDeptCd;

@@ -2,7 +2,8 @@ package nogari.system.dept.service;
 
 import lombok.RequiredArgsConstructor;
 import nogari.system.dept.dao.mapper.DeptMapper;
-import nogari.system.dept.domain.dto.DeptDTO;
+import nogari.system.dept.domain.dto.DeptReqDTO;
+import nogari.system.dept.domain.dto.DeptRespDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,25 +13,30 @@ import java.util.List;
 public class DeptServiceImpl implements DeptService {
 
     private final DeptMapper deptMapper;
+
     @Override
-    public List<DeptDTO> findDepts() {
+    public List<DeptReqDTO> findDepts() {
         return deptMapper.selectDept();
     }
+
     @Override
-    public DeptDTO findDeptByDeptCd(String deptCd) {
+    public DeptRespDTO findDeptByDeptCd(String deptCd) {
         return deptMapper.selectDeptByDeptCd(deptCd);
     }
+
     @Override
-    public void createDept(DeptDTO deptDTO) {
-        deptMapper.insertDept(deptDTO);
+    public int createDept(DeptReqDTO deptReqDTO) {
+        return deptMapper.insertDept(deptReqDTO);
     }
+
     @Override
-    public void editDept(DeptDTO deptDTO) {
-        deptMapper.updateDept(deptDTO);
+    public int editDept(DeptReqDTO deptReqDTO) {
+        return deptMapper.updateDept(deptReqDTO);
     }
+
     @Override
-    public void deleteDept(String deptCd) {
-        deptMapper.deleteDept(deptCd);
+    public int deleteDept(String deptCd) {
+        return deptMapper.deleteDept(deptCd);
     }
 
 

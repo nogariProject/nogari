@@ -6,19 +6,19 @@
 
     <select id="selectDept" resultType="DeptRespDTO">
         SELECT
-            DEPT_CD        --부서코드
-             ,DEPT_NM        --부서이름
-             ,MGR_ID         --관리자ID
-             ,UPPER_DEPT_CD  --상위부서코드
-             ,SORT           --정렬순서
-             ,USE_YN         --유효일시
-             ,UPD_DT         --등록일시
-             ,UPD_ID         --등록자ID
-             ,REG_DT         --수정일시
-             ,REG_ID         --수정자ID
+         DEPT_CD        --부서코드
+        ,DEPT_NM        --부서이름
+        ,MGR_ID         --관리자ID
+        ,UPPER_DEPT_CD  --상위부서코드
+        ,SORT           --정렬순서
+        ,USE_YN         --유효일시
+        ,UPD_DT         --등록일시
+        ,UPD_ID         --등록자ID
+        ,REG_DT         --수정일시
+        ,REG_ID         --수정자ID
         FROM
             DEPT
-                START WITH
+        START WITH
             UPPER_DEPT_CD IS NULL
         CONNECT BY
             PRIOR DEPT_CD = UPPER_DEPT_CD
@@ -26,38 +26,38 @@
 
     <select id="selectDeptByDeptCd" parameterType="String" resultType="DeptRespDTO">
         SELECT
-            DEPT_CD        --부서코드
-             ,DEPT_NM        --부서이름
-             ,MGR_ID         --관리자ID
-             ,UPPER_DEPT_CD  --상위부서코드
-             ,SORT           --정렬순서
-             ,USE_YN         --유효일시
-             ,UPD_DT         --등록일시
-             ,UPD_ID         --등록자ID
-             ,REG_DT         --수정일시
-             ,REG_ID         --수정자ID
+         DEPT_CD        --부서코드
+        ,DEPT_NM        --부서이름
+        ,MGR_ID         --관리자ID
+        ,UPPER_DEPT_CD  --상위부서코드
+        ,SORT           --정렬순서
+        ,USE_YN         --유효일시
+        ,UPD_DT         --등록일시
+        ,UPD_ID         --등록자ID
+        ,REG_DT         --수정일시
+        ,REG_ID         --수정자ID
         FROM DEPT
         WHERE DEPT_CD = #{deptCd}
     </select>
 
     <insert id="insertDept" parameterType="DeptReqDTO">
         INSERT INTO DEPT (
-                          DEPT_CD        --부서코드
-                         ,DEPT_NM        --부서이름
-                         ,MGR_ID         --관리자ID
-                         ,UPPER_DEPT_CD  --상위부서코드
-                         ,SORT           --정렬순서
-                         ,UPD_ID         --등록자ID
-                         ,REG_ID         --수정자ID
+         DEPT_CD        --부서코드
+        ,DEPT_NM        --부서이름
+        ,MGR_ID         --관리자ID
+        ,UPPER_DEPT_CD  --상위부서코드
+        ,SORT           --정렬순서
+        ,UPD_ID         --등록자ID
+        ,REG_ID         --수정자ID
         )VALUES(
-                   #{deptCd}
-               ,#{deptNm}
-               ,#{mgrId}
-               ,#{upperDeptCd}
-               ,#{sort}
-               ,#{updId}
-               ,#{regId}
-               )
+         #{deptCd}
+        ,#{deptNm}
+        ,#{mgrId}
+        ,#{upperDeptCd}
+        ,#{sort}
+        ,#{updId}
+        ,#{regId}
+        )
     </insert>
 
     <update id="updateDept" parameterType="DeptReqDTO">
