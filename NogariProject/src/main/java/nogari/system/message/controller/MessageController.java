@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/messages")
@@ -73,8 +72,8 @@ public class MessageController {
      * @return
      */
     @PostMapping("/delete-multi")
-    public ResponseEntity<Integer> messagesRemove(@RequestBody Map<String, List<String>> msgCds){
-        int deletedRow = messageService.deleteMessages(msgCds.get("msgCds"));
+    public ResponseEntity<Integer> messagesRemove(@RequestBody List<String> msgCds){
+        int deletedRow = messageService.deleteMessages(msgCds);
         return new ResponseEntity<>(deletedRow,HttpStatus.OK);
     }
 }
