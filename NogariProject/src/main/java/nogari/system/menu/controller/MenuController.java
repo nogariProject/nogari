@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import nogari.system.menu.domain.dto.MenuDTO;
 import nogari.system.menu.domain.dto.MenuFieldDTO;
 import nogari.system.menu.service.MenuService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -27,21 +29,24 @@ public class MenuController {
     }
 
     @PostMapping
-    public String menuSave(@RequestBody MenuDTO menuDTO) {
+    public ResponseEntity<String> menuSave(@RequestBody @Valid MenuDTO menuDTO) {
+            log.info("메뉴  :: {}",menuDTO.getMaster());
+            log.info("메뉴코드  :: "+menuDTO.getMaster().getMenuCd());
+            log.info("메뉴 url  :: "+menuDTO.getMaster().getUrl());
         int cnt = menuService.createMenu(menuDTO);
-        return cnt+"건 저장 성공!";
+        return new ResponseEntity<>(cnt+"건 저장 성공!", HttpStatus.OK);
     }
 
     @PutMapping
-    public String menuModify(@Valid @RequestBody MenuDTO menuDTO) {
+    public ResponseEntity<String> menuModify(@Valid @RequestBody MenuDTO menuDTO) {
         int cnt = menuService.editMenu(menuDTO);
-        return cnt+"건 변경 성공!";
+        return new ResponseEntity<>(cnt+"건 저장 성공!", HttpStatus.OK);
     }
 
     @DeleteMapping
-    public String menuRemove(@RequestBody MenuDTO menuDTO) {
-        int cnt =menuService.deleteMenu(menuDTO);
-        return cnt+"건 삭제 성공!";
+    public ResponseEntity<String> menuRemove(@RequestBody MenuDTO menuDTO) {
+        int cnt = menuService.deleteMenu(menuDTO);
+        return new ResponseEntity<>(cnt+"건 삭제 성공!", HttpStatus.OK);
     }
 
     @PostMapping("/test")

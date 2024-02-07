@@ -44,8 +44,8 @@
 	<insert id="insertScreen" parameterType="MenuFieldDTO">
 	<selectKey resultType="String" keyProperty="menuCd" order="BEFORE">
 		<choose>
-		<when test='menuCd != null or menuCd != ""'>
-			SELECT #{menuCd} AS MENU_CD FROM DAUL
+		<when test='menuCd != null and menuCd != ""'>
+			SELECT #{menuCd} FROM DUAL
 		</when>
 		<otherwise>
 			SELECT 'SCR' || LPAD(TO_CHAR(NVL(SUBSTR(MAX(MENU_CD), 4, 7), 0)+1), 6, '0')

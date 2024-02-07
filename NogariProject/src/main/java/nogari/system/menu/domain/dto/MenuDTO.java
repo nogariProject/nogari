@@ -10,6 +10,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@MenuValidation
 @Alias("MenuDTO")
 public class MenuDTO {
     private MenuFieldDTO master;
