@@ -9,16 +9,16 @@ import lombok.Setter;
 @Setter
 public class CodeCdDTO {
 
-	@NotNull(message = "필수값")
-	String clsCd;
-	@NotNull(message = "필수값")
-	String codeCd;
-	String codeNm;
-	String opt1;
-	String opt2;
-	String opt3;
-	String remark;
-	String useYN;
-	String id;
-	
+    @NotNull(message = "필수값")
+    String clsCd;                   // 대분류 코드
+    @NotNull(message = "필수값")
+    String codeCd;                  // 소분류 코드
+    String codeNm;                  // 소분류 이름
+    String opt1;                    // 옵션 1
+    String opt2;                    // 옵션 2
+    String opt3;                    // 옵션 3
+    String remark;                  // 기타
+    String useYN;                   // 사용 여부
+    String id;                      // 사용자 아이디
+
 }

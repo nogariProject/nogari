@@ -13,88 +13,127 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import nogari.system.commcd.domain.dto.ClsCdDTO;
 import nogari.system.commcd.domain.dto.CodeCdDTO;
 import nogari.system.commcd.domain.dto.CommCdDTO;
 import nogari.system.commcd.service.CommCdService;
 
+/**
+ * 
+ * @author CSPI
+ */
 @RestController
 @RequestMapping("/common-cds")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CommCdController {
-	
-	private final CommCdService service;
-	
-	//조회
-	@GetMapping
-	public ResponseEntity<List<ClsCdDTO>> clsCdList(@RequestParam(required=false) String clsCd) throws Exception {
-		List<ClsCdDTO> list = service.findClsCd(clsCd);
-		
-		return new ResponseEntity<>(list, HttpStatus.OK);
-	}
-	
-	@GetMapping("/{clsCd}")
-	public ResponseEntity<List<CodeCdDTO>> codeCdList(@PathVariable String clsCd) throws Exception {
-		List<CodeCdDTO> list = service.findCodeCd(clsCd);
-		
-		return new ResponseEntity<>(list, HttpStatus.OK);
-	}
-	
-	
-	//저장
-	@PostMapping
-	public String clsCdAdd(@RequestBody ClsCdDTO dto) throws Exception {
-		String str = service.createClsCd(dto);
-		
-		return str;
-	}
 
-	@PostMapping("/{clsCd}")
-	public String codeCdAdd(@PathVariable String clsCd, @RequestBody List<CodeCdDTO> list) throws Exception {
-		String str = service.createCodeCd(list);
-		
-		return str;
-	}
-	
-	@PostMapping("/save")
-	public String commCdAdd(@RequestBody CommCdDTO dto) throws Exception {
-		StringBuffer sb = new StringBuffer();
-		sb.append(service.createClsCd(dto.getClsCdDTO())).append("\n");
-		sb.append(service.createCodeCd(dto.getCodeCdDTOList())).append("\n");
-		
-		return sb.toString();
-	}
-	
-	
-//	//삭제
-//	@DeleteMapping
-//	public String clsCdRemove(@RequestBody ClsCdDTO dto) throws Exception {
-//		String str = service.deleteClsCd(dto);
-//		
-//		return str;
-//	}
-//	
-//	@DeleteMapping("/{clsCd}")
-//	public String codeCdRemove(@PathVariable String clsCd, @RequestBody List<CodeCdDTO> list) throws Exception {
-//		String str = service.deleteCodeCd(list);
-//		
-//		return str;
-//	}
-	
-	
-	//수정
-	@PutMapping
-	public String clsCdModify(@RequestBody ClsCdDTO dto) throws Exception {
-		String str = service.editClsCd(dto);
-		
-		return str;
-	}
-	
-	@PutMapping("/{clsCd}")
-	public String codeCdModify(@PathVariable String clsCd, @RequestBody List<CodeCdDTO> list) throws Exception {
-		String str = service.editCodeCd(list);
-		
-		return str;
-	}
+    private final CommCdService service;
+
+    /**
+     * <pre>
+     *  대분류 코드 조회
+     * </pre>
+     * 
+     * @param 검색을 위해 입력받은 문자열
+     * @return 조회조건에 맞는 대분류 코드
+     */
+    @GetMapping
+    public ResponseEntity<List<ClsCdDTO>> clsCdList(@RequestParam(required = false) String clsCd) {
+        List<ClsCdDTO> list = service.findClsCd(clsCd);
+
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    /**
+     * <pre>
+     *  소분류 코드 조회
+     * </pre>
+     * 
+     * @param 선택한 대분류 코드
+     * @return 선택한 대분류 코드 하위 소분류 코드
+     */
+    @GetMapping("/{clsCd}")
+    public ResponseEntity<List<CodeCdDTO>> codeCdList(@PathVariable String clsCd) {
+        List<CodeCdDTO> list = service.findCodeCd(clsCd);
+
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    /**
+     * <pre>
+     *  대분류 코드 저장
+     * </pre>
+     * 
+     * @param 저장할 대분류 코드 정보
+     * @return 저장 성공 여부
+     */
+    @PostMapping
+    public ResponseEntity<?> clsCdAdd(@RequestBody ClsCdDTO dto) {
+        service.createClsCd(dto);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    /**
+     * <pre>
+     *  소분류 코드 저장
+     * </pre>
+     * 
+     * @param 저장할 소분류 코드 정보
+     * @return 저장 성공 여부
+     */
+    @PostMapping("/{clsCd}")
+    public ResponseEntity<?> codeCdAdd(@PathVariable String clsCd, @RequestBody List<CodeCdDTO> list) {
+        service.createCodeCd(list);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    /**
+     * <pre>
+     *  대, 소분류 코드 동시 저장
+     * </pre>
+     * 
+     * @param 저장할 대, 소분류 코드 정보
+     * @return 저장 성공 여부
+     */
+    @PostMapping("/save")
+    public ResponseEntity<?> commCdAdd(@RequestBody CommCdDTO dto) {
+        service.createClsCd(dto.getClsCdDTO());
+        service.createCodeCd(dto.getCodeCdDTOList());
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    /**
+     * <pre>
+     *  대분류 코드 수정
+     * </pre>
+     * 
+     * @param 수정한 대분류 코드 정보
+     * @return 수정 성공 여부
+     */
+    @PutMapping
+    public ResponseEntity<?> clsCdModify(@RequestBody ClsCdDTO dto) {
+        service.editClsCd(dto);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     * <pre>
+     *  소분류 코드 수정
+     * </pre>
+     * 
+     * @param 수정한 소분류 코드 정보
+     * @return 수정 성공 여부
+     */
+    @PutMapping("/{clsCd}")
+    public ResponseEntity<?> codeCdModify(@PathVariable String clsCd, @RequestBody List<CodeCdDTO> list) {
+        service.editCodeCd(list);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

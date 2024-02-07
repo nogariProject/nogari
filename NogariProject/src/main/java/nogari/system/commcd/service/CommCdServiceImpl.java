@@ -5,86 +5,101 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import nogari.system.commcd.dao.mapper.CommCdMapper;
 import nogari.system.commcd.domain.dto.ClsCdDTO;
 import nogari.system.commcd.domain.dto.CodeCdDTO;
 
-@Service("commCdService")
+@Service
 @Transactional
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CommCdServiceImpl implements CommCdService {
-	
-	private final CommCdMapper mapper;
-	
-	public List<ClsCdDTO> findClsCd(String clsCd) throws Exception {
-		
-		return mapper.selectClsCd(clsCd);
-	}
-	
-	public List<CodeCdDTO> findCodeCd(String clsCd) throws Exception {
-		
-		return mapper.selectCodeCd(clsCd);
-	}
-	
-	
-	public String createClsCd(ClsCdDTO dto) throws Exception {
-		if(mapper.selectClsCdChk(dto)!=0) {
-			return "중복 코드";
-		}else {
-			mapper.insertClsCd(dto);
-			
-			return "insert 완료";
-		}
-	}
-	
-	public String createCodeCd(List<CodeCdDTO> list) throws Exception {
-		StringBuffer result = new StringBuffer();
-		for(CodeCdDTO dto : list) {
-			if(mapper.selectCodeCdChk(dto)!=0) {
-				result.append(dto.getCodeCd()).append(" : 중복 코드\n");
-			}else {
-				mapper.insertCodeCd(dto);
-				result.append(dto.getCodeCd()).append(" : 저장 완료\n");
-			}
-		}
-		return result.toString();
-	}
-	
-	
-//	public String deleteClsCd(ClsCdDTO dto) throws Exception {
-//
-//		mapper.deleteClsCodeCd(dto);
-//		mapper.deleteClsCd(dto);
-//		
-//		return "delete 완료";
-//	}
-//	
-//	public String deleteCodeCd(List<CodeCdDTO> list) throws Exception {
-//		StringBuffer result = new StringBuffer();
-//		for(CodeCdDTO dto : list) {
-//			mapper.deleteCodeCd(dto);
-//			result.append(dto.getCodeCd()).append(" : 삭제 완료\n");
-//		}
-//		return result.toString();
-//	}
-	
-	
-	public String editClsCd(ClsCdDTO dto) throws Exception {
-		
-		mapper.updateClsCd(dto);
-		if(dto.getUseYN().equals("N")) {
-			mapper.updateClsCodeCd(dto);
-		}
-		return "update 완료";
-	}
-	
-	public String editCodeCd(List<CodeCdDTO> list) throws Exception {
-		StringBuffer result = new StringBuffer();
-		for(CodeCdDTO dto : list) {
-			mapper.updateCodeCd(dto);
-			result.append(dto.getCodeCd()).append(" : 수정 완료\n");
-		}
-		return result.toString();
-	}
+
+    private final CommCdMapper mapper;
+
+    /**
+     * <pre>
+     *  대분류 코드 조회
+     * </pre>
+     * 
+     * @param 검색을 위해 입력받은 문자열
+     * @return 조회조건에 맞는 대분류 코드
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<ClsCdDTO> findClsCd(String clsCd) {
+
+        return mapper.selectClsCd(clsCd);
+    }
+
+    /**
+     * <pre>
+     *  소분류 코드 조회
+     * </pre>
+     * 
+     * @param 선택한 대분류 코드
+     * @return 선택한 대분류 코드 하위 소분류 코드
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<CodeCdDTO> findCodeCd(String clsCd) {
+
+        return mapper.selectCodeCd(clsCd);
+    }
+
+    /**
+     * <pre>
+     *  대분류 코드 저장
+     * </pre>
+     * 
+     * @param 저장할 대분류 코드 정보
+     */
+    @Override
+    public void createClsCd(ClsCdDTO dto) {
+        mapper.insertClsCd(dto);
+    }
+
+    /**
+     * <pre>
+     *  소분류 코드 저장
+     * </pre>
+     * 
+     * @param 저장할 소분류 코드 정보
+     */
+    @Override
+    public void createCodeCd(List<CodeCdDTO> list) {
+        for (CodeCdDTO dto : list) {
+            mapper.insertCodeCd(dto);
+        }
+    }
+
+    /**
+     * <pre>
+     *  대분류 코드 수정
+     * </pre>
+     * 
+     * @param 수정한 대분류 코드 정보
+     */
+    @Override
+    public void editClsCd(ClsCdDTO dto) {
+        mapper.updateClsCd(dto);
+        if (dto.getUseYN().equals("N")) {
+            mapper.updateClsCodeCd(dto);
+        }
+    }
+
+    /**
+     * <pre>
+     *  소분류 코드 수정
+     * </pre>
+     * 
+     * @param 수정한 소분류 코드 정보
+     */
+    @Override
+    public void editCodeCd(List<CodeCdDTO> list) {
+        for (CodeCdDTO dto : list) {
+            mapper.updateCodeCd(dto);
+        }
+    }
+
 }

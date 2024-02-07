@@ -9,11 +9,11 @@ import lombok.Setter;
 @Setter
 public class ClsCdDTO {
 
-	@NotNull(message = "필수값")
-	String clsCd;
-	String clsNm;
-	String remark;
-	String useYN;
-	String id;
-	
+    @NotNull(message = "필수값")
+    String clsCd;                   // 대분류 코드
+    String clsNm;                   // 대분류 이름
+    String remark;                  // 기타
+    String useYN;                   // 사용 여부
+    String id;                      // 사용자 아이디
+
 }
