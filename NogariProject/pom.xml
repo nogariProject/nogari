@@ -20,7 +20,7 @@
     </properties>
 
     <dependencies>
-        <!-- Spring Boot Starter -->
+        <!-- Spring Boot Starter START-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -46,17 +46,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <!-- Spring Boot Starter -->
-
-        <!--MyBatis 설정 시작-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.2.0</version>
         </dependency>
+        <!-- Spring Boot Starter END-->
 
-
-        <!-- Oracle DataBase 설정 시작 -->
+        <!-- DataBase START -->
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
             <artifactId>ojdbc10</artifactId>
@@ -79,17 +76,9 @@
             <groupId>com.oracle.database.security</groupId>
             <artifactId>osdt_core</artifactId>
         </dependency>
-        <!-- Oracle DataBase 설정 끝 -->
+        <!-- DataBase END -->
 
-        <!-- Add DB tools 시작 -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <!-- Add DB tools 끝 -->
-
-        <!-- lombok 설정 시작 -->
+        <!-- lombok START -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -101,16 +90,22 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
-        <!-- lombok 설정 끝 -->
+        <!-- lombok END -->
 
-        <!-- log 정렬 툴 -->
+        <!-- log START -->
         <dependency>
             <groupId>org.bgee.log4jdbc-log4j2</groupId>
             <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
             <version>1.16</version>
         </dependency>
+        <!-- log END -->
 
-        <!-- Test Dependencies -->
+        <!-- Test START -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -122,6 +117,8 @@
             <version>2.2</version>
             <scope>test</scope>
         </dependency>
+        <!-- Test END -->
+
     </dependencies>
 
     <build>
