@@ -19,8 +19,6 @@ import java.util.stream.Collectors;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ErrorResponse {
-
-    private int status;                     // http 상태코드
     private String message;                 // 에러 메시지
     private String code;                    // 에러코드
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -29,13 +27,11 @@ public class ErrorResponse {
     /**
      * 빌더 패턴이 적용된 ErrorResponse 생성자
      *
-     * @param status
      * @param message
      * @param bindingResult
      */
     @Builder
-    protected ErrorResponse(final HttpStatus status, final String code, final String message, BindingResult bindingResult, final List<ErrorResponse.CustomFieldError> fieldErrors) {
-        this.status = status.value();
+    protected ErrorResponse(final String code, final String message, BindingResult bindingResult, final List<ErrorResponse.CustomFieldError> fieldErrors) {
         this.message = message;
         this.code = code;
         this.errors = List.of();
@@ -55,7 +51,6 @@ public class ErrorResponse {
      */
     public static ErrorResponse of(ErrorCode errorCode) {
         return ErrorResponse.builder()
-                .status(errorCode.getHttpStatus())
                 .code(errorCode.getErrorCode())
                 .message(errorCode.getMessage())
                 .build();
@@ -71,7 +66,6 @@ public class ErrorResponse {
      */
     public static ErrorResponse of(ErrorCode errorCode, BindingResult bindingResult) {
         return ErrorResponse.builder()
-                .status(errorCode.getHttpStatus())
                 .code(errorCode.getErrorCode())
                 .message(errorCode.getMessage())
                 .bindingResult(bindingResult)
@@ -87,7 +81,6 @@ public class ErrorResponse {
      */
     public static ErrorResponse of(ErrorCode errorCode, List<ErrorResponse.CustomFieldError> FieldErrorList) {
         return ErrorResponse.builder()
-                .status(errorCode.getHttpStatus())
                 .code(errorCode.getErrorCode())
                 .message(errorCode.getMessage())
                 .fieldErrors(FieldErrorList)

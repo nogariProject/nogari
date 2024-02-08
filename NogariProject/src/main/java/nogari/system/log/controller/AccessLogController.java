@@ -18,24 +18,15 @@ public class AccessLogController {
 
     private final AccessLogService service;
 
-//    @GetMapping("/accessLogs")
-//    public List<AccessLogDTO> accessLogList( //조회
-//                                             @RequestParam( required = true) @Pattern(regexp = "(19|20)\\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])",message = "년도월일로 넣어주세요1")String accsDtFrom
-//            , @RequestParam( required = true) @Pattern(regexp = "(19|20)\\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])",message = "년도월일로 넣어주세요2")String accsDtTo
-//            , @RequestParam( required = false) String memberId
-//    ){
-//        AccessLogDTO paramDTO = AccessLogDTO.builder().accsDtFrom(accsDtFrom).accsDtTo(accsDtTo).memberId(memberId).build();
-//        return accessLogService.findAccessLog(paramDTO);
-//    }
     @GetMapping("")
-    public ResponseEntity<List<AccessLogDTO>> accessLogFind(@RequestParam AccessLogReqDTO paramDTO) {
+    public ResponseEntity<List<AccessLogDTO>> accessLogListFind(@Valid AccessLogReqDTO paramDTO) {
         List<AccessLogDTO> accessLogList = service.findAccessLogList(paramDTO);
         return new ResponseEntity<>(accessLogList, HttpStatus.OK);
     }
 
     @PostMapping("")
-    public ResponseEntity<List<AccessLogDTO>> accessLogCreate(@Valid @RequestBody AccessLogDTO paramDTO) {
-        service.createAccessLog(paramDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Integer> accessLogCreate(@Valid @RequestBody AccessLogDTO paramDTO) {
+        int cnt = service.createAccessLog(paramDTO);
+        return new ResponseEntity<>(cnt, HttpStatus.CREATED);
     }
 }
