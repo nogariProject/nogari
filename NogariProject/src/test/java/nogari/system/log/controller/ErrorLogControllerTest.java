@@ -24,8 +24,8 @@ class ErrorLogControllerTest {
     @Test
     void errlogFind() throws Exception {
         mockMvc.perform(get("/errlogs")
-//                        .param("tranDtFrom", "202402031")
-//                        .param("tranDtTo", "202402305")
+                        .param("tranDtFrom", "20240201")
+                        .param("tranDtTo", "20240205")
                         )
                 .andExpect(status().isOk())
                 .andDo(MockMvcResultHandlers.print(System.out));
