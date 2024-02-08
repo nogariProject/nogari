@@ -5,10 +5,11 @@
 
     <!-- 대분류 코드 조회 -->
     <select id="selectClsCd" parameterType="String" resultType="HashMap">
-        SELECT CLS_CD
-             , CLS_NM
-             , REMARK
-             , USE_YN
+        /* CommCdMapper.selectClsCd */
+        SELECT CLS_CD           /* 대분류 코드 */
+             , CLS_NM           /* 대분류 이름 */
+             , REMARK           /* 기타 */
+             , USE_YN           /* 사용 여부 */
           FROM CODE_MST
          WHERE 1=1
         <if test="_parameter != '' and _parameter != null">
@@ -19,14 +20,15 @@
 
     <!-- 소분류 코드 조회 -->
     <select id="selectCodeCd" parameterType="String" resultType="HashMap">
-        SELECT CLS_CD
-             , CODE_CD
-             , CODE_NM
-             , OPT_1
-             , OPT_2
-             , OPT_3
-             , REMARK
-             , USE_YN
+        /* CommCdMapper.selectCodeCd */
+        SELECT CLS_CD           /* 대분류 코드 */
+             , CODE_CD          /* 소분류 코드 */
+             , CODE_NM          /* 소분류 이름 */
+             , OPT_1            /* 옵션 1 */
+             , OPT_2            /* 옵션 2 */
+             , OPT_3            /* 옵션 3 */
+             , REMARK           /* 기타 */
+             , USE_YN           /* 사용 여부 */
           FROM CODE_DTL
          WHERE 1=1
            AND CLS_CD = #{clsCd}
@@ -34,8 +36,17 @@
 
     <!-- 대분류 코드 저장 -->
     <insert id="insertClsCd" parameterType="nogari.system.commcd.domain.dto.ClsCdDTO">
-        INSERT
-          INTO CODE_MST
+        /* CommCdMapper.insertClsCd */
+        INSERT INTO CODE_MST (
+               CLS_CD               /* 대분류 코드 */
+             , CLS_NM               /* 대분류 이름 */
+             , REMARK               /* 기타 */
+             , REG_DT               /* 등록일 */
+             , REG_ID               /* 등록자 */
+             , UPD_DT               /* 수정일 */
+             , UPD_ID               /* 수정자 */
+             , USE_YN               /* 사용 여부 */
+        )
         VALUES (
                #{clsCd}
              , #{clsNm}
@@ -50,58 +61,86 @@
 
     <!-- 소분류 코드 저장 -->
     <insert id="insertCodeCd" parameterType="nogari.system.commcd.domain.dto.CodeCdDTO">
-        INSERT
-          INTO CODE_DTL
+        /* CommCdMapper.insertCodeCd */
+        INSERT INTO CODE_DTL (
+               CODE_CD              /* 소분류 코드 */
+             , CLS_CD               /* 대분류 코드 */
+             , CODE_NM              /* 소분류 이름 */
+             , OPT_1                /* 옵션 1 */
+             , OPT_2                /* 옵션 2 */
+             , OPT_3                /* 옵션 3 */
+             , REMARK               /* 기타 */
+             , REG_DT               /* 등록일 */
+             , REG_ID               /* 등록자 */
+             , UPD_DT               /* 수정일 */
+             , UPD_ID               /* 수정자 */
+             , USE_YN               /* 사용 여부 */
+        )
         VALUES (
-               #{codeCd}
-             , #{clsCd}
-             , #{codeNm}
-             , #{opt1}
-             , #{opt2}
-             , #{opt3}
-             , #{remark}
-             , CURRENT_DATE
-             , #{id}
-             , CURRENT_DATE
-             , #{id}
-             , 'Y'
+               #{codeCd}	        
+             , #{clsCd}             
+             , #{codeNm}            
+             , #{opt1}              
+             , #{opt2}              
+             , #{opt3}              
+             , #{remark}            
+             , CURRENT_DATE         
+             , #{id}                
+             , CURRENT_DATE         
+             , #{id}                
+             , 'Y'                  
         )
     </insert>
 
     <!-- 대분류 코드 수정 -->
     <update id="updateClsCd" parameterType="nogari.system.commcd.domain.dto.ClsCdDTO">
+        /* CommCdMapper.updateClsCd */
         UPDATE CODE_MST
-           SET CLS_NM = #{clsNm}
-             , REMARK = #{remark}
-             , USE_YN = #{useYN}
-             , UPD_DT = CURRENT_DATE
-             , UPD_ID = #{id}
+           SET CLS_NM = #{clsNm}            /* 대분류 이름 */
+             , REMARK = #{remark}           /* 기타 */
+             , USE_YN = #{useYn}            /* 사용 여부 */
+             , UPD_DT = CURRENT_DATE        /* 수정일 */
+             , UPD_ID = #{id}               /* 수정자 */
          WHERE 1=1
            AND CLS_CD = #{clsCd}
     </update>
 
     <!-- 대분류 코드 하위 소분류 코드 사용여부 수정 -->
     <update id="updateClsCodeCd" parameterType="nogari.system.commcd.domain.dto.ClsCdDTO">
+        /* CommCdMapper.updateClsCodeCd */
         UPDATE CODE_DTL
-           SET USE_YN = #{useYN}
+           SET USE_YN = #{useYn}            /* 사용 여부 */
          WHERE 1=1
-           AND CLS_CD = #{clsCd}
+           AND CLS_CD = #{clsCd}            /* 대분류 코드 */
     </update>
 
     <!-- 소분류 코드 수정 -->
     <update id="updateCodeCd" parameterType="nogari.system.commcd.domain.dto.CodeCdDTO">
+        /* CommCdMapper.updateCodeCd */
         UPDATE CODE_DTL
-           SET CODE_NM = #{codeNm}
-             , OPT_1   = #{opt1}
-             , OPT_2   = #{opt2}
-             , OPT_3   = #{opt3}
-             , REMARK  = #{remark}
-             , USE_YN  = #{useYN}
-             , UPD_DT  = CURRENT_DATE
-             , UPD_ID  = #{id}
+           SET CODE_NM = #{codeNm}          /* 소분류 이름 */
+             , OPT_1   = #{opt1}            /* 옵션 1 */
+             , OPT_2   = #{opt2}            /* 옵션 2 */
+             , OPT_3   = #{opt3}            /* 옵션 3 */
+             , REMARK  = #{remark}          /* 기타 */
+             , USE_YN  = #{useYn}           /* 사용 여부 */
+             , UPD_DT  = CURRENT_DATE       /* 수정일 */
+             , UPD_ID  = #{id}              /* 수정자 */
          WHERE 1=1
-           AND CLS_CD  = #{clsCd}
-           AND CODE_CD = #{codeCd}
+           AND CLS_CD  = #{clsCd}           /* 대분류 코드 */
+           AND CODE_CD = #{codeCd}          /* 소분류 코드 */
+    </update>
+
+    <!-- 소분류 코드 사용 여부 수정 -->
+    <update id="updateCodeCdUseYn" parameterType="nogari.system.commcd.domain.dto.CodeCdDTO">
+        /* CommCdMapper.updateCodeCdUseYn */
+        UPDATE CODE_DTL
+           SET USE_YN  = 'N'                /* 사용 여부 */
+             , UPD_DT  = CURRENT_DATE       /* 수정일 */
+             , UPD_ID  = #{id}              /* 수정자 */
+         WHERE 1=1
+           AND CLS_CD  = #{clsCd}           /* 대분류 코드 */
+           AND CODE_CD = #{codeCd}          /* 소분류 코드 */
     </update>
 
 </mapper>

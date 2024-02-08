@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import nogari.system.commcd.dao.mapper.CommCdMapper;
 import nogari.system.commcd.domain.dto.ClsCdDTO;
 import nogari.system.commcd.domain.dto.CodeCdDTO;
+import nogari.system.commcd.domain.dto.CommCdDTO;
 
 @Service
 @Transactional
@@ -49,56 +50,52 @@ public class CommCdServiceImpl implements CommCdService {
 
     /**
      * <pre>
-     *  대분류 코드 저장
+     *  공통 코드 저장 (추가, 수정)
      * </pre>
      * 
-     * @param 저장할 대분류 코드 정보
+     * @param  추가, 수정할 공통 코드 정보
      */
     @Override
-    public void createClsCd(ClsCdDTO dto) {
-        mapper.insertClsCd(dto);
-    }
-
-    /**
-     * <pre>
-     *  소분류 코드 저장
-     * </pre>
-     * 
-     * @param 저장할 소분류 코드 정보
-     */
-    @Override
-    public void createCodeCd(List<CodeCdDTO> list) {
-        for (CodeCdDTO dto : list) {
-            mapper.insertCodeCd(dto);
+    public void saveCommCd(CommCdDTO dto) {
+        
+        ClsCdDTO master = dto.getClsCdDTO();
+        List<CodeCdDTO> detail = dto.getCodeCdDTOList();
+        
+        // 대분류 
+        if(master != null) {
+            if("C".equals(master.getStatus())) {
+                mapper.insertClsCd(master);
+            } else if("U".equals(master.getStatus())) {
+                mapper.updateClsCd(master);
+                if ("N".equals(master.getUseYn())) {
+                    mapper.updateClsCodeCd(master);
+                }
+            } 
         }
-    }
-
-    /**
-     * <pre>
-     *  대분류 코드 수정
-     * </pre>
-     * 
-     * @param 수정한 대분류 코드 정보
-     */
-    @Override
-    public void editClsCd(ClsCdDTO dto) {
-        mapper.updateClsCd(dto);
-        if (dto.getUseYN().equals("N")) {
-            mapper.updateClsCodeCd(dto);
+        // 소분류
+        if(detail != null) {
+            for (CodeCdDTO codeCdDTO : detail) {
+                if("C".equals(codeCdDTO.getStatus())) {
+                    mapper.insertCodeCd(codeCdDTO);
+                } else if("U".equals(codeCdDTO.getStatus())) {
+                    mapper.updateCodeCd(codeCdDTO);
+                }
+            }
         }
+        
     }
 
     /**
      * <pre>
-     *  소분류 코드 수정
+     *  소분류 코드 사용 여부 일괄 수정
      * </pre>
      * 
-     * @param 수정한 소분류 코드 정보
+     * @param  수정할 소분류 코드 정보
      */
     @Override
     public void editCodeCd(List<CodeCdDTO> list) {
         for (CodeCdDTO dto : list) {
-            mapper.updateCodeCd(dto);
+            mapper.updateCodeCdUseYn(dto);
         }
     }
 
