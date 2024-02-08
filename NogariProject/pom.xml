@@ -67,6 +67,7 @@
             <artifactId>ojdbc11</artifactId>
             <version>21.5.0.0</version>
         </dependency>
+
         <dependency>
             <groupId>com.oracle.database.security</groupId>
             <artifactId>osdt_cert</artifactId>
