@@ -30,4 +30,6 @@ class SampleServiceImplTest {
         log.info("@@@@@@size{}",list.size());
         log.info("@@@@@@list{}",list);
     }
+
+
 }

@@ -1,20 +1,17 @@
 package nogari.system.dept.dao.mapper;
 
-import nogari.system.dept.domain.dto.DeptDTO;
-import org.apache.ibatis.annotations.MapKey;
+import nogari.system.dept.domain.dto.DeptReqDTO;
+import nogari.system.dept.domain.dto.DeptRespDTO;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Mapper
-@Component
 public interface DeptMapper {
-    List<DeptDTO> selectDept();
-    DeptDTO selectDeptByDeptCd(String deptCd);
-    void insertDept(DeptDTO deptDTO);
-    void updateDept(DeptDTO deptDTO);
-    void deleteDept(String deptCd);
-
+    List<DeptReqDTO> selectDept();
+    DeptRespDTO selectDeptByDeptCd(String deptCd);
+    int insertDept(DeptReqDTO deptReqDTO);
+    int updateDept(DeptReqDTO deptReqDTO);
+    int deleteDept(String deptCd);
 
 }
