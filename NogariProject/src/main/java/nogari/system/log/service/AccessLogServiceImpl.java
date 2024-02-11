@@ -18,8 +18,8 @@ public class AccessLogServiceImpl implements AccessLogService {
     private final AccessLogMapper mapper;
 
     @Override
-    public void createAccessLog(AccessLogDTO paramDTO) {
-        int cnt = mapper.insertAccessLog(paramDTO);
+    public int createAccessLog(AccessLogDTO paramDTO) {
+        return mapper.insertAccessLog(paramDTO);
     }
 
     @Override
