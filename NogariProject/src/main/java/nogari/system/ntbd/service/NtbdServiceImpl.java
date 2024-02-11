@@ -2,12 +2,11 @@ package nogari.system.ntbd.service;
 
 import lombok.RequiredArgsConstructor;
 import nogari.system.ntbd.dao.mapper.NtbdMapper;
-import nogari.system.ntbd.domain.dto.BoardReqDto;
-import nogari.system.ntbd.domain.dto.BoardRespDto;
+import nogari.system.ntbd.domain.dto.BoardReqDTO;
+import nogari.system.ntbd.domain.dto.BoardRespDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service
@@ -19,20 +18,20 @@ public class NtbdServiceImpl implements NtbdService {
 
     //게시글 조회
     @Override
-    public List<BoardRespDto> findBoard(String ntbdCd){
+    public List<BoardRespDTO> findBoard(String ntbdCd){
         return mapper.selectBoard(ntbdCd);
     }
 
     //게시판 글목록 조회
     @Override
-    public List<BoardRespDto> findBoards() {
+    public List<BoardRespDTO> findBoards() {
         return mapper.selectBoardList();
     }
 
     // 게시글 등록
     @Override
-    public String createBoard(BoardReqDto boardReqDto) {
-        int result = mapper.insertBoard(boardReqDto);
+    public String createBoard(BoardReqDTO boardReqDTO) {
+        int result = mapper.insertBoard(boardReqDTO);
         if(result==1){
             return "게시글 등록 성공";
         }else{
@@ -42,8 +41,8 @@ public class NtbdServiceImpl implements NtbdService {
 
     // 게시글 수정
     @Override
-    public String editBoard(BoardReqDto boardReqDto) {
-        int result = mapper.updateBoard(boardReqDto);
+    public String editBoard(BoardReqDTO boardReqDTO) {
+        int result = mapper.updateBoard(boardReqDTO);
         if(result==1){
             return "게시글 수정 성공";
         }else{

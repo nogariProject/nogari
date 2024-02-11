@@ -10,11 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -26,7 +24,7 @@ public class ErrorLogController {
     private final ErrorLogService service;
 
     @GetMapping("")
-    public ResponseEntity<List<ErrorLogDTO>> errlogFindA(@Valid ErrorLogReqDTO errorLogReqDTO) {
+    public ResponseEntity<List<ErrorLogDTO>> errlogListFind(@Valid ErrorLogReqDTO errorLogReqDTO) {
         List<ErrorLogDTO> errorLogList = service.findErrorLogList(errorLogReqDTO);
         return new ResponseEntity<>(errorLogList, HttpStatus.OK);
     }

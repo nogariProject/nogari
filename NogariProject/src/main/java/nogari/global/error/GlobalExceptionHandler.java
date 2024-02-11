@@ -70,8 +70,9 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(Exception exception) {
         log.error("[{}.handleMethodArgumentNotValidExceptionHandler]", this.getClass().getSimpleName(), exception);
         BindingResult bindingResult = getBindingResult(exception);
-        final ErrorResponse response = ErrorResponse.of(ErrorCode.NOT_VALID_ERROR, bindingResult);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        ErrorCode errorCode = ErrorCode.NOT_VALID_ERROR;
+        final ErrorResponse response = ErrorResponse.of(errorCode, bindingResult);
+        return new ResponseEntity<>(response, errorCode.getHttpStatus());
     }
 
     private BindingResult getBindingResult(Exception exception) {
@@ -91,13 +92,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     protected ResponseEntity<ErrorResponse> handleMissingServletRequestParameterException(MissingServletRequestParameterException exception) {
         // log.error("[{}.handleMissingServletRequestParameterException] {}", this.getClass().getSimpleName(), exception);
+        ErrorCode errorCode = ErrorCode.NOT_VALID_ERROR;
         String field = exception.getParameterName();
         List<ErrorResponse.CustomFieldError> resultList = Collections.singletonList(
-                ErrorResponse.CustomFieldError.builder().field(field).message(ErrorCode.NOT_VALID_ERROR.getMessage()).build()
+                ErrorResponse.CustomFieldError.builder().field(field).message(errorCode.getMessage()).build()
         );
-
-        final ErrorResponse response = ErrorResponse.of(ErrorCode.NOT_VALID_ERROR, resultList);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        final ErrorResponse response = ErrorResponse.of(errorCode, resultList);
+        return new ResponseEntity<>(response, errorCode.getHttpStatus());
     }
 
     /**
@@ -109,8 +110,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     protected ResponseEntity<ErrorResponse> handleConstraintViolationException(ConstraintViolationException exception) {
         log.error("[{}.handleConstraintViolationException] {}", this.getClass().getSimpleName(), exception);
-        List<ErrorResponse.CustomFieldError> resultList = new ArrayList<>();
 
+        ErrorCode errorCode = ErrorCode.NOT_VALID_ERROR;
+
+        List<ErrorResponse.CustomFieldError> resultList = new ArrayList<>();
         Set<ConstraintViolation<?>> constraintViolations = exception.getConstraintViolations();
         for (ConstraintViolation<?> violation : constraintViolations) {
             Path propertyPath = violation.getPropertyPath();
@@ -122,8 +125,8 @@ public class GlobalExceptionHandler {
             resultList.add(errorField);
         }
 
-        final ErrorResponse response = ErrorResponse.of(ErrorCode.NOT_VALID_ERROR, resultList);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        final ErrorResponse response = ErrorResponse.of(errorCode, resultList);
+        return new ResponseEntity<>(response, errorCode.getHttpStatus());
     }
 
     private static String getCurrentLeafNodeName(Path propertyPath) {
@@ -142,8 +145,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpClientErrorException.BadRequest.class)
     protected ResponseEntity<ErrorResponse> handleBadRequestException(HttpClientErrorException exception, WebRequest webRequest) {
 //        log.error("[{}.handleBadRequestException] {}", this.getClass().getSimpleName(), webRequest.getDescription(true), exception);
-        final ErrorResponse response = ErrorResponse.of(ErrorCode.BAD_REQUEST);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        ErrorCode errorCode = ErrorCode.BAD_REQUEST;
+        final ErrorResponse response = ErrorResponse.of(errorCode);
+        return new ResponseEntity<>(response, errorCode.getHttpStatus());
     }
 
 
@@ -156,8 +160,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     protected ResponseEntity<ErrorResponse> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException exception) {
 //        log.error("[{}.handleHttpRequestMethodNotSupportedException]", this.getClass().getSimpleName(), exception);
-        final ErrorResponse response = ErrorResponse.of(ErrorCode.BAD_REQUEST);
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        ErrorCode errorCode = ErrorCode.BAD_REQUEST;
+        final ErrorResponse response = ErrorResponse.of(errorCode);
+        return new ResponseEntity<>(response, errorCode.getHttpStatus());
     }
 
     /**
@@ -171,7 +176,7 @@ public class GlobalExceptionHandler {
         // log.error("[{}.handleDataAccessException]", this.getClass().getSimpleName(), exception);
         ErrorCode errorCode = determineErrorCode(exception);
         final ErrorResponse response = ErrorResponse.of(errorCode);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, errorCode.getHttpStatus());
     }
     private ErrorCode determineErrorCode(DataAccessException exception) {
         if (exception instanceof BadSqlGrammarException) {
@@ -204,13 +209,14 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ErrorResponse> handleException(Exception exception, WebRequest webRequest) {
-        final ErrorResponse response = ErrorResponse.of(ErrorCode.INTERNAL_SERVER_ERROR);
+        ErrorCode errorCode = ErrorCode.INTERNAL_SERVER_ERROR;
+        final ErrorResponse response = ErrorResponse.of(errorCode);
         try {
             service.createErrorLog(exception, webRequest);
         } catch (Exception innerException) {
             log.error("[{}.handleException-createErrorLog]", this.getClass().getSimpleName(), innerException);
         } finally {
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            return new ResponseEntity<>(response, errorCode.getHttpStatus());
         }
     }
 
