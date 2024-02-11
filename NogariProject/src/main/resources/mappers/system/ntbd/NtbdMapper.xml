@@ -5,7 +5,7 @@
 <mapper namespace="nogari.system.ntbd.dao.mapper.NtbdMapper">
 
     <!-- 게시글 조회 -->
-    <select id="selectBoard" parameterType="String" resultType="nogari.system.ntbd.domain.dto.BoardRespDto">
+    <select id="selectBoard" parameterType="String" resultType="BoardRespDTO">
         SELECT NTBD_CD
              , NTBD_DIV
              , VIEW_CNT
@@ -25,7 +25,7 @@
     </select>
 
     <!-- 게시글 목록 조회 -->
-    <select id="selectBoardList" parameterType="String" resultType="BoardRespDto">
+    <select id="selectBoardList" parameterType="String" resultType="BoardRespDTO">
         SELECT NTBD_CD
              , NTBD_DIV
              , VIEW_CNT
@@ -41,7 +41,7 @@
     </select>
 
     <!-- 게시글 저장 -->
-    <insert id="insertBoard" parameterType="BoardReqDto">
+    <insert id="insertBoard" parameterType="BoardReqDTO">
         INSERT
           INTO NOTICE_BOARD (
                         NTBD_CD
@@ -74,7 +74,7 @@
     </insert>
 
     <!-- 게시글 수정 -->
-    <update id="updateBoard" parameterType="BoardReqDto">
+    <update id="updateBoard" parameterType="BoardReqDTO">
         UPDATE NOTICE_BOARD
            SET NTBD_DIV = #{ntbdDiv}
              , POST_NM = #{postNm}
