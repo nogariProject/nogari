@@ -2,6 +2,8 @@ package nogari.system.commcd.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,8 +37,8 @@ public class CommCdController {
      *  대분류 코드 조회
      * </pre>
      * 
-     * @param 검색을 위해 입력받은 문자열
-     * @return 조회조건에 맞는 대분류 코드
+     * @param  검색을 위해 입력받은 문자열
+     * @return 조회 조건에 맞는 대분류 코드
      */
     @GetMapping
     public ResponseEntity<List<ClsCdDTO>> clsCdList(@RequestParam(required = false) String clsCd) {
@@ -50,7 +52,7 @@ public class CommCdController {
      *  소분류 코드 조회
      * </pre>
      * 
-     * @param 선택한 대분류 코드
+     * @param  선택한 대분류 코드
      * @return 선택한 대분류 코드 하위 소분류 코드
      */
     @GetMapping("/{clsCd}")
@@ -62,71 +64,25 @@ public class CommCdController {
 
     /**
      * <pre>
-     *  대분류 코드 저장
+     *  공통 코드 저장 (추가, 수정)
      * </pre>
      * 
-     * @param 저장할 대분류 코드 정보
-     * @return 저장 성공 여부
-     */
-    @PostMapping
-    public ResponseEntity<?> clsCdAdd(@RequestBody ClsCdDTO dto) {
-        service.createClsCd(dto);
-
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    /**
-     * <pre>
-     *  소분류 코드 저장
-     * </pre>
-     * 
-     * @param 저장할 소분류 코드 정보
-     * @return 저장 성공 여부
+     * @param  추가, 수정할 공통 코드 정보
+     * @return 추가, 수정 성공 여부
      */
     @PostMapping("/{clsCd}")
-    public ResponseEntity<?> codeCdAdd(@PathVariable String clsCd, @RequestBody List<CodeCdDTO> list) {
-        service.createCodeCd(list);
+    public ResponseEntity<?> commCdSave(@PathVariable String clsCd, @Valid @RequestBody CommCdDTO dto) {
+        service.saveCommCd(dto);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     /**
      * <pre>
-     *  대, 소분류 코드 동시 저장
+     *  소분류 코드 사용 여부 일괄 수정
      * </pre>
      * 
-     * @param 저장할 대, 소분류 코드 정보
-     * @return 저장 성공 여부
-     */
-    @PostMapping("/save")
-    public ResponseEntity<?> commCdAdd(@RequestBody CommCdDTO dto) {
-        service.createClsCd(dto.getClsCdDTO());
-        service.createCodeCd(dto.getCodeCdDTOList());
-
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    /**
-     * <pre>
-     *  대분류 코드 수정
-     * </pre>
-     * 
-     * @param 수정한 대분류 코드 정보
-     * @return 수정 성공 여부
-     */
-    @PutMapping
-    public ResponseEntity<?> clsCdModify(@RequestBody ClsCdDTO dto) {
-        service.editClsCd(dto);
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    /**
-     * <pre>
-     *  소분류 코드 수정
-     * </pre>
-     * 
-     * @param 수정한 소분류 코드 정보
+     * @param  수정할 소분류 코드 정보
      * @return 수정 성공 여부
      */
     @PutMapping("/{clsCd}")

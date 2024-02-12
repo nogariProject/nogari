@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nogari.system.message.dao.mapper.MessageMapper">
+
+    <select id="selectMessage" resultType="MessageRespDTO">
+        SELECT MSG_CD        /* 메시지코드 */
+             , TYPE          /* 메세지타입 */
+             , DESCRIPTION   /* 메세지설명 */
+             , REG_DT        /* 등록일 */
+             , REG_ID        /* 등록자ID */
+             , UPD_DT        /* 수정일시 */
+             , UPD_ID        /* 수정자ID */
+          FROM MESSAGE
+    </select>
+
+    <select id="selectMessageByMsgCd" parameterType="String" resultType="MessageRespDTO">
+        SELECT MSG_CD            /* 메시지코드 */
+             , TYPE              /* 메세지타입 */
+             , DESCRIPTION       /* 메세지설명 */
+             , REG_DT            /* 등록일 */
+             , REG_ID            /* 등록자ID */
+             , UPD_DT            /* 수정일시 */
+             , UPD_ID            /* 수정자ID */
+          FROM MESSAGE
+         WHERE MSG_CD = #{msgCd} /* 메시지코드 */
+    </select>
+
+    <insert id="insertMessage" parameterType="MessageReqDTO" >
+        INSERT INTO MESSAGE (
+               MSG_CD           /* 메시지코드 */
+             , TYPE             /* 메세지타입 */
+             , DESCRIPTION      /* 메세지설명 */
+             , REG_ID           /* 등록일 */
+             , UPD_ID           /* 등록자ID */
+             ) VALUES
+             ( #{msgCd}
+             , #{type}
+             , #{description}
+             , #{regId}
+             , #{updId}
+             )
+    </insert>
+
+    <update id="updateMessage" parameterType="MessageReqDTO">
+        UPDATE MESSAGE SET
+               TYPE        = #{type}               /* 메세지타입 */
+             , DESCRIPTION = #{description}        /* 메세지설명 */
+             , UPD_DT      = CURRENT_TIMESTAMP     /* 수정일시 */
+             , UPD_ID      = #{updId}              /* 수정ID */
+         WHERE MSG_CD      = #{msgCd}              /* 메세지코드 */
+    </update>
+
+    <delete id="deleteMessage" parameterType="String">
+        DELETE FROM MESSAGE
+         WHERE MSG_CD = #{msgCd}                   /* 메세지코드 */
+    </delete>
+</mapper>

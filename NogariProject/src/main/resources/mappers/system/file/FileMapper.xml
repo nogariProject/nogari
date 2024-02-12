@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nogari.system.file.dao.mapper.FileMapper">
+
+    <!-- 파일 저장 -->
+    <insert id="insertFile" parameterType="nogari.system.file.domain.dto.FileDTO">
+        /* FileMapper.insertFile */
+        INSERT INTO FILE_DATA (
+               FILE_CD              /* 파일 코드 */
+             , SEQ                  /* 순번 */
+             , USE_YN               /* 사용 여부 */
+             , FILE_NM	            /* 파일 이름 */
+             , PATH                 /* 파일 경로 */
+             , FILE_SIZE            /* 파일 용량 */
+             , REG_DT               /* 등록일 */
+             , REG_ID               /* 등록자 */
+             , UPD_DT               /* 수정일 */
+             , UPD_ID               /* 수정자 */
+        )
+        VALUES (
+               #{fileCd}
+             , (SELECT NVL(MAX(SEQ), 0) + 1 FROM FILE_DATA WHERE FILE_CD = #{fileCd})
+             , 'Y'
+             , #{fileNm}
+             , #{path}
+             , #{size}
+             , CURRENT_DATE
+             , #{id}
+             , CURRENT_DATE
+             , #{id}
+        )
+    </insert>
+
+</mapper>
