@@ -1,7 +1,5 @@
 package nogari.system.file.domain.dto;
 
-import java.util.List;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
@@ -19,10 +17,14 @@ public class FileDTO {
 
     private MultipartFile file;
     private String fileCd;
-    private String fileNm;
-    private Long size;
-    private String path;
+    private Long seq;
     private String useYn;
+    private String fileNm;
+    private String path;
+    private Long size;
     private String id;
+    private String fromDt;
+    private String toDt;
 
+    private String extension;
 }

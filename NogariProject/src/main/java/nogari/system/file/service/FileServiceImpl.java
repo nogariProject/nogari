@@ -18,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,8 +33,15 @@ public class FileServiceImpl implements FileService {
 
     private final FileMapper mapper;
 
+    @Override
+    public List<FileDTO> findFile(FileDTO dto) {
+        return mapper.selectFile(dto);
+    }
+    
+    
     private static final String UPLOAD_DIR = "uploadDir";
 
+    @Override
     public void saveFile(List<MultipartFile> fileList, List<FileDTO> dtoList) throws IOException {
         String fileCd = UUID.randomUUID().toString();
         
@@ -57,11 +65,16 @@ public class FileServiceImpl implements FileService {
             mapper.insertFile(dtoList.get(i));
         }
     }
-    
+
+    @Override
     public ResponseEntity<Resource> downloadFile(List<FileDTO> dtoList) throws FileNotFoundException, IOException {
         File tempDir = new File("tempDir");
         if (!tempDir.exists()) {
             tempDir.mkdir();
+        }
+        
+        for (FileDTO dto : dtoList) {
+            dto.setPath(mapper.selectFilePath(dto).get("PATH"));
         }
         
         // 단건
@@ -95,6 +108,14 @@ public class FileServiceImpl implements FileService {
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"files.zip\"")
                 .body(resource);
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
+    public void editFile(List<FileDTO> dtoList) {
+        for (FileDTO dto : dtoList) {
+            mapper.updateFile(dto);
+        }
     }
     
 }
