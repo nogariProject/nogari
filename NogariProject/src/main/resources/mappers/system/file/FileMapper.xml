@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nogari.global.file.dao.mapper.FileMapper">
+
+    <!-- 파일 저장 -->
+    <insert id="insertFile" parameterType="FileDTO" >
+        /* FileMapper.insertFile */
+        INSERT INTO FILE_DATA (
+               FILE_CD                  /* 파일 코드 */
+             , SEQ                      /* 파일 SEQ (다중 파일 업로드 구분용) */
+             , FILE_NM                  /* 오리지널 파일명 */
+             , PATH                     /* 파일 저장 경로 */
+             , FILE_SIZE                /* 오리지널 파일 크기 */
+             , REG_DT                   /* 등록 날짜 */
+             , REG_ID                   /* 등록자 ID */
+             , UPD_DT                   /* 수정 날짜 */
+             , UPD_ID                   /* 수정자 ID */
+        ) VALUES (
+          #{fileCd}
+        , (SELECT NVL(MAX(SEQ) + 1, 1) FROM FILE_DATA WHERE FILE_CD = #{fileCd})
+        , #{fileNm}
+        , #{path}
+        , #{fileSize}
+        , CURRENT_DATE
+        , #{userId}
+        , CURRENT_DATE
+        , #{userId}
+        )
+    </insert>
+
+    <!-- 파일 다운로드용 경로 선택 -->
+    <select id="selectPath" parameterType="FileDTO" resultType="String">
+    /* FileMapper.selectPath */
+        SELECT PATH                     /* 파일 경로 */
+          FROM FILE_DATA
+         WHERE 1=1
+           AND FILE_CD = #{fileCd}       /* 파일 코드 */
+           AND SEQ = #{seq}             /* 파일 SEQ */
+
+    </select>
+
+</mapper>
