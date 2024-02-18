@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.Normalizer;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -64,7 +65,8 @@ public class FileServiceImpl implements FileService {
         }
 
         for(int i=0; i<fileList.size(); i++) {
-            String fileName = fileList.get(i).getOriginalFilename();
+            String fileName = normalizeNfc(fileList.get(i).getOriginalFilename());
+
             FileDTO fileDTO = null;
 
             log.info(uploadPath);
@@ -120,7 +122,11 @@ public class FileServiceImpl implements FileService {
 
         // 단건 파일 다운로드 로직
         if(fileDownReqDTOList.size() == 1 ){
-            FileDTO fileDTO = FileDTO.builder().fileCd(fileDownReqDTOList.get(0).getFileCd()).seq(fileDownReqDTOList.get(0).getSeq()).fileNm(fileDownReqDTOList.get(0).getFileNm()).build();
+            FileDTO fileDTO = FileDTO.builder()
+                                    .fileCd(fileDownReqDTOList.get(0).getFileCd())
+                                    .seq(fileDownReqDTOList.get(0).getSeq())
+                                    .fileNm(fileDownReqDTOList.get(0).getFileNm())
+                                    .build();
             File file = new File(mapper.selectPath(fileDTO));
             FileSystemResource resource = new FileSystemResource(file);
             fileDownRespDTO.setResult(1);
@@ -185,6 +191,13 @@ public class FileServiceImpl implements FileService {
         return formattedToday;
     }
 
+    // 윈도우 한글 깨짐 방지용 변환 메소드
+    private static String normalizeNfc(String fileName) {
+        if (!Normalizer.isNormalized(fileName, Normalizer.Form.NFC)) {
+            return Normalizer.normalize(fileName, Normalizer.Form.NFC);
+        }
+        return fileName;
+    }
 
 
 
