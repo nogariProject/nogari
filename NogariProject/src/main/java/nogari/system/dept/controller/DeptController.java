@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/depts")
+@RequestMapping("${api.base-path}/depts")
 @RequiredArgsConstructor
 public class DeptController {
 

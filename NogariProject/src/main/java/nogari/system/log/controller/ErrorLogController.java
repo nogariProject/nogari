@@ -17,7 +17,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(path = "/errlogs")
+@RequestMapping("${api.base-path}/errlogs")
 @Slf4j
 @Validated
 public class ErrorLogController {
