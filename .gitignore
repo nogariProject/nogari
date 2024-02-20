@@ -1,3 +1,7 @@
+### IDE ###
+NogariProject/src/main/resources/config/secureinfo.properties
+
+
 # Created by https://www.toptal.com/developers/gitignore/api/java,maven,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,maven,eclipse
 
@@ -9,10 +13,8 @@ tmp/
 *.bak
 *.swp
 *~.nib
-NogariProject/local.properties
 NogariProject/.settings/
 NogariProject/.idea/
-NogariProject/src/main/resources/application.properties
 .loadpath
 .recommenders
 .idea/

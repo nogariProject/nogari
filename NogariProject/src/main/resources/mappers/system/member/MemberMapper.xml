@@ -1,0 +1,78 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nogari.system.member.dao.mapper.MemberMapper">
+    <select id="selectMembers" resultType="MemberRespDTO">
+        SELECT ID
+             , AUTH_CD
+             , DEPT_CD
+             , PWD
+             , MEMBER_NM
+             , MEMBER_NM_ENG
+             , POSITION_CD
+             , EMAIL
+             , TEL_NO
+             , FAIL_CNT
+             , FIRST_LOGIN_YN
+             , LAST_LOGIN_DT
+             , REMARK
+             , USE_YN
+             , REG_DT
+             , REG_ID,
+               UPD_DT
+             , UPD_ID
+        FROM MEMBER
+    </select>
+
+    <select id="selectMemberById" parameterType="String" resultType="MemberRespDTO">
+        SELECT ID
+             , PWD
+             , USE_YN
+        FROM MEMBER
+        WHERE ID = #{id}
+    </select>
+    
+    <insert id="insertMember" parameterType="MemberReqDTO">
+        INSERT INTO MEMBER (
+               ID
+             , AUTH_CD
+             , DEPT_CD
+             , PWD
+             , MEMBER_NM
+             , MEMBER_NM_ENG
+             , POSITION_CD
+             , EMAIL
+             , TEL_NO
+             , FAIL_CNT
+             , FIRST_LOGIN_YN
+             , LAST_LOGIN_DT
+             , REMARK
+             , USE_YN
+             , REG_DT
+             , REG_ID
+             , UPD_DT
+             , UPD_ID
+             ) VALUES (
+               #{id}
+             , #{AuthCd}
+             , #{deptCd}
+             , #{pwd}
+             , #{memberNm}
+             , #{memberNmEng}
+             , #{positionCd}
+             , #{email}
+             , #{telNo}
+             , #{failCnt}
+             , #{firstLoginYn}
+             , #{lastLoginDt}
+             , #{remark}
+             , #{useYn}
+             , #{regDt}
+             , #{regId}
+             , #{updDt}
+             , #{updId}
+             )
+
+    </insert>
+</mapper>
