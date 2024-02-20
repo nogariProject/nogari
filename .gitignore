@@ -1,5 +1,5 @@
 ### IDE ###
-NogariProject/src/main/resources/config/datasource.properties
+NogariProject/src/main/resources/config/secureinfo.properties
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/java,maven,eclipse
