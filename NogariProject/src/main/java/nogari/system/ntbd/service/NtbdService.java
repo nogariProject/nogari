@@ -1,16 +1,16 @@
 package nogari.system.ntbd.service;
 
-import java.util.List;
+import nogari.system.ntbd.domain.dto.BoardReqDTO;
+import nogari.system.ntbd.domain.dto.BoardRespDTO;
 
-import nogari.system.ntbd.domain.dto.BoardReqDto;
-import nogari.system.ntbd.domain.dto.BoardRespDto;
+import java.util.List;
 
 public interface NtbdService {
 
-    List<BoardRespDto> findBoard(String ntbdCd);
-    List<BoardRespDto> findBoards();
-    String createBoard(BoardReqDto boardReqDto);
-    String editBoard(BoardReqDto boardReqDto);
+    List<BoardRespDTO> findBoard(String ntbdCd);
+    List<BoardRespDTO> findBoards();
+    String createBoard(BoardReqDTO boardReqDto);
+    String editBoard(BoardReqDTO boardReqDto);
     String deleteBoard(String ntbdCd);
     String deleteBoards(List<String> ntbdCds);
 }
