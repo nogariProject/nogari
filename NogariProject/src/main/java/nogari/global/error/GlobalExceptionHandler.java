@@ -211,6 +211,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleException(Exception exception, WebRequest webRequest) {
         ErrorCode errorCode = ErrorCode.INTERNAL_SERVER_ERROR;
         final ErrorResponse response = ErrorResponse.of(errorCode);
+      log.error("[{}.handleException]", this.getClass().getSimpleName(), exception);
         try {
             service.createErrorLog(exception, webRequest);
         } catch (Exception innerException) {
