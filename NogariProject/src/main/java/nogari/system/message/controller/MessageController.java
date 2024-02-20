@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/messages")
+@RequestMapping("${api.base-path}/messages")
 @RequiredArgsConstructor
 public class MessageController {
 

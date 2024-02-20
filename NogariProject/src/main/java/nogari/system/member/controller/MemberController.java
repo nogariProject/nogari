@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@RequestMapping("/member")
+@RequestMapping("${api.base-path}/member")
 @RequiredArgsConstructor
 public class MemberController {
 
