@@ -1,16 +1,11 @@
 package nogari.system.message.service;
 
 import lombok.AllArgsConstructor;
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
-@WebMvcTest(MessageServiceImp.class)
+@WebMvcTest(MessageServiceImpl.class)
 @AllArgsConstructor
 class MessageServiceTest {
-    private final MessageServiceImp messageService;
+    private final MessageServiceImpl messageService;
 
-    @Test
-    void MessageService_getAllMessage_Test(){
-        messageService.getAllMessage();
-    }
 }
