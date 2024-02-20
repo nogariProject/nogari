@@ -1,17 +1,16 @@
 package nogari.system.menu.service;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.springframework.stereotype.Service;
-
 import lombok.RequiredArgsConstructor;
 import nogari.system.menu.dao.mapper.MenuMapper;
 import nogari.system.menu.domain.dto.MenuDTO;
 import nogari.system.menu.domain.dto.MenuFieldDTO;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class MenuServiceImpl implements MenuService{
 
