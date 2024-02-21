@@ -25,14 +25,15 @@ import nogari.system.file.service.FileService;
  * @author CSPI
  */
 @Controller
-@RequestMapping("/files")
+@RequestMapping("${api.base-path}/files")
 @RequiredArgsConstructor
 public class FileController {
 
     private final FileService service;
 
     @GetMapping
-    public ResponseEntity<List<FileDTO>> fileList(@RequestBody FileDTO dto) {
+    public ResponseEntity<List<FileDTO>> fileList(@RequestBody(required = false) FileDTO dto) {
+        System.out.print("@@@@@@@@@@@@@@@@@@@@@@@");
         List<FileDTO> list = service.findFile(dto);
 
         return new ResponseEntity<>(list, HttpStatus.OK);
