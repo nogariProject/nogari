@@ -22,7 +22,7 @@ public class SwaggerWorkaround implements WebMvcOpenApiTransformationFilter {
         OpenAPI openApi = context.getSpecification();
         Server localServer = new Server();
         localServer.setDescription("local");
-        localServer.setUrl("http://localhost:8081"); //로컬계 셋팅
+        localServer.setUrl("http://localhost:8080"); //로컬계 셋팅
 
         Server testServer = new Server();
         testServer.setDescription("test");
