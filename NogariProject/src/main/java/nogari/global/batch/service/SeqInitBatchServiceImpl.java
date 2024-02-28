@@ -16,7 +16,7 @@ public class SeqInitBatchServiceImpl implements  SeqIntiBatchService{
 
 
     @Override
-    public SeqInitDTO seqInitBatExc() throws Exception {
+    public SeqInitDTO seqInitBatExc() {
 
         SeqInitDTO result  = SeqInitDTO.builder().errCd("S0001").errMsg("정상처리되었습니다.").build();
 

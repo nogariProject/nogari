@@ -1,5 +1,7 @@
 package nogari.global.batch.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import nogari.global.batch.domain.dto.SeqInitDTO;
 import nogari.global.batch.service.SeqIntiBatchService;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Component
+@Api(tags = "SeqInitBatchController", description = "시퀀스 초기화 배치 매일 12시에 초기화 된다.")
 public class SeqInitBatchController {
 
     @Autowired(required = false)
@@ -23,13 +26,16 @@ public class SeqInitBatchController {
     }
 
     @RestController
-    public class MyController { //수동실행할때 사용하는부분
+    @RequestMapping("${api.base-path}/")
+    @Api(tags = "SeqInitBatchController", description = "시퀀스 초기화 배치 매일 12시에 초기화 된다.")
+    public class ManualSeqBatEcec { //수동실행할때 사용하는부분
 
         @Autowired(required = false)
         protected SeqIntiBatchService seqIntiBatchService;
 
         @PutMapping("/sequence")
-        public ResponseEntity<SeqInitDTO> seqInitManualBatExc() throws Exception{
+        @ApiOperation("시퀀스 수동으로 init 초기화")
+        public ResponseEntity<SeqInitDTO> seqInitManualBatExc(){
             SeqInitDTO dto = seqIntiBatchService.seqInitBatExc();
             return ResponseEntity.ok().body(dto);
         }
