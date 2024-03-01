@@ -27,14 +27,14 @@ public class SeqInitBatchController {
 
     @RestController
     @RequestMapping("${api.base-path}/")
-    @Api(tags = "SeqInitBatchController", description = "시퀀스 초기화 배치 매일 12시에 초기화 된다.")
+    @Api(tags = "ManualSeqBatEcec", description = "에러로그 시퀀스 초기화")
     public class ManualSeqBatEcec { //수동실행할때 사용하는부분
 
         @Autowired(required = false)
         protected SeqIntiBatchService seqIntiBatchService;
 
         @PutMapping("/sequence")
-        @ApiOperation("시퀀스 수동으로 init 초기화")
+        @ApiOperation(value = "에러로그 시퀀스 초기화 배치 수동실행", notes = "에러로그 시퀀스 초기화 배치 수동실행를 수동 실행한다. ")
         public ResponseEntity<SeqInitDTO> seqInitManualBatExc(){
             SeqInitDTO dto = seqIntiBatchService.seqInitBatExc();
             return ResponseEntity.ok().body(dto);
