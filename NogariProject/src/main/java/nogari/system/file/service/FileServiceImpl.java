@@ -7,11 +7,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -33,34 +36,62 @@ public class FileServiceImpl implements FileService {
 
     private final FileMapper mapper;
 
+    @Value("${file.path}")
+    private String PROFILE;
+    private final String UPLOAD_DIR = "uploadDir";
+    private final String ZIP_DIR = "tempDir";
+    private final String ZIP_NAME = "files.zip";
+
+    private String setPath() {
+        String pattern = "/yyyy/MM/dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(new Date());
+
+        return PROFILE + UPLOAD_DIR + date;
+    }
+
+    private void mkDir(String dir) {
+        File directory = new File(dir);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+    }
+
+    private void mkZip(Path path, List<FileDTO> dtoList) throws FileNotFoundException, IOException {
+        try (ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(path.toFile()))) {
+            for (FileDTO dto : dtoList) {
+                Path aPath = Paths.get(dto.getPath());
+                if (Files.exists(aPath)) {
+                    zos.putNextEntry(new ZipEntry(dto.getFileNm()));
+                    Files.copy(aPath, zos);
+                    zos.closeEntry();
+                }
+            }
+        }
+    }
+
     @Override
     public List<FileDTO> findFile(FileDTO dto) {
         return mapper.selectFile(dto);
     }
-    
-    
-    private static final String UPLOAD_DIR = "uploadDir";
 
     @Override
     public void saveFile(List<MultipartFile> fileList, List<FileDTO> dtoList) throws IOException {
+        String uploadDir = setPath();
+        mkDir(uploadDir);
+
         String fileCd = UUID.randomUUID().toString();
-        
-        File uploadDir = new File(UPLOAD_DIR);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdir();
-        }
-        
-        for(int i = 0;i<dtoList.size();i++) {
-            Path path = Paths.get(UPLOAD_DIR, UUID.randomUUID().toString());
+        for (int i = 0; i < dtoList.size(); i++) {
+            Path path = Paths.get(uploadDir, UUID.randomUUID().toString());
             dtoList.set(i, FileDTO.builder()
-                    .file(fileList.get(i))
-                    .fileCd(fileCd)
-                    .fileNm(fileList.get(i).getOriginalFilename())
-                    .size(fileList.get(i).getSize())
-                    .path(path.toString())
-                    .id(dtoList.get(i).getId())
-                    .build());
-            
+                   .file(fileList.get(i))
+                   .fileCd(fileCd)
+                   .fileNm(fileList.get(i).getOriginalFilename())
+                   .size(fileList.get(i).getSize())
+                   .path(path.toString())
+                   .id(dtoList.get(i).getId())
+                   .build());
+
             fileList.get(i).transferTo(path);
             mapper.insertFile(dtoList.get(i));
         }
@@ -68,46 +99,28 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public ResponseEntity<Resource> downloadFile(List<FileDTO> dtoList) throws FileNotFoundException, IOException {
-        File tempDir = new File("tempDir");
-        if (!tempDir.exists()) {
-            tempDir.mkdir();
-        }
+        Path path;
+        String name;
         
+        String zipDir = PROFILE + ZIP_DIR;
+        mkDir(zipDir);
+
         for (FileDTO dto : dtoList) {
             dto.setPath(mapper.selectFilePath(dto).get("PATH"));
         }
-        
-        // 단건
-        if(dtoList.size()==1) {
-            Path path = Paths.get(dtoList.get(0).getPath());
-            FileSystemResource resource = new FileSystemResource(path.toFile());
-            return ResponseEntity.ok()
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dtoList.get(0).getFileNm() + "\"")
-                    .body(resource);
+
+        if (dtoList.size() == 1) { // 단건
+            path = Paths.get(dtoList.get(0).getPath());
+            name = dtoList.get(0).getFileNm();
+        } else { // 다건
+            path = Paths.get(zipDir, ZIP_NAME);
+            name = ZIP_NAME;
+            mkZip(path, dtoList);
         }
         
-        // 다건
-        Path zipPath = Paths.get("tempDir", "files.zip");
-        try (FileOutputStream fos = new FileOutputStream(zipPath.toFile());
-                ZipOutputStream zos = new ZipOutputStream(fos)) {
-            
-            for (FileDTO dto : dtoList) {
-                Path path = Paths.get(dto.getPath());
-                if (Files.exists(path)) {
-                    zos.putNextEntry(new ZipEntry(dto.getFileNm()));
-                    Files.copy(path, zos);
-                    zos.closeEntry();
-                }
-            }
-            
-        }
-        
-        FileSystemResource resource = new FileSystemResource(zipPath.toFile());
-        return ResponseEntity.ok()
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"files.zip\"")
-                .body(resource);
+        FileSystemResource resource = new FileSystemResource(path.toFile());
+        return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + name + "\"").body(resource);
     }
 
     @Override
@@ -117,5 +130,5 @@ public class FileServiceImpl implements FileService {
             mapper.updateFile(dto);
         }
     }
-    
+
 }

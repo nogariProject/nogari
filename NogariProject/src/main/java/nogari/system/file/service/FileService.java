@@ -13,7 +13,7 @@ import nogari.system.file.domain.dto.FileDTO;
 public interface FileService {
 
     List<FileDTO> findFile(FileDTO dto);
-    
+
     void saveFile(List<MultipartFile> fileList, List<FileDTO> dtoList) throws IOException;
     
     ResponseEntity<Resource> downloadFile(List<FileDTO> dtoList) throws FileNotFoundException, IOException;

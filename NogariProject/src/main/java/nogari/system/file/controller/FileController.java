@@ -33,7 +33,6 @@ public class FileController {
 
     @GetMapping
     public ResponseEntity<List<FileDTO>> fileList(@RequestBody(required = false) FileDTO dto) {
-        System.out.print("@@@@@@@@@@@@@@@@@@@@@@@");
         List<FileDTO> list = service.findFile(dto);
 
         return new ResponseEntity<>(list, HttpStatus.OK);
