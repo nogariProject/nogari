@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nogari.system.menu.dao.mapper.MenuMapper">
+
+	<select id="selectMenuList" resultType="MenuFieldDTO">
+	SELECT LEVEL
+		 , MENU_CD
+		 , UPPER_MENU_CD
+		 , MENU_NM
+		 , SORT
+	  FROM (
+	  		SELECT '0000'   AS MENU_CD
+			     , NULL     AS UPPER_MENU_CD
+			     , '전체'		AS MENU_NM
+			     , 0		AS SORT
+			  FROM DUAL
+			
+			 UNION ALL
+			
+			SELECT MENU_CD
+				 , UPPER_MENU_CD
+				 , MENU_NM
+				 , SORT
+			  FROM MENU
+			 WHERE 1=1
+			   AND URL IS NULL 
+		   )
+	 START WITH UPPER_MENU_CD IS NULL
+   CONNECT BY PRIOR MENU_CD = UPPER_MENU_CD
+     ORDER SIBLINGS BY SORT
+	</select>
+	
+	<select id="selectScreen" parameterType="String" resultType="MenuFieldDTO">
+	SELECT *
+	  FROM MENU
+	 WHERE 1=1
+	   AND URL IS NOT NULL
+	   AND UPPER_MENU_CD = #{upperMenuCd}
+	 ORDER BY SORT
+	</select>
+	
+	<insert id="insertScreen" parameterType="MenuFieldDTO">
+	<selectKey resultType="String" keyProperty="menuCd" order="BEFORE">
+		<choose>
+		<when test='menuCd != null and menuCd != ""'>
+			SELECT #{menuCd} FROM DUAL
+		</when>
+		<otherwise>
+			SELECT 'SCR' || LPAD(TO_CHAR(NVL(SUBSTR(MAX(MENU_CD), 4, 7), 0)+1), 6, '0')
+			  FROM MENU
+			 WHERE 1=1
+			   AND SUBSTR(MENU_CD, 0, 3) = 'SCR'
+		</otherwise>
+		</choose>
+	</selectKey>
+	INSERT INTO MENU (
+		  MENU_CD
+		, MENU_NM
+		, SORT
+		, UPPER_MENU_CD
+		, URL
+		, USE_YN
+		, CRT_YN
+		, RED_YN
+		, SAV_YN
+		, DEL_YN
+		, PRT_YN
+		, EXL_YN
+		, ETC_1_YN
+		, ETC_2_YN
+		, ETC_3_YN
+		, PARAM
+		, REG_ID
+		, UPD_ID
+	) VALUES (
+		  #{menuCd}
+		, #{menuNm}
+		, #{sort}
+		, #{upperMenuCd}
+		, #{url}
+		, NVL(#{useYn}  , 'N')
+		, NVL(#{crtYn}  , 'N')
+		, NVL(#{redYn}  , 'N')
+		, NVL(#{savYn}  , 'N')
+		, NVL(#{delYn}  , 'N')
+		, NVL(#{prtYn}  , 'N')
+		, NVL(#{exlYn}  , 'N')
+		, NVL(#{etc1Yn}, 'N')
+		, NVL(#{etc2Yn}, 'N')
+		, NVL(#{etc3Yn}, 'N')
+		, #{param}
+		, #{regId}
+		, #{updId}
+	)
+	</insert>
+
+	<update id="updateMenu" parameterType="MenuFieldDTO">
+	UPDATE MENU SET
+		   MENU_NM       = #{menuNm}
+		 , SORT          = #{sort}
+		 , UPPER_MENU_CD = #{upperMenuCd}
+		 , URL           = #{url}
+		 , USE_YN        = #{useYn}
+		 , CRT_YN        = #{crtYn}
+		 , RED_YN        = #{redYn}
+		 , SAV_YN        = #{savYn}
+		 , DEL_YN        = #{delYn}
+		 , PRT_YN        = #{prtYn}
+		 , EXL_YN        = #{exlYn}
+		 , ETC_1_YN      = #{etc1Yn}
+		 , ETC_2_YN      = #{etc2Yn}
+		 , ETC_3_YN      = #{etc3Yn}
+		 , PARAM         = #{param}
+		 , UPD_ID        = #{updId}
+	 WHERE MENU_CD       = #{menuCd}
+	</update>
+
+	<delete id="deleteMenu" parameterType="MenuFieldDTO">
+	DELETE FROM MENU
+	 WHERE MENU_CD = #{menuCd}
+	</delete>
+
+</mapper>

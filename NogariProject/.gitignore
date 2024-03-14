@@ -1,3 +1,6 @@
+### 추가 사항 ###
+src/main/resources/config/secureinfo.properties
+
 # Created by https://www.toptal.com/developers/gitignore/api/java,maven,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,maven,eclipse
 
@@ -12,7 +15,6 @@ tmp/
 local.properties
 .settings/
 .idea/
-application.properties
 .loadpath
 .recommenders
 
@@ -122,3 +124,6 @@ src/.DS_Store
 # Oracle Cloud DB
 src/main/resources/Wallet_nogariDB/
 
+# spring boot file
+spring-boot-complete.iml
+src/main/resources/rebel.xml

@@ -1,0 +1,95 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nogari.system.member.dao.mapper.MemberMapper">
+
+    <insert id="insertMember" parameterType="MemberDTO">
+        /* MemberMapper.insertMember */
+        INSERT INTO MEMBER (
+                    ID
+                  , AUTH_CD
+                  , DEPT_CD
+                  , PWD
+                  , MEMBER_NM
+                  , MEMBER_NM_ENG
+                  , POSITION_CD
+                  , EMAIL
+                  , TEL_NO
+                  , REMARK
+                  , REG_DT
+                  , REG_ID
+                  , UPD_DT
+                  , UPD_ID
+                  ) VALUES (
+                    #{id}
+                  , #{authCd}
+                  , #{deptCd}
+                  , #{password}
+                  , #{memberNm}
+                  , #{memberNmEng}
+                  , #{positionCd}
+                  , #{email}
+                  , #{telNo}
+                  , #{remark}
+                  , CURRENT_DATE
+                  , #{regId}
+                  , CURRENT_DATE
+                  , #{updId}
+                  )
+    </insert>
+
+    <select id="selectMember" parameterType="string" resultType="MemberDTO">
+        /* MemberMapper.selectMember */
+        SELECT MEMB.ID
+             , MEMB.AUTH_CD
+             , MEMB.DEPT_CD
+             , MEMB.PWD PASSWORD
+             , MEMB.MEMBER_NM
+             , MEMB.MEMBER_NM_ENG
+             , MEMB.POSITION_CD
+             , MEMB.EMAIL
+             , MEMB.TEL_NO
+             , MEMB.FAIL_CNT
+             , MEMB.FIRST_LOGIN_YN
+             , MEMB.LAST_LOGIN_DT
+             , MEMB.REMARK
+             , MEMB.USE_YN
+             , MEMB.REG_DT
+             , MEMB.REG_ID
+             , MEMB.UPD_DT
+             , MEMB.UPD_ID
+             , MENU.URL
+          FROM MEMBER MEMB
+             , AUTH_DTL AUTH
+             , ADMIN.MENU MENU
+         WHERE MEMB.ID       = #{username}
+           AND MEMB.AUTH_CD  = AUTH.AUTH_CD(+)
+           AND AUTH.MENU_CD  = MENU.MENU_CD(+)
+    </select>
+
+    <select id="selectAuthUrl" parameterType="string" resultType="string">
+        /* MemberMapper.selectAuthUrl */
+        SELECT MENU.URL
+          FROM MEMBER MEMB
+             , AUTH_DTL AUTH
+             , ADMIN.MENU MENU
+         WHERE MEMB.ID       = #{username}
+           AND MEMB.AUTH_CD  = AUTH.AUTH_CD(+)
+           AND AUTH.MENU_CD  = MENU.MENU_CD(+)
+    </select>
+
+    <update id="mergeToken" parameterType="MemberReqDTO">
+        /* MemberMapper.mergeToken */
+        MERGE INTO TEMP_TABLE A
+        USING (SELECT #{username} MEMBER_ID FROM DUAL) B
+           ON (A.MEMBER_ID = B.MEMBER_ID)
+         WHEN MATCHED THEN
+       UPDATE SET
+              A.TOKEN = #{token}
+        WHEN NOT MATCHED THEN
+       INSERT (MEMBER_ID, TOKEN) VALUES
+              (#{username}, #{token})
+
+    </update>
+</mapper>
