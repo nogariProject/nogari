@@ -53,7 +53,7 @@
             )
          </if>
          <if test="errType != null and errType != ''">
-           AND ERR.ERR_TYPE = #{memberId}
+           AND ERR.ERR_TYPE = #{errType}
          </if>
     </select>
 </mapper>

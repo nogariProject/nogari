@@ -5,5 +5,5 @@ import nogari.global.batch.domain.dto.SeqInitDTO;
 public interface SeqIntiBatchService {
 
 
-    SeqInitDTO seqInitBatExc() throws Exception;
+    SeqInitDTO seqInitBatExc();
 }// end class
