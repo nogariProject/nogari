@@ -3,6 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="nogari.system.member.dao.mapper.MemberMapper">
+
     <insert id="insertMember" parameterType="MemberDTO">
         /* MemberMapper.insertMember */
         INSERT INTO MEMBER (

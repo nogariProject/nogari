@@ -13,7 +13,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/accslogs")
+@RequestMapping("${api.base-path}/accslogs")
 public class AccessLogController {
 
     private final AccessLogService service;

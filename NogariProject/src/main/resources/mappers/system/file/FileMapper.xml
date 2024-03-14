@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="nogari.system.file.dao.mapper.FileMapper">
+
+    <!-- 파일 저장 -->
+    <insert id="insertFile" parameterType="nogari.system.file.domain.dto.FileDTO">
+        /* FileMapper.insertFile */
+        INSERT INTO FILE_DATA (
+               FILE_CD              /* 파일 코드 */
+             , SEQ                  /* 순번 */
+             , USE_YN               /* 사용 여부 */
+             , FILE_NM	            /* 파일 이름 */
+             , PATH                 /* 파일 경로 */
+             , FILE_SIZE            /* 파일 용량 */
+             , REG_DT               /* 등록일 */
+             , REG_ID               /* 등록자 */
+             , UPD_DT               /* 수정일 */
+             , UPD_ID               /* 수정자 */
+        )
+        VALUES (
+               #{fileCd}
+             , (SELECT NVL(MAX(SEQ), 0) + 1 FROM FILE_DATA WHERE FILE_CD = #{fileCd})
+             , 'Y'
+             , #{fileNm}
+             , #{path}
+             , #{size}
+             , CURRENT_DATE
+             , #{id}
+             , CURRENT_DATE
+             , #{id}
+        )
+    </insert>
+    
+    <!-- 파일 조회 -->
+    <select id="selectFile" parameterType="nogari.system.file.domain.dto.FileDTO" resultType="HashMap">
+        /* FileMapper.selectFile */
+        SELECT FILE_CD          /* 파일 코드 */
+             , SEQ              /* 순번 */
+             , USE_YN           /* 사용 여부 */
+             , FILE_NM          /* 파일 이름 */
+             , FILE_SIZE        /* 파일 크기 */
+             , REG_DT           /* 등록일 */
+             , REG_ID           /* 등록자 */
+             , UPD_DT           /* 수정일 */
+             , UPD_ID           /* 수정자 */
+          FROM FILE_DATA
+         WHERE 1=1
+        <if test="fromDt != '' and fromDt != null and toDt != '' and toDt != null">
+           AND REG_DT BETWEEN #{fromDt} AND #{toDt}
+        </if>
+        <if test="id != '' and id != null">
+           AND REG_ID LIKE '%'||#{id}||'%'
+        </if>
+        <if test="extension != '' and extension != null">
+           AND FILE_NM LIKE '%'||#{extension}
+        </if>
+    </select>
+    
+    <!-- 파일 경로 조회 -->
+    <select id="selectFilePath" parameterType="nogari.system.file.domain.dto.FileDTO" resultType="HashMap">
+        /* FileMapper.selectFilePath */
+        SELECT PATH             /* 파일 경로 */
+          FROM FILE_DATA
+         WHERE 1=1
+           AND FILE_CD = #{fileCd}
+           AND SEQ = #{seq}
+    </select>
+    
+    <!-- 파일 사용 여부 수정 -->
+    <update id="updateFile" parameterType="nogari.system.file.domain.dto.FileDTO">
+        /* FileMapper.updateFile */
+        UPDATE FILE_DATA
+           SET USE_YN  = #{useYn}           /* 사용 여부 */
+             , UPD_DT  = CURRENT_DATE       /* 수정일 */
+             , UPD_ID  = #{id}              /* 수정자 */
+         WHERE 1=1
+           AND FILE_CD  = #{fileCd}         /* 파일 코드 */
+           AND SEQ = #{seq}                 /* 순번 */
+    </update>
+    
+    <!-- 파일 사용 여부 수정 -->
+    <update id="updateFiles" parameterType="nogari.system.file.domain.dto.FileDTO">
+        <foreach collection="list" item="fileDTO" separator=";">
+            UPDATE FILE_DATA 
+               SET USE_YN = #{fileDTO.useYn}
+                 , UPD_DT = CURRENT_DATE
+                 , UPD_ID = #{fileDTO.id}
+             WHERE 1=1
+               AND FILE_CD = #{fileDTO.fileCd}
+               AND SEQ = #{fileDTO.seq}
+        </foreach>
+    </update>
+
+</mapper>

@@ -1,16 +1,16 @@
 package nogari.system.auth.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import nogari.system.auth.dao.mapper.AuthMapper;
 import nogari.system.auth.domain.dto.AuthDtlDTO;
 import nogari.system.auth.domain.dto.AuthMstDTO;
-import nogari.system.auth.service.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
+@Transactional
 public class AuthServiceImpl implements AuthService {
 
 	@Autowired

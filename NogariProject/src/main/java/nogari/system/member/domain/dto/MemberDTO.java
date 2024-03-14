@@ -14,6 +14,7 @@ public class MemberDTO {
     private String authCd;
     private String deptCd;
     private String password;
+
     private String memberNm;
     private String memberNmEng;
     private String positionCd;
@@ -29,4 +30,3 @@ public class MemberDTO {
     private String updDt;
     private String updId;
 }
-

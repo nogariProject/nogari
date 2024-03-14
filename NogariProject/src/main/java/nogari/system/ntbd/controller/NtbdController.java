@@ -1,12 +1,9 @@
 package nogari.system.ntbd.controller;
 
 import lombok.RequiredArgsConstructor;
-import nogari.system.ntbd.domain.dto.BoardReqDto;
-import nogari.system.ntbd.domain.dto.BoardRespDto;
+import nogari.system.ntbd.domain.dto.BoardReqDTO;
+import nogari.system.ntbd.domain.dto.BoardRespDTO;
 import nogari.system.ntbd.service.NtbdService;
-import nogari.system.ntbd.service.NtbdServiceImpl;
-import oracle.jdbc.proxy.annotation.Post;
-import org.apache.ibatis.type.ByteObjectArrayTypeHandler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,35 +11,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/board")
+@RequestMapping("${api.base-path}/board")
 @RequiredArgsConstructor
 public class NtbdController {
 
     private final NtbdService ntbdService;
 
     @GetMapping
-    public ResponseEntity<List<BoardRespDto>> boardList() throws Exception{
-        List<BoardRespDto> boardList = ntbdService.findBoards();
+    public ResponseEntity<List<BoardRespDTO>> boardList() throws Exception{
+        List<BoardRespDTO> boardList = ntbdService.findBoards();
         return new ResponseEntity<>(boardList, HttpStatus.OK);
     }
 
     //게시글 내용 조회
     @GetMapping("/{ntbdCd}")
-    public ResponseEntity<List<BoardRespDto>> boardDetails(@PathVariable String ntbdCd){
-        List<BoardRespDto> board = ntbdService.findBoard(ntbdCd);
+    public ResponseEntity<List<BoardRespDTO>> boardDetails(@PathVariable String ntbdCd){
+        List<BoardRespDTO> board = ntbdService.findBoard(ntbdCd);
         return new ResponseEntity<>(board, HttpStatus.OK);
     }
 
     @PostMapping("")
-    public ResponseEntity<String> boardAdd(@RequestBody BoardReqDto boardReqDto){
-        String result = ntbdService.createBoard(boardReqDto);
+    public ResponseEntity<String> boardAdd(@RequestBody BoardReqDTO boardReqDTO){
+        String result = ntbdService.createBoard(boardReqDTO);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PutMapping("/{ntbdCd}")
-    public ResponseEntity<String> boardModify(@RequestBody BoardReqDto boardReqDto) {
-        String result = ntbdService.editBoard(boardReqDto);
+    public ResponseEntity<String> boardModify(@RequestBody BoardReqDTO boardReqDTO) {
+        String result = ntbdService.editBoard(boardReqDTO);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

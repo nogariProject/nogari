@@ -10,8 +10,8 @@ import javax.validation.constraints.NotNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Alias("BoardRespDto")
-public class BoardRespDto {
+@Alias("BoardRespDTO")
+public class BoardRespDTO {
 
     @NotNull(message = "필수값")
     String ntbdCd;

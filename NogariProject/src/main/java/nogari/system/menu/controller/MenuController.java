@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/menus")
+@RequestMapping("${api.base-path}/menus")
 @Slf4j
 @RequiredArgsConstructor
 public class MenuController {
