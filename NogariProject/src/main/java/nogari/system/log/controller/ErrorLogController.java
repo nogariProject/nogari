@@ -36,8 +36,8 @@ public class ErrorLogController {
     @ApiOperation(value = "에러로그 조회", notes = "저장된 에러로그를 조회한다.")
     @ApiImplicitParams(
         {
-              @ApiImplicitParam(name="tranDtFrom",value="조회시작일자(YYYYMMDD)"          ,required=false)
-            , @ApiImplicitParam(name="tranDtTo"  ,value="조회종료일자(YYYYMMDD)"          ,required=false)
+              @ApiImplicitParam(name="tranDtFrom",value="조회시작일자"          ,required=false)
+            , @ApiImplicitParam(name="tranDtTo"  ,value="조회종료일자"          ,required=false)
             , @ApiImplicitParam(name="member"    ,value="사용자ID 또는 사용자명"           ,required=false)
             , @ApiImplicitParam(name="errType"   ,value="에러타입"                       ,required=false)
         }

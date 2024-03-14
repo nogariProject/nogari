@@ -12,10 +12,10 @@ import javax.validation.constraints.Pattern;
 @ToString
 @Alias("ErrorLogReqDTO")
 public class ErrorLogReqDTO {
-
-    @Pattern(regexp = "^(19|20)\\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$", message = "년월일8자리로 입력해주세요.")
+    //@Pattern Swagger 에서 따라감
+   @Pattern(regexp = "^(19|20)\\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$", message = "년월일8자리로 입력해주세요.")
     private String tranDtFrom;
-    @Pattern(regexp = "^(19|20)\\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$", message = "년월일8자리로 입력해주세요.")
+   @Pattern(regexp = "^(19|20)\\d{2}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$", message = "년월일8자리로 입력해주세요.")
     private String tranDtTo;
     private String member;
     private String errType;
