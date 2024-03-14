@@ -3,6 +3,7 @@ package nogari.global.config;
 import lombok.RequiredArgsConstructor;
 import nogari.global.security.JwtFilter;
 import nogari.global.security.JwtTokenProvider;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -33,12 +35,14 @@ import javax.sql.DataSource;
 @EnableMethodSecurity // Spring Security 메서드 단위로 추가하기 위해 사용 (default : true)
 @RequiredArgsConstructor
 public class SecurityConfig {
+    @Value("#{bcrpyt-salt}")
+    private String salt;
     private final JwtTokenProvider tokenProvider;
     private final AuthenticationEntryPoint exceptionHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder(10);
     }
 
     @Bean
