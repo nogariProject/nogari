@@ -18,12 +18,12 @@ public enum ErrorCode {
     UNAUTHORIZED_MEMBER(HttpStatus.UNAUTHORIZED, "A-010", "회원 정보가 일치하지 않습니다."),
 
     // 멤버관련 M
-    NOT_EXISTS_USER_ID(HttpStatus.NOT_FOUND, "M-001", "존재하지 않는 유저 아이디입니다."),
-    NOT_EXISTS_USER_NICKNAME(HttpStatus.NOT_FOUND, "M-002", "존재하지 않는 유저 닉네임입니다."),
-    NOT_EXISTS_USER_EMAIL(HttpStatus.NOT_FOUND, "M-003", "존재하지 않는 유저 이메일입니다."),
-    ALREADY_REGISTERED_USER_ID(HttpStatus.BAD_REQUEST, "M-004", "이미 존재하는 유저 아이디입니다."),
-    NOT_EXISTS_USER_PASSWORD(HttpStatus.NOT_FOUND, "M-005", "존재하지 않는 유저 비밀번호입니다."),
-    INVALID_USER_DATA(HttpStatus.BAD_REQUEST, "M-006", "잘못된 유저 정보입니다."),
+    NOT_EXISTS_USER_ID(HttpStatus.BAD_REQUEST, "M-001", "존재하지 않는 유저 아이디입니다."),
+    NOT_EXISTS_USER_NICKNAME(HttpStatus.UNAUTHORIZED, "M-002", "존재하지 않는 유저 닉네임입니다."),
+    NOT_EXISTS_USER_EMAIL(HttpStatus.UNAUTHORIZED, "M-003", "존재하지 않는 유저 이메일입니다."),
+    ALREADY_REGISTERED_USER_ID(HttpStatus.UNAUTHORIZED, "M-004", "이미 존재하는 유저 아이디입니다."),
+    NOT_EXISTS_USER_PASSWORD(HttpStatus.UNAUTHORIZED, "M-005", "존재하지 않는 유저 비밀번호입니다."),
+    INVALID_USER_DATA(HttpStatus.UNAUTHORIZED, "M-006", "잘못된 유저 정보입니다."),
     INVALID_ADMIN(HttpStatus.BAD_REQUEST, "M-007", "관리자가 아닙니다."),
 
 

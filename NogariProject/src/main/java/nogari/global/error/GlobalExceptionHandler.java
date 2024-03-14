@@ -1,5 +1,6 @@
 package nogari.global.error;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import nogari.system.log.service.ErrorLogService;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.InvalidResultSetAccessException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -166,6 +168,34 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * 자격증명 없음
+     * @param exception
+     * @return
+     */
+    @ExceptionHandler(BadCredentialsException.class)
+    protected ResponseEntity<ErrorResponse> handleBadCredentialsException(BadCredentialsException exception) {
+        log.error("[{}.handleBadCredentialsException]", this.getClass().getSimpleName(), exception);
+        ErrorCode errorCode = ErrorCode.INVALID_USER_DATA;
+        final ErrorResponse response = ErrorResponse.of(errorCode);
+        return new ResponseEntity<>(response, errorCode.getHttpStatus());
+    }
+
+    /**
+     * 토큰만료
+     * @param exception
+     * @return
+     */
+    @ExceptionHandler(ExpiredJwtException.class)
+    protected ResponseEntity<ErrorResponse> handleExpiredJwtException(ExpiredJwtException exception) {
+        log.error("[{}.handleExpiredJwtException]", this.getClass().getSimpleName(), exception);
+        ErrorCode errorCode = ErrorCode.TOKEN_EXPIRED;
+        final ErrorResponse response = ErrorResponse.of(errorCode);
+        return new ResponseEntity<>(response, errorCode.getHttpStatus());
+    }
+
+
+
+    /**
      * [Exception] DB 에러관련 오류들
      *
      * @param exception DataAccessException
@@ -173,7 +203,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(DataAccessException.class)
     protected ResponseEntity<ErrorResponse> handleDataAccessException(DataAccessException exception, HttpServletRequest request) {
-        // log.error("[{}.handleDataAccessException]", this.getClass().getSimpleName(), exception);
+        log.error("[{}.handleDataAccessException]", this.getClass().getSimpleName(), exception);
         ErrorCode errorCode = determineErrorCode(exception);
         final ErrorResponse response = ErrorResponse.of(errorCode);
         return new ResponseEntity<>(response, errorCode.getHttpStatus());
@@ -209,6 +239,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ErrorResponse> handleException(Exception exception, WebRequest webRequest) {
+        log.error("[{}.handleException]", this.getClass().getSimpleName(), exception);
         ErrorCode errorCode = ErrorCode.INTERNAL_SERVER_ERROR;
         final ErrorResponse response = ErrorResponse.of(errorCode);
         try {
