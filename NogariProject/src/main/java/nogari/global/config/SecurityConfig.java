@@ -35,8 +35,6 @@ import javax.sql.DataSource;
 @EnableMethodSecurity // Spring Security 메서드 단위로 추가하기 위해 사용 (default : true)
 @RequiredArgsConstructor
 public class SecurityConfig {
-    @Value("#{bcrpyt-salt}")
-    private String salt;
     private final JwtTokenProvider tokenProvider;
     private final AuthenticationEntryPoint exceptionHandler;
 
